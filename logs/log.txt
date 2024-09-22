@@ -1,0 +1,1075 @@
+19.02.2024 22:18:00, backend, postreprice, [object Undefined]
+19.02.2024 22:18:00, backend, postreprice, Ошибка при отправке post-запроса на обновление скидок - Request failed with status code 400
+19.02.2024 22:18:00, backend, executeRepricer, Ошибка при выполнении задачи
+19.02.2024 22:22:00, backend, postreprice, [object Undefined]
+19.02.2024 22:22:00, backend, postreprice, Ошибка при отправке post-запроса на обновление скидок - Request failed with status code 400
+19.02.2024 22:22:00, backend, executeRepricer, Ошибка при выполнении задачи
+19.02.2024 22:25:00, backend, postreprice, [object Undefined]
+19.02.2024 22:25:00, backend, postreprice, Ошибка при отправке post-запроса на обновление скидок - Request failed with status code 400
+19.02.2024 22:25:00, backend, executeRepricer, Ошибка при выполнении задачи
+19.02.2024 22:25:29, backend, /api/save-data/prices, API успешно отработал 
+19.02.2024 22:25:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+19.02.2024 22:25:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 07:06:19, backend, /api/save-data/prices, API успешно отработал 
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:38:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:39:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.02.2024 15:40:04, backend, /api/save-data/prices, API успешно отработал 
+21.02.2024 07:04:27, backend, /api/save-data/prices, API успешно отработал 
+21.02.2024 20:12:54, backend, /api/save-data/prices, API успешно отработал 
+21.02.2024 20:14:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 20:14:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 20:14:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 20:14:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 20:14:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 20:14:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 20:14:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 20:56:06, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:06, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:06, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:06, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:07, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:07, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:07, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:07, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:07, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:08, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:08, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:08, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:08, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:08, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:08, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:09, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:09, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:09, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:09, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:09, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:09, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:10, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:10, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:10, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:10, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:10, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:10, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:11, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:11, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:11, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:11, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:11, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:11, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 20:56:12, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:01:59, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:01:59, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:00, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:00, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:00, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:00, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:00, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:00, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:01, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:01, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:01, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:01, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:01, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:02, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:02, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:02, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:02, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:02, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:02, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:03, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:03, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:03, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:03, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:03, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:03, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:04, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:04, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:04, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:04, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:04, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:04, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:05, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:05, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:02:05, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:28, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:29, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:29, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:29, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:29, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:29, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:30, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:30, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:30, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:30, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:30, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:30, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:31, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:31, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:31, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:31, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:31, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:31, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:32, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:32, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:32, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:32, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:32, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:32, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:33, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:33, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:33, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:33, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:33, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:33, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:34, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:34, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:34, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:06:34, backend, insertrow, Error inserting row: столбец "big" в таблице "goods" не существует
+21.02.2024 21:15:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:49, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:49, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:49, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:49, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:49, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:50, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:50, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:50, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:50, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:50, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:50, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:51, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:51, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:51, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:51, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:51, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:51, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:52, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:52, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:52, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.02.2024 21:19:52, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 07:08:14, backend, /api/save-data/prices, API успешно отработал 
+22.02.2024 07:08:20, backend, /api/save-data/prices, API успешно отработал 
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:51:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:52:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:21, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.02.2024 16:54:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 07:46:40, backend, /api/save-data/prices, API успешно отработал 
+23.02.2024 20:10:33, backend, /api/save-data/prices, API успешно отработал 
+23.02.2024 20:14:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:14:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:14:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.02.2024 20:15:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.02.2024 19:46:11, backend, /api/save-data/prices, API успешно отработал 
+24.02.2024 19:46:52, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:57:22, backend, /api/save-data/prices, API успешно отработал 
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.02.2024 07:59:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.03.2024 07:05:37, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.03.2024 07:05:37, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.03.2024 07:05:37, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 20:01:55, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:01:55, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:01:56, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:01:56, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:01:56, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:01:56, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:01:56, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:01:57, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 20:02:19, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 20:04:28, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 20:06:33, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:33, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:33, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:33, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:33, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:33, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:33, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:33, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:06:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+12.03.2024 20:49:04, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 20:52:43, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:08:36, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:11:54, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:12:29, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:12:57, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:16:28, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:19:12, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:19:13, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:19:37, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:19:40, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:20:06, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:21:06, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:40:08, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:43:53, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:46:24, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:48:53, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 21:49:32, backend, /api/save-data/prices, API успешно отработал 
+12.03.2024 22:09:08, backend, /api/save-data/prices, API успешно отработал 
+13.03.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+13.03.2024 12:57:13, backend, /api/save-data/prices, API успешно отработал 
+13.03.2024 13:27:50, backend, /api/save-data/prices, API успешно отработал 
+13.03.2024 13:47:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 13:47:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 13:47:11, backend, /api/save-data/prices, API успешно отработал 
+13.03.2024 14:25:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:41, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:41, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:41, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:41, backend, updaterow, Row updated successfully: 1 row(s) affected.
+13.03.2024 14:25:41, backend, updaterow, Row updated successfully: 1 row(s) affected.
+14.03.2024 15:28:18, backend, updaterow, Row updated successfully: 1 row(s) affected.
+14.03.2024 15:28:18, backend, updaterow, Row updated successfully: 1 row(s) affected.
+14.03.2024 15:28:19, backend, /api/save-data/prices, API успешно отработал 
+14.03.2024 15:28:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+14.03.2024 15:28:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+14.03.2024 15:28:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:56:54, backend, /api/save-data/prices, API успешно отработал 
+15.03.2024 20:57:18, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:18, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:18, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:19, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.03.2024 20:57:20, backend, updaterow, Row updated successfully: 1 row(s) affected.
+16.03.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+16.03.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+17.03.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+17.03.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+18.03.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+18.03.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+19.03.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+19.03.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+20.03.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+20.03.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+21.03.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+21.03.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+21.03.2024 10:33:32, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:33:33, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:33:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:33:35, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:33:38, backend, /api/save-data/prices, API успешно отработал 
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:57, backend, updaterow, Row updated successfully: 1 row(s) affected.
+21.03.2024 10:38:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+22.03.2024 10:03:06, backend, /api/save-data/prices, API успешно отработал 
+22.03.2024 10:03:23, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.03.2024 17:54:08, backend, /api/save-data/prices, API успешно отработал 
+23.03.2024 17:55:07, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.03.2024 17:55:07, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.03.2024 17:55:07, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.03.2024 17:55:07, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.03.2024 17:55:07, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.03.2024 17:55:07, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.03.2024 17:55:07, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.03.2024 17:55:07, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.03.2024 18:57:28, backend, /api/save-data/prices, API успешно отработал 
+24.03.2024 00:15:01, backend, postreprice, Ошибка при отправке post-запроса на обновление скидок - Request failed with status code 401
+24.03.2024 00:15:01, backend, executeRepricer, Ошибка при выполнении задачи
+24.03.2024 06:45:00, backend, postreprice, Ошибка при отправке post-запроса на обновление скидок - Request failed with status code 400
+24.03.2024 06:45:00, backend, executeRepricer, Ошибка при выполнении задачи
+24.03.2024 07:07:34, backend, /api/save-data/prices, API успешно отработал 
+24.03.2024 09:20:03, backend, postreprice, Ошибка при отправке post-запроса на обновление скидок - Request failed with status code 400
+24.03.2024 09:20:03, backend, executeRepricer, Ошибка при выполнении задачи
+24.03.2024 09:20:23, backend, /api/save-data/prices, API успешно отработал 
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 09:20:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+24.03.2024 19:14:48, backend, /api/save-data/prices, API успешно отработал 
+25.03.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+25.03.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+25.03.2024 09:20:00, backend, executeRepricer, нет активных репрайсов
+26.03.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+26.03.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+26.03.2024 09:20:00, backend, executeRepricer, нет активных репрайсов
+27.03.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+27.03.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+27.03.2024 09:20:00, backend, executeRepricer, нет активных репрайсов
+28.03.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+28.03.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+28.03.2024 09:20:00, backend, executeRepricer, нет активных репрайсов
+03.04.2024 21:09:36, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:09:37, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:09:37, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:09:37, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:09:37, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:09:37, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:09:38, backend, /api/save-data/prices, API успешно отработал 
+03.04.2024 21:12:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:46, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:47, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:48, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:49, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:49, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:12:49, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:17:00, backend, postreprice, Ошибка при отправке post-запроса на обновление скидок - Request failed with status code 400
+03.04.2024 21:17:00, backend, executeRepricer, Ошибка при выполнении задачи
+03.04.2024 21:37:00, backend, postreprice, Ошибка при отправке post-запроса на обновление скидок - Request failed with status code 400
+03.04.2024 21:37:00, backend, executeRepricer, Ошибка при выполнении задачи
+03.04.2024 21:48:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:12, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:12, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:12, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:12, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:12, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:12, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:13, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:13, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:13, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:13, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:13, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.04.2024 21:48:13, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:51:06, backend, /api/save-data/prices, API успешно отработал 
+06.04.2024 19:51:48, backend, /api/save-data/prices, API успешно отработал 
+06.04.2024 19:53:06, backend, /api/save-data/prices, API успешно отработал 
+06.04.2024 19:57:43, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:43, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.04.2024 19:57:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:36:56, backend, /api/save-data/prices, API успешно отработал 
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 14:37:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:28:51, backend, /api/save-data/prices, API успешно отработал 
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 17:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+08.04.2024 19:04:09, backend, /api/save-data/prices, API успешно отработал 
+08.04.2024 19:05:02, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 09:37:57, backend, /api/save-data/prices, data.map is not a function
+15.04.2024 09:41:26, backend, /api/save-data/prices, data.map is not a function
+15.04.2024 09:51:38, backend, /api/save-data/prices, data.map is not a function
+15.04.2024 10:38:10, backend, /api/save-data/prices, API успешно отработал 
+15.04.2024 10:40:29, backend, /api/save-data/prices, API успешно отработал 
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:40:34, backend, updaterow, Row updated successfully: 1 row(s) affected.
+15.04.2024 10:41:30, backend, /api/save-data/prices, API успешно отработал 
+16.04.2024 00:15:00, backend, executeRepricer, нет активных репрайсов
+16.04.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+17.04.2024 11:44:14, backend, /api/save-data/prices, API успешно отработал 
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:09, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+17.04.2024 11:50:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.04.2024 21:43:41, backend, /api/save-data/prices, API успешно отработал 
+20.04.2024 21:45:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+20.04.2024 21:45:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.04.2024 22:00:41, backend, /api/save-data/prices, API успешно отработал 
+23.04.2024 22:01:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.04.2024 22:01:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.04.2024 22:01:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.04.2024 22:02:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+23.04.2024 22:02:42, backend, /api/save-data/prices, API успешно отработал 
+25.04.2024 21:14:01, backend, /api/save-data/prices, API успешно отработал 
+25.04.2024 21:15:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+25.04.2024 21:15:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+25.04.2024 21:15:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+25.04.2024 21:15:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+25.04.2024 21:15:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+25.04.2024 21:15:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+26.04.2024 16:09:23, backend, /api/save-data/prices, API успешно отработал 
+26.04.2024 16:09:41, backend, updaterow, Row updated successfully: 1 row(s) affected.
+26.04.2024 16:51:36, backend, /api/save-data/prices, API успешно отработал 
+26.04.2024 17:20:04, backend, /api/save-data/prices, API успешно отработал 
+26.04.2024 17:21:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+26.04.2024 17:21:10, backend, updaterow, Row updated successfully: 1 row(s) affected.
+26.04.2024 17:28:16, backend, /api/save-data/prices, API успешно отработал 
+26.04.2024 17:29:13, backend, updaterow, Row updated successfully: 1 row(s) affected.
+27.04.2024 21:07:10, backend, /api/save-data/prices, API успешно отработал 
+27.04.2024 21:07:52, backend, updaterow, Row updated successfully: 1 row(s) affected.
+27.04.2024 21:07:52, backend, updaterow, Row updated successfully: 1 row(s) affected.
+27.04.2024 21:08:14, backend, /api/save-data/prices, API успешно отработал 
+29.04.2024 17:44:36, backend, /api/save-data/prices, API успешно отработал 
+29.04.2024 17:46:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+29.04.2024 17:46:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:15, backend, /api/save-data/prices, API успешно отработал 
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+02.05.2024 20:29:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.05.2024 00:05:00, backend, executeRepricer, нет активных репрайсов
+03.05.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+04.05.2024 00:05:00, backend, executeRepricer, нет активных репрайсов
+04.05.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+03.06.2024 21:46:29, backend, /api/save-data/prices, API успешно отработал 
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:52:54, backend, updaterow, Row updated successfully: 1 row(s) affected.
+03.06.2024 21:53:20, backend, /api/save-data/prices, API успешно отработал 
+04.06.2024 21:18:53, backend, /api/save-data/prices, API успешно отработал 
+04.06.2024 21:19:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:06, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:06, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:06, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:06, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:06, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:06, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:06, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:06, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:06, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:06, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:19:47, backend, /api/save-data/prices, API успешно отработал 
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:26, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+04.06.2024 21:28:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:48:54, backend, /api/save-data/prices, API успешно отработал 
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:15, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:16, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:16, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:16, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:16, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:16, backend, updaterow, Row updated successfully: 1 row(s) affected.
+05.06.2024 20:49:16, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 00:05:00, backend, executeRepricer, нет активных репрайсов
+06.06.2024 06:45:00, backend, executeRepricer, нет активных репрайсов
+06.06.2024 22:29:23, backend, /api/save-data/prices, API успешно отработал 
+06.06.2024 22:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:04, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
