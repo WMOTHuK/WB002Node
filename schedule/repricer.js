@@ -112,7 +112,7 @@ async function postreprice(data, ttm) {
     };
   }
 
-
+// Тест гитхаб
 // Планирование выполнения с обёрткой
-schedule.scheduleJob('05 0 * * *', scheduleExecuteRepricer('night')); // теперь будет запускаться в 00:15 каждый день
-schedule.scheduleJob('45 6 * * *', scheduleExecuteRepricer('day')); // теперь будет запускаться в 06:45 каждый день
+//schedule.scheduleJob('05 0 * * *', scheduleExecuteRepricer('night')); // теперь будет запускаться в 00:15 каждый день
+//schedule.scheduleJob('45 6 * * *', scheduleExecuteRepricer('day')); // теперь будет запускаться в 06:45 каждый день
