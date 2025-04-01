@@ -1,11 +1,18 @@
+// server.js
+
+import 'dotenv/config';
 import { pool, allowedTableNames } from './General/globals.js';
 import express, { json } from 'express';
 import { logMessage, sendlogTG} from './General/logger.js';
 import './schedule/repricer.js'
-/* import { createProxyMiddleware } from 'http-proxy-middleware'; */
+import cors from 'cors';
+import authRoutes from './routes/auth.js';
+import apiKeysRoutes from './routes/apiKeys.js'; 
+import { authenticate } from './middleware/auth.js';
+
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 /* // Определение маршрута прокси
 const apiProxy = createProxyMiddleware({
@@ -13,6 +20,13 @@ const apiProxy = createProxyMiddleware({
   changeOrigin: true,
   pathRewrite: {'^/api': ''}, // Это опционально, в зависимости от вашей конфигурации
 }); */
+
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+
 
 
 async function updaterow(tablename, tablekey, fieldsToUpdate, rowData) {
@@ -72,8 +86,14 @@ async function insertrow(tablename, rowData) {
     return errorMessage;
   }
 }
-/* app.use('/api', apiProxy); */
+
+// Routes
+
 app.use(json()); // Для парсинга JSON в запросах
+
+app.use('/api/auth', authRoutes);
+app.use('/api/auth', authenticate, apiKeysRoutes); // Защищенный маршрут
+
 
 async function checkAndInsertPrice(data) {
 const client = await pool.connect();

@@ -1,7 +1,7 @@
 import pkg from 'pg';
 const { Pool } = pkg;
 
-const allowedTableNames = ['prices', 'goods', 'photos']; // Список разрешённых имен таблиц
+const allowedTableNames = ['prices', 'goods', 'photos','users']; // Список разрешённых имен таблиц
 
 // Конфигурация подключения к базе данных
 const pool = new Pool({
@@ -12,4 +12,6 @@ const pool = new Pool({
   port: 5432,
 });
 
+
+// Для ES модулей (если нужно)
 export { allowedTableNames, pool };
