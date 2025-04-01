@@ -1119,3 +1119,29 @@
 01.02.2025 17:50:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
 01.02.2025 17:50:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
 01.02.2025 17:50:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:17:38, backend, updaterow, Error updating  row: неверный синтаксис для типа boolean: "X"
+01.02.2025 21:17:38, backend, updaterow, Error updating  row: неверный синтаксис для типа boolean: "X"
+01.02.2025 21:23:11, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:23:12, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:43, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:43, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:43, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:43, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:43, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:44, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 21:31:45, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 23:38:36, backend, updaterow, Row updated successfully: 1 row(s) affected.
+14.02.2025 00:05:02, backend, postreprice, Ошибка при отправке post-запроса на обновление скидок - Request failed with status code 401
+14.02.2025 00:05:02, backend, executeRepricer, Ошибка при выполнении задачи
+14.02.2025 06:45:00, backend, postreprice, Ошибка при отправке post-запроса на обновление скидок - Request failed with status code 401
+14.02.2025 06:45:00, backend, executeRepricer, Ошибка при выполнении задачи

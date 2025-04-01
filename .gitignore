@@ -129,3 +129,4 @@ dist
 .yarn/install-state.gz
 .pnp.*
 logs/log.txt
+logs/log.txt
