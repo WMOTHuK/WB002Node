@@ -1145,3 +1145,66 @@
 14.02.2025 00:05:02, backend, executeRepricer, Ошибка при выполнении задачи
 14.02.2025 06:45:00, backend, postreprice, Ошибка при отправке post-запроса на обновление скидок - Request failed with status code 401
 14.02.2025 06:45:00, backend, executeRepricer, Ошибка при выполнении задачи
+01.04.2025 11:53:27, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:27, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:27, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:27, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:27, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:27, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:28, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:28, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:28, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:28, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 11:53:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 11:53:29, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:29, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:29, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.04.2025 11:53:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 11:53:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 11:53:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 11:53:30, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:30, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:30, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:30, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:30, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:31, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:31, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:31, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:31, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:31, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:31, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:32, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 11:53:32, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.04.2025 12:03:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:27, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:28, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:03:29, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:30, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:30, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:30, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:30, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:30, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:30, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:30, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 12:08:31, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 14:53:42, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 15:18:25, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.04.2025 15:18:53, backend, updaterow, Row updated successfully: 1 row(s) affected.

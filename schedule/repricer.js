@@ -78,7 +78,7 @@ async function postreprice(data, ttm) {
       return response; // Возвращаем весь объект ответа
     } catch (error) {
       // В случае ошибки, возвращаем объект ошибки
-      const failMessage = `Ошибка при отправке post-запроса на обновление скидок - ${error.message}`;
+      const failMessage = `Ошибка при отправке post-запроса на обновление скидок - ${error.response.data.detail}`;
       logMessage(postreprice.name, 2, failMessage); // Логирование Ошибок
       sendlogTG(failMessage); // Лог в телеграмм
 
