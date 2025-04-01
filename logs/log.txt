@@ -1073,3 +1073,49 @@
 06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
 06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
 06.06.2024 22:33:05, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 16:50:36, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 16:50:37, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 16:50:37, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 16:50:37, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:37, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:37, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:38, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:38, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:38, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:38, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:38, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:39, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 16:50:39, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:39, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:39, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+01.02.2025 16:50:39, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 16:50:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 16:50:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 16:50:40, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:49:56, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:49:56, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:49:56, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:49:56, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:57, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:57, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:57, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:57, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:57, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:57, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:58, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:58, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:49:58, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:58, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:58, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:49:59, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+01.02.2025 17:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:49:59, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:50:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:50:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:50:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
+01.02.2025 17:50:00, backend, updaterow, Row updated successfully: 1 row(s) affected.
