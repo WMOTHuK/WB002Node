@@ -36,20 +36,33 @@ export const register = async (req, res) => {
     const { login, password } = req.body;
     
     // Проверка существования пользователя
-    const existingUser = await User.findByLogin(login);
-    if (existingUser) {
+    const existingUser = await pool.query(
+      'SELECT * FROM users WHERE login = $1', 
+      [login]
+    );
+    
+    if (existingUser.rows.length > 0) {
       return res.status(400).json({ message: 'Пользователь уже существует' });
     }
+    if (password.length < 6) {
+      return res.status(400).json({ message: 'Пароль должен быть не менее 6 символов' });
+    }
+    // Хеширование пароля
+    const hashedPassword = await bcrypt.hash(password, 12);
     
-    // Создание нового пользователя
-    const user = await User.create(login, password);
-    
+    // Создание пользователя
+    const newUser = await pool.query(
+      `INSERT INTO users (login, password_hash) 
+       VALUES ($1, $2) RETURNING id, login`,
+      [login, hashedPassword]
+    );
+
     res.status(201).json({ 
       message: 'Пользователь создан',
-      userId: user.id 
+      user: newUser.rows[0]
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Ошибка сервера' });
+    console.error('Registration error:', error);
+    res.status(500).json({ message: 'Ошибка регистрации' });
   }
 };
