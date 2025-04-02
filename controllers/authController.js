@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import { pool } from '../General/globals.js';
+import bcrypt from 'bcryptjs';
 
 export const login = async (req, res) => {
   try {
@@ -34,7 +36,26 @@ export const login = async (req, res) => {
 export const register = async (req, res) => {
   try {
     const { login, password } = req.body;
-    
+
+    // Валидация
+    if (!login || !password) {
+      return res.status(400).json({ 
+        message: 'Логин и пароль обязательны' 
+      });
+    }
+
+    if (login.length < 3) {
+      return res.status(400).json({ 
+        message: 'Логин должен быть не менее 3 символов' 
+      });
+    }
+
+    if (password.length < 6) {
+      return res.status(400).json({ 
+        message: 'Пароль должен быть не менее 6 символов' 
+      });
+    }
+
     // Проверка существования пользователя
     const existingUser = await pool.query(
       'SELECT * FROM users WHERE login = $1', 
@@ -42,11 +63,11 @@ export const register = async (req, res) => {
     );
     
     if (existingUser.rows.length > 0) {
-      return res.status(400).json({ message: 'Пользователь уже существует' });
+      return res.status(409).json({ 
+        message: 'Пользователь с таким логином уже существует' 
+      });
     }
-    if (password.length < 6) {
-      return res.status(400).json({ message: 'Пароль должен быть не менее 6 символов' });
-    }
+
     // Хеширование пароля
     const hashedPassword = await bcrypt.hash(password, 12);
     
@@ -58,11 +79,13 @@ export const register = async (req, res) => {
     );
 
     res.status(201).json({ 
-      message: 'Пользователь создан',
+      message: 'Пользователь успешно зарегистрирован',
       user: newUser.rows[0]
     });
   } catch (error) {
     console.error('Registration error:', error);
-    res.status(500).json({ message: 'Ошибка регистрации' });
+    res.status(500).json({ 
+      message: 'Внутренняя ошибка сервера при регистрации' 
+    });
   }
 };
