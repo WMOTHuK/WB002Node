@@ -8,6 +8,10 @@ const router = express.Router();
 
 router.post('/login', login);
 router.post('/register', register);
-router.get('/keys', authenticate, getApiKeys); // Новый маршрут
+/* router.get('/keys', authenticate, getApiKeys); // Новый маршрут */
+
+//Получение типов API ключей
+
+
 
 export default router;

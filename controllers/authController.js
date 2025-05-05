@@ -29,7 +29,8 @@
   
       res.json({ 
         token, 
-        login: user.login 
+        login: user.login,
+        userId: user.id  // Добавляем userId в ответ
       });
       console.error(error);
       res.status(500).json({ message: 'Ошибка сервера' });

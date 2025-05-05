@@ -1,6 +1,6 @@
 import User from '../models/User.js';
 
-export const getApiKeys = async (req, res) => {
+/* export const getApiKeys = async (req, res) => {
   try {
     const keys = await User.getApiKeys(req.user.id);
     
@@ -28,4 +28,4 @@ export const updateApiKey = async (req, res) => {
     console.error('Failed to update API key:', error);
     res.status(500).json({ message: 'Ошибка обновления ключа' });
   }
-};
+}; */

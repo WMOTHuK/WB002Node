@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 
 const algorithm = 'aes-256-cbc';
-const secretKey = process.env.CRYPTO_SECRET; // 32-байтный ключ
+const secretKey = Buffer.from(process.env.CRYPTO_SECRET, 'hex');
 const iv = crypto.randomBytes(16);
 
 export function encrypt(text) {
