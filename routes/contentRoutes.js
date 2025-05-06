@@ -72,8 +72,8 @@ router.get('/getgoodsdata', authenticate, async (req, res) => {
     
     // Если данные не массив - преобразуем (пример для разных форматов ответа)
     if (!Array.isArray(responseData)) {
-      if (responseData.items && Array.isArray(responseData.items)) {
-        responseData = responseData.items;
+      if (responseData.cards && Array.isArray(responseData.cards)) {
+        responseData = responseData.cards;
       } else if (responseData.data && Array.isArray(responseData.data)) {
         responseData = responseData.data;
       } else {

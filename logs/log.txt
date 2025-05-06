@@ -1208,3 +1208,24 @@
 01.04.2025 14:53:42, backend, updaterow, Row updated successfully: 1 row(s) affected.
 01.04.2025 15:18:25, backend, updaterow, Row updated successfully: 1 row(s) affected.
 01.04.2025 15:18:53, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.05.2025 15:46:36, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+06.05.2025 15:46:37, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+06.05.2025 15:46:37, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+06.05.2025 15:46:37, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+06.05.2025 15:46:37, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+06.05.2025 15:46:37, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+06.05.2025 15:46:37, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+06.05.2025 15:46:38, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+06.05.2025 15:46:38, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+06.05.2025 15:46:38, backend, insertrow, Row inserted into table goods: 1 row(s) affected.
+06.05.2025 15:46:38, backend, updaterow, Row updated successfully: 1 row(s) affected.
+06.05.2025 15:46:38, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+06.05.2025 15:46:38, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+06.05.2025 15:46:39, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+06.05.2025 15:46:39, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+06.05.2025 15:46:39, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+06.05.2025 15:46:39, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+06.05.2025 15:46:39, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+06.05.2025 15:46:39, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+06.05.2025 15:46:40, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
+06.05.2025 15:46:40, backend, insertrow, Row inserted into table photos: 1 row(s) affected.
