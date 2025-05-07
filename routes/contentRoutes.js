@@ -10,7 +10,7 @@ const router = express.Router();
 
 // Конфигурация сервера
 const SERVER_CONFIG = {
-  getcardsurl: 'https://content-api.wildberries.ru/content/v2/get/cards/list', // Пример URL, замените на реальный
+  getcardsurl: 'https://content-api.wildberries.ru/content/v2/get/cards/list', // URL получения данных о карточках
   // Другие URL могут быть добавлены здесь
  
 
@@ -32,7 +32,7 @@ async function getContentAPIKey(userId) {
         const decryptedKey = decrypt(apiKeys[0].api_key);
     return decryptedKey;
   } catch (error) {
-    console.error('Error getting API key:', error);
+    console.error('Error getting Content API key:', error);
     throw error;
   }
 }

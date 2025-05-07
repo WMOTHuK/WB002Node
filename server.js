@@ -9,7 +9,8 @@ import cors from 'cors';
 import authRoutes from './routes/auth.js';
 import apiKeysRoutes from './routes/apiKeys.js'; 
 import { authenticate } from './middleware/auth.js';
-import contentRoutes from './routes/contentRoutes.js'
+import contentRoutes from './routes/contentRoutes.js';
+import CRMRoutes from './routes/CRMRoutes.js'
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -94,6 +95,7 @@ app.use(json()); // Для парсинга JSON в запросах
 app.use('/api/auth', authRoutes);
 app.use('/api/auth', authenticate, apiKeysRoutes); // Защищенный маршрут
 app.use('/api/content', authenticate, contentRoutes); // Защищенный маршрут
+app.use('/api/CRM', authenticate, CRMRoutes); // Защищенный маршрут
 
 async function checkAndInsertPrice(data) {
 const client = await pool.connect();
