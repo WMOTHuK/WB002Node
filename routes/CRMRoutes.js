@@ -42,34 +42,34 @@ function parseAdverts(responseData) {
   const result = [];
   
   if (!responseData.adverts || !Array.isArray(responseData.adverts)) {
-      return result;
+    return result;
   }
   
-  // Сначала собираем все данные
   for (const advertGroup of responseData.adverts) {
-      const { type, status, advert_list } = advertGroup;
-      
-      if (!advert_list || !Array.isArray(advert_list)) {
-          continue;
+    const { type, status, advert_list } = advertGroup;
+    
+    if (!advert_list || !Array.isArray(advert_list)) {
+      continue;
+    }
+    
+    for (const advert of advert_list) {
+      if (advert.advertId) {
+        result.push({
+          advertid: Number(advert.advertId), 
+          crmtype: Number(type),             
+          crmstatus: Number(status),         
+          // Остальные поля будут заполнены в enrichAdvertData
+        });
       }
-      
-      for (const advert of advert_list) {
-          if (advert.advertId) {
-              result.push({
-                  advertId: advert.advertId,
-                  type: type,
-                  status: status
-              });
-          }
-      }
+    }
   }
   
   // Сортируем по статусу (по возрастанию), затем по типу (по возрастанию)
   result.sort((a, b) => {
-      if (a.status !== b.status) {
-          return a.status - b.status;
-      }
-      return a.type - b.type;
+    if (a.crmstatus !== b.crmstatus) {
+      return a.crmstatus - b.crmstatus;
+    }
+    return a.crmtype - b.crmtype;
   });
   
   return result;
@@ -77,26 +77,27 @@ function parseAdverts(responseData) {
 async function enrichAdvertData(parsedData, getcrmdetailsurl, crmAPIKEY) {
   const enrichedData = parsedData.map(item => ({
     ...item,
-    pause_time: null,
-    restart_time: null,
-    pause_active: false
+    crmname: null,        
+    crmsps: null,         
+    crmpt: null,         
+    pause_time: null,     
+    restart_time: null,   
+    active: false         
   }));
 
   const batchSize = 50;
   const maxRetries = 2;
   const failedBatches = [];
   
-  // Разбиваем данные на пакеты по 50 элементов
   for (let i = 0; i < enrichedData.length; i += batchSize) {
     const batch = enrichedData.slice(i, i + batchSize);
-    const advertIds = batch.map(item => Number(item.advertId));
+    const advertIds = batch.map(item => item.advertid);
     const batchNumber = i / batchSize + 1;
     
     let retryCount = 0;
     let lastError = null;
     let success = false;
 
-    // Повторяем попытки до maxRetries раз
     while (retryCount <= maxRetries && !success) {
       try {
         const response = await axios.post(getcrmdetailsurl, advertIds, {
@@ -112,18 +113,18 @@ async function enrichAdvertData(parsedData, getcrmdetailsurl, crmAPIKEY) {
         
         response.data.forEach(detail => {
           detailsMap[detail.advertId] = {
-            name: detail.name,
-            paymentType: detail.paymentType,
-            searchPluseState: detail.searchPluseState
+            crmname: detail.name || null,
+            crmpt: detail.paymentType || null,
+            crmsps: detail.searchPluseState === 'on' ? true : false
           };
         });
         
         batch.forEach(item => {
-          const details = detailsMap[item.advertId];
+          const details = detailsMap[item.advertid];
           if (details) {
-            item.name = details.name;
-            item.paymentType = details.paymentType;
-            item.searchPluseState = details.searchPluseState;
+            item.crmname = details.crmname;
+            item.crmpt = details.crmpt;
+            item.crmsps = details.crmsps;
           }
         });
         
@@ -133,7 +134,6 @@ async function enrichAdvertData(parsedData, getcrmdetailsurl, crmAPIKEY) {
         retryCount++;
         if (retryCount <= maxRetries) {
           console.warn(`Retrying batch ${batchNumber}, attempt ${retryCount}/${maxRetries}`);
-          // Добавляем небольшую задержку перед повторной попыткой
           await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
         }
       }
@@ -156,7 +156,6 @@ async function enrichAdvertData(parsedData, getcrmdetailsurl, crmAPIKEY) {
   
   return enrichedData;
 }
-
 router.get('/getcompaigns', authenticate, async (req, res) => {
   try {
     const userId = req.user.id;
