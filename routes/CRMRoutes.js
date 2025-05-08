@@ -5,6 +5,8 @@ import axios from 'axios';
 import { readtable } from '../General/DBactions/readtable.js';
 import { authenticate } from '../middleware/auth.js';
 import { decrypt } from '../utils/crypto.js';
+import { syncTableWithData } from '../General/DBactions/tableSync.js'
+import { replaceKeysWithDescriptions } from '../General/DBactions/descriptionsMapper.js';
 
 const router = express.Router();
 
@@ -176,11 +178,27 @@ router.get('/getcompaigns', authenticate, async (req, res) => {
     //Обагатим данными (имя, тип оплаты,Активность фиксированных фраз)
     const enrichedData = await enrichAdvertData(parsedData, SERVER_CONFIG.getcrmdetailsurl, crmAPIKEY);
     // Теперь enrichedData содержит все исходные поля + name, paymentType, searchPluseState
-    
 
-    // Явно возвращаем массив данных
-    res.status(200).json(enrichedData);
-    
+    // Синхронизация с БД
+    const syncResult = await syncTableWithData(
+      enrichedData,
+      'crm_headers',
+      'advertid', 
+      { batchSize: 500 }
+    );
+
+    // Фильтруем записи (исключаем статус 7)
+    const filteredData = enrichedData.filter(item => item.crmstatus !== 7);
+    // Заменяем ключи на описания
+    const finalData = await replaceKeysWithDescriptions(filteredData, [
+      { field: 'crmstatus', tableName: 'crm_status' },
+      { field: 'crmtype', tableName: 'crm_type' }
+    ]);
+
+    res.status(200).json({
+      data: finalData,
+      dbSync: syncResult
+    });
   } catch (error) {
     console.error('Error in /getcompaigns:', error);
     
