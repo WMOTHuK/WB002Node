@@ -5,7 +5,7 @@ import axios from 'axios';
 import { readtable } from '../General/DBactions/readtable.js';
 import { authenticate } from '../middleware/auth.js';
 import { decrypt } from '../utils/crypto.js';
-import { syncTableWithData } from '../General/DBactions/tableSync.js'
+import { syncTableToDB, syncTableFromDB } from '../General/DBactions/tableSync.js'
 import { replaceKeysWithDescriptions } from '../General/DBactions/descriptionsMapper.js';
 
 const router = express.Router();
@@ -179,16 +179,30 @@ router.get('/getcompaigns', authenticate, async (req, res) => {
     const enrichedData = await enrichAdvertData(parsedData, SERVER_CONFIG.getcrmdetailsurl, crmAPIKEY);
     // Теперь enrichedData содержит все исходные поля + name, paymentType, searchPluseState
 
-    // Синхронизация с БД
-    const syncResult = await syncTableWithData(
+    // Синхронизация с БД (игнорируем поля pause_time, restart_time и active при сравнении)
+    const syncResult = await syncTableToDB(
       enrichedData,
       'crm_headers',
       'advertid', 
-      { batchSize: 500 }
+      { 
+        batchSize: 500,
+        ignoreFields: ['pause_time', 'restart_time', 'active'] 
+      }
+    );
+
+    const updatedData = await syncTableFromDB(
+      enrichedData,
+      'crm_headers',
+      'advertid', 
+      { 
+        batchSize: 500
+      }
     );
 
     // Фильтруем записи (исключаем статус 7)
-    const filteredData = enrichedData.filter(item => item.crmstatus !== 7);
+    const filteredData = updatedData.filter(item => item.crmstatus !== 7);
+
+
     // Заменяем ключи на описания
     const finalData = await replaceKeysWithDescriptions(filteredData, [
       { field: 'crmstatus', tableName: 'crm_status' },

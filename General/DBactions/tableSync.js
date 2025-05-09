@@ -1,5 +1,5 @@
-// utils/db/tableSync.js
-import { readtable } from '../DBactions/readtable.js';
+// General/DBactions/tableSync.js
+import { readtable } from './readtable.js';
 import { bulkUpsert, bulkUpdate } from './bulkOperations.js';
 
 /**
@@ -10,13 +10,14 @@ import { bulkUpsert, bulkUpdate } from './bulkOperations.js';
  * @param {Object} [options] - Дополнительные опции
  * @param {boolean} [options.useBulk=true] - Использовать bulk операции
  * @param {number} [options.batchSize=1000] - Размер пакета
+ * @param {Array} [options.ignoreFields=[]] - Поля, которые не нужно сравнивать при обновлении
  * @returns {Promise<SyncResult>}
  */
-export async function syncTableWithData(
+export async function syncTableToDB(
   sourceData,
   tableName,
   keyFields,
-  { useBulk = true, batchSize = 1000 } = {}
+  { useBulk = true, batchSize = 1000, ignoreFields = [] } = {}
 ) {
   if (!Array.isArray(sourceData)) {
     throw new Error('sourceData must be an array');
@@ -42,7 +43,8 @@ export async function syncTableWithData(
       tableName,
       keyFieldList,
       dbMap,
-      batchSize
+      batchSize,
+      ignoreFields
     );
   } catch (error) {
     console.error('Table sync error:', error);
@@ -68,7 +70,7 @@ function createLookupMap(records, keyFields) {
   );
 }
 
-async function processInBatches(data, tableName, keyFields, dbMap, batchSize) {
+async function processInBatches(data, tableName, keyFields, dbMap, batchSize, ignoreFields) {
   const result = {
     inserted: 0,
     updated: 0,
@@ -78,7 +80,7 @@ async function processInBatches(data, tableName, keyFields, dbMap, batchSize) {
 
   for (let i = 0; i < data.length; i += batchSize) {
     const batch = data.slice(i, i + batchSize);
-    const batchResult = await processBatch(batch, tableName, keyFields, dbMap);
+    const batchResult = await processBatch(batch, tableName, keyFields, dbMap, ignoreFields);
     
     result.inserted += batchResult.inserted;
     result.updated += batchResult.updated;
@@ -93,7 +95,7 @@ async function processInBatches(data, tableName, keyFields, dbMap, batchSize) {
   };
 }
 
-async function processBatch(batch, tableName, keyFields, dbMap) {
+async function processBatch(batch, tableName, keyFields, dbMap, ignoreFields) {
   const batchResult = {
     inserted: 0,
     updated: 0,
@@ -112,7 +114,7 @@ async function processBatch(batch, tableName, keyFields, dbMap) {
       if (!existing) {
         toInsert.push(newRecord);
       } else {
-        const changedFields = getChangedFields(newRecord, existing, keyFields);
+        const changedFields = getChangedFields(newRecord, existing, keyFields, ignoreFields);
         if (changedFields.length > 0) {
           toUpdate.push({ ...newRecord, _changed: changedFields });
         } else {
@@ -159,9 +161,9 @@ async function processBatch(batch, tableName, keyFields, dbMap) {
   return batchResult;
 }
 
-function getChangedFields(newRecord, oldRecord, excludeFields = []) {
+function getChangedFields(newRecord, oldRecord, excludeFields = [], ignoreFields = []) {
   return Object.keys(newRecord)
-    .filter(key => !excludeFields.includes(key))
+    .filter(key => ![...excludeFields, ...ignoreFields].includes(key)) // Исключаем ключевые и игнорируемые поля
     .filter(key => newRecord[key] !== oldRecord[key]);
 }
 
@@ -176,8 +178,74 @@ function formatResult(opResult, total) {
   };
 }
 
-export default {
-  syncTableWithData,
-  bulkUpsert,
-  bulkUpdate
-};
+
+/**
+ * Синхронизирует данные из БД с переданным массивом (приоритет у данных из БД)
+ * @param {Array} sourceData - Исходные данные для обновления
+ * @param {string} tableName - Имя таблицы в БД
+ * @param {string|Array} keyFields - Поле/поля ключа
+ * @param {Object} [options] - Дополнительные опции
+ * @param {Array} [options.ignoreFields=[]] - Поля, которые не нужно обновлять
+ * @returns {Promise<Array>} - Обновлённый массив данных
+ */
+export async function syncTableFromDB(
+    sourceData,
+    tableName,
+    keyFields,
+    { ignoreFields = [] } = {}
+  ) {
+    if (!Array.isArray(sourceData)) {
+      throw new Error('sourceData must be an array');
+    }
+  
+    const keyFieldList = Array.isArray(keyFields) 
+      ? keyFields 
+      : [keyFields];
+  
+    try {
+      // 1. Получаем все записи из таблицы БД
+      const dbRecords = await readtable(tableName, []);
+      const dbMap = createLookupMap(dbRecords, keyFieldList);
+  
+      // 2. Создаём копию исходных данных для модификации
+      const updatedData = [...sourceData];
+  
+      // 3. Обновляем записи в массиве данными из БД
+      for (let i = 0; i < updatedData.length; i++) {
+        const recordKey = keyFieldList.map(f => updatedData[i][f]).join('|');
+        const dbRecord = dbMap.get(recordKey);
+  
+        if (dbRecord) {
+          // Создаём обновлённую запись
+          const updatedRecord = { ...updatedData[i] };
+          
+          // Копируем все поля из БД, кроме ключевых и игнорируемых
+          for (const field in dbRecord) {
+            if (
+              !keyFieldList.includes(field) && 
+              !ignoreFields.includes(field)
+            ) {
+              updatedRecord[field] = dbRecord[field];
+            }
+          }
+  
+          updatedData[i] = updatedRecord;
+        }
+      }
+  
+      return updatedData;
+    } catch (error) {
+      console.error('Error in syncTableFromDB:', error);
+      // В случае ошибки возвращаем исходные данные
+      return sourceData;
+    }
+  }
+  
+  // ... (остальные существующие функции остаются без изменений)
+  
+  export default {
+    syncTableToDB, // переименованная старая функция
+    syncTableFromDB,                  // новая функция
+    bulkUpsert,
+    bulkUpdate
+  };
