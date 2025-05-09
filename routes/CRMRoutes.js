@@ -6,7 +6,7 @@ import { readtable } from '../General/DBactions/readtable.js';
 import { authenticate } from '../middleware/auth.js';
 import { decrypt } from '../utils/crypto.js';
 import { syncTableToDB, syncTableFromDB } from '../General/DBactions/tableSync.js'
-import { replaceKeysWithDescriptions } from '../General/DBactions/descriptionsMapper.js';
+import { addDescriptionColumns } from '../General/DBactions/descriptionsMapper.js';
 
 const router = express.Router();
 
@@ -204,7 +204,7 @@ router.get('/getcompaigns', authenticate, async (req, res) => {
 
 
     // Заменяем ключи на описания
-    const finalData = await replaceKeysWithDescriptions(filteredData, [
+    const finalData = await addDescriptionColumns(filteredData, [
       { field: 'crmstatus', tableName: 'crm_status' },
       { field: 'crmtype', tableName: 'crm_type' }
     ]);

@@ -14,51 +14,58 @@ import { bulkUpsert, bulkUpdate } from './bulkOperations.js';
  * @returns {Promise<SyncResult>}
  */
 export async function syncTableToDB(
-  sourceData,
-  tableName,
-  keyFields,
-  { useBulk = true, batchSize = 1000, ignoreFields = [] } = {}
-) {
-  if (!Array.isArray(sourceData)) {
-    throw new Error('sourceData must be an array');
-  }
-
-  const keyFieldList = Array.isArray(keyFields) 
-    ? keyFields 
-    : [keyFields];
-
-  try {
-    // Для bulk операций
-    if (useBulk && sourceData.length <= batchSize * 10) {
-      const result = await bulkUpsert(tableName, sourceData, keyFieldList);
-      return formatResult(result, sourceData.length);
+    sourceData,
+    tableName,
+    keyFields,
+    { useBulk = true, batchSize = 1000, ignoreFields = [] } = {}
+  ) {
+    if (!Array.isArray(sourceData)) {
+      throw new Error('sourceData must be an array');
     }
-
-    // Для очень больших наборов данных
-    const dbRecords = await readtable(tableName, []);
-    const dbMap = createLookupMap(dbRecords, keyFieldList);
-
-    return await processInBatches(
-      sourceData,
-      tableName,
-      keyFieldList,
-      dbMap,
-      batchSize,
-      ignoreFields
-    );
-  } catch (error) {
-    console.error('Table sync error:', error);
-    return {
-      success: false,
-      inserted: 0,
-      updated: 0,
-      unchanged: 0,
-      errors: [error.message],
-      totalProcessed: 0
-    };
+  
+    const keyFieldList = Array.isArray(keyFields) 
+      ? keyFields 
+      : [keyFields];
+  
+    try {
+      // Очищаем данные от игнорируемых полей ДЛЯ ВСЕХ операций
+      const dataToSync = sourceData.map(item => {
+        const cleanItem = { ...item };
+        ignoreFields.forEach(field => delete cleanItem[field]);
+        return cleanItem;
+      });
+  
+      // Для bulk операций
+      if (useBulk && sourceData.length <= batchSize * 10) {
+        const result = await bulkUpsert(tableName, dataToSync, keyFieldList);
+        return formatResult(result, sourceData.length);
+      }
+  
+      // Для очень больших наборов данных
+      const dbRecords = await readtable(tableName, []);
+      const dbMap = createLookupMap(dbRecords, keyFieldList);
+  
+      return await processInBatches(
+        dataToSync, // Используем очищенные данные
+        tableName,
+        keyFieldList,
+        dbMap,
+        batchSize,
+        ignoreFields
+      );
+    } catch (error) {
+      console.error('Table sync error:', error);
+      return {
+        success: false,
+        inserted: 0,
+        updated: 0,
+        unchanged: 0,
+        errors: [error.message],
+        totalProcessed: 0
+      };
+    }
   }
-}
-
+  
 /** Вспомогательные функции */
 
 function createLookupMap(records, keyFields) {

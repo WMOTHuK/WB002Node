@@ -1,13 +1,13 @@
-//General/DBactions/descriptionsMapper.js
+// General/DBactions/descriptionsMapper.js
 import { readtable } from '../DBactions/readtable.js';
 
 /**
- * Заменяет ключи в данных на их описания из БД
+ * Добавляет столбцы с описаниями к данным, сохраняя исходные значения
  * @param {Array} data - Массив данных для обработки
- * @param {Array} mappingConfig - Конфигурация замены полей
- * @returns {Promise<Array>} - Обработанные данные
+ * @param {Array} mappingConfig - Конфигурация полей с описаниями
+ * @returns {Promise<Array>} - Данные с добавленными описаниями
  */
-export async function replaceKeysWithDescriptions(data, mappingConfig) {
+export async function addDescriptionColumns(data, mappingConfig) {
   if (!data?.length || !mappingConfig?.length) return data;
 
   // Собираем все необходимые описания из БД
@@ -22,16 +22,24 @@ export async function replaceKeysWithDescriptions(data, mappingConfig) {
     }
   }
 
-  // Заменяем ключи на описания
+  // Добавляем описания как новые поля
   return data.map(item => {
-    const newItem = { ...item };
+    const newItem = {};
+    const fields = Object.keys(item);
     
-    for (const config of mappingConfig) {
-      const fieldValue = newItem[config.field];
-      const descriptions = descriptionsCache[config.tableName];
+    // Проходим по всем полям исходного объекта
+    for (const field of fields) {
+      // Вставляем исходное поле
+      newItem[field] = item[field];
       
-      if (descriptions && descriptions.has(fieldValue)) {
-        newItem[config.field] = descriptions.get(fieldValue);
+      // Проверяем, нужно ли добавлять описание для этого поля
+      const config = mappingConfig.find(c => c.field === field);
+      if (config) {
+        const descriptions = descriptionsCache[config.tableName];
+        const descriptionField = `${field}_desc`;
+        
+        // Добавляем поле с описанием после исходного поля
+        newItem[descriptionField] = descriptions?.get(item[field]) || '';
       }
     }
     
