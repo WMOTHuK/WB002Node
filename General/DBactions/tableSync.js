@@ -44,7 +44,9 @@ export async function syncTableToDB(
       // Для очень больших наборов данных
       const dbRecords = await readtable(tableName, []);
       const dbMap = createLookupMap(dbRecords, keyFieldList);
-  
+      if (tableName === 'crm_headers') {
+        require('../services/scheduler.service').syncCampaigns();
+      }
       return await processInBatches(
         dataToSync, // Используем очищенные данные
         tableName,
@@ -53,6 +55,7 @@ export async function syncTableToDB(
         batchSize,
         ignoreFields
       );
+      
     } catch (error) {
       console.error('Table sync error:', error);
       return {

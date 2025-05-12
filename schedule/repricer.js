@@ -45,7 +45,7 @@ async function getactiverepricing() {
   
 async function postreprice(data, ttm) {
     const url = 'https://discounts-prices-api.wb.ru/api/v2/upload/task'; // Замените на реальный URL API
-    const apiKey = 'eyJhbGciOiJFUzI1NiIsImtpZCI6IjIwMjMxMjI1djEiLCJ0eXAiOiJKV1QifQ.eyJlbnQiOjEsImV4cCI6MTcyMjkwODM4NSwiaWQiOiI2NjkzN2E4YS1kNDFmLTQwZWUtOWU0ZC03ZTExNTJhZjczYWIiLCJpaWQiOjI3NzY1ODQ0LCJvaWQiOjEzMTQ0MDMsInMiOjgsInNpZCI6ImI1NTI4ZWVmLWE0MzYtNDk1OS1hNzEzLTQ2MTcxYTM1NjdmYyIsInQiOmZhbHNlLCJ1aWQiOjI3NzY1ODQ0fQ.2LMLOry_vPfFCN9w6HxzfC0MSNkCA69-QzFsao4i7b4v1AoFs0_zUYK2eBKn2-cw4_T8WGk867k6hVaqkvRWXA'; // Замените на ваш реальный ключ авторизации
+    const apiKey = 'key'; // Замените на ваш реальный ключ авторизации
 
    // Формирование тела запроса
     const requestBody = {

@@ -62,8 +62,6 @@ async function sendlogTG(message) {
       chat_id: CHAT_ID,
       text: message,
     });
-    
-    console.log('Сообщение отправлено', response.data);
   } catch (error) {
     console.error('Ошибка при отправке сообщения', error);
   }

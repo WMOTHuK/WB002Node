@@ -76,9 +76,10 @@ function parseAdverts(responseData) {
   
   return result;
 }
-async function enrichAdvertData(parsedData, getcrmdetailsurl, crmAPIKEY) {
+async function enrichAdvertData(parsedData, getcrmdetailsurl, crmAPIKEY, userId) {
   const enrichedData = parsedData.map(item => ({
     ...item,
+    user_id: userId,
     crmname: null,        
     crmsps: null,         
     crmpt: null,         
@@ -176,14 +177,16 @@ router.get('/getcompaigns', authenticate, async (req, res) => {
     const parsedData = parseAdverts(responseData);  // Прогоним через парсер 
 
     //Обагатим данными (имя, тип оплаты,Активность фиксированных фраз)
-    const enrichedData = await enrichAdvertData(parsedData, SERVER_CONFIG.getcrmdetailsurl, crmAPIKEY);
+    const enrichedData = await enrichAdvertData(parsedData, SERVER_CONFIG.getcrmdetailsurl, crmAPIKEY, userId);
     // Теперь enrichedData содержит все исходные поля + name, paymentType, searchPluseState
 
     // Синхронизация с БД (игнорируем поля pause_time, restart_time и active при сравнении)
+    const tablekey = ['advertid', 'user_id']
+    const tableName = 'crm_headers'
     const syncResult = await syncTableToDB(
       enrichedData,
-      'crm_headers',
-      'advertid', 
+      tableName,
+      tablekey, 
       { 
         batchSize: 500,
         ignoreFields: ['pause_time', 'restart_time', 'active'] 
@@ -193,7 +196,7 @@ router.get('/getcompaigns', authenticate, async (req, res) => {
     const updatedData = await syncTableFromDB(
       enrichedData,
       'crm_headers',
-      'advertid', 
+      tablekey, 
       { 
         batchSize: 500
       }
