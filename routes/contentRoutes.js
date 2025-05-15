@@ -1,102 +1,160 @@
 // routes/contentRoutes.js
-
+import server_config from '../config/apiurls.js'
 import express from 'express';
 import axios from 'axios';
-import { readtable } from '../General/DBactions/readtable.js';
+import { createErrorResponse } from '../utils/errorhandling.js'
 import { authenticate } from '../middleware/auth.js';
-import { decrypt } from '../utils/crypto.js';
+import { syncTableToDB, syncTableFromDB } from '../General/DBactions/tableSync.js';
+import { pool } from '../General/globals.js';
+import { getAPIKey } from '../utils/apiutils.js';
+
 
 const router = express.Router();
 
-// Конфигурация сервера
-const SERVER_CONFIG = {
-  getcardsurl: 'https://content-api.wildberries.ru/content/v2/get/cards/list', // URL получения данных о карточках
-  // Другие URL могут быть добавлены здесь
- 
-
+// конфигурацию запроса по карточкам товаров
+const DEFAULT_REQUEST_CONFIG = {
+  settings: {
+    sort: { ascending: false },
+    filter: {
+      textSearch: "",
+      allowedCategoriesOnly: true,
+      tagIDs: [],
+      objectIDs: [],
+      brands: [],
+      imtID: 0,
+      withPhoto: -1
+    },
+    cursor: {
+      updatedAt: null,
+      nmID: 0,
+      limit: 99
+    }
+  }
 };
 
-// Получение API ключа из БД
-async function getContentAPIKey(userId) {
-  try {
-    const apiKeys = await readtable('user_api_keys', [
-      { colname: 'user_id', sign: 'EQ', low: userId },
-      { colname: 'key_type', sign: 'EQ', low: 2 } // key_type = 2 для content API
-    ]);
+// запрос к API 
+async function fetchGoodsData(apiKey) {
+  return axios.post(server_config.getcardsurl, DEFAULT_REQUEST_CONFIG, {
+    headers: { 'Authorization': `Bearer ${apiKey}` }
+  });
+}
 
-    if (!apiKeys || apiKeys.length === 0) {
-      throw new Error('Content API key not found for this user');
+function processCards(wbData) {
+  if (!Array.isArray(wbData)) {
+    throw new Error("wbData is not an array");
+  }
+
+  const singleFields = [];
+  const photos = [];
+
+  // Определение ключей, которые нужно включить в singleFields
+  const includedKeys = ['nmID', 'imtID', 'subjectID', 'subjectName', 'vendorCode', 'brand', 'title'];
+
+  
+
+  wbData.forEach(card => {
+    const cardSingleFields = {};
+
+    Object.entries(card).forEach(([key, value]) => {
+      // Преобразование ключа к нижнему регистру
+      const keyLowerCase = key.toLowerCase();
+
+      if (key === 'photos' && Array.isArray(value)) {
+        // Обработка массива фотографий
+        const firstPhotoSmall = value.length > 0 ? value[0].tm : null;
+        const firstPhotoBig = value.length > 0 ? value[0].big : null;
+        if (firstPhotoSmall) {
+          photos.push({ nmid: card.nmID, small: firstPhotoSmall, big: firstPhotoBig }); // Используем nmID из входных данных
+        } else {}
+      } else if (includedKeys.includes(key)) {
+        // Включение поля, если его ключ в списке разрешенных
+        cardSingleFields[keyLowerCase] = value;
+      }
+    });
+
+    if (Object.keys(cardSingleFields).length > 0) {
+      singleFields.push(cardSingleFields);
     }
+  });
 
-       // Дешифруем ключ перед использованием
-        const decryptedKey = decrypt(apiKeys[0].api_key);
-    return decryptedKey;
+  return { singleFields, photos };
+}
+
+const extendGoods = async (pool, igoods) => {
+  if (!igoods || igoods.length === 0) return igoods;
+
+  try {
+    // 1. Получаем nmid всех товаров для запроса
+    const nmids = igoods.map(g => g.nmid);
+    
+    // 2. Запрос к БД для получения данных
+    const query = `
+      SELECT 
+        g.nmid, 
+        g.sprice, 
+        p.big
+      FROM goods g
+      LEFT JOIN photos p ON g.nmid = p.nmid
+      WHERE g.nmid = ANY($1::int[])
+    `;
+
+    const { rows: dbData } = await pool.query(query, [nmids]);
+
+    // 3. Создаем lookup-объект для быстрого доступа
+    const dbDataMap = dbData.reduce((acc, row) => {
+      acc[row.nmid] = {
+        sprice: row.sprice,
+        big: row.big
+      };
+      return acc;
+    }, {});
+
+    // 4. Расширяем исходный массив
+    return igoods.map(item => ({
+      ...item,
+      sprice: dbDataMap[item.nmid]?.sprice || null,
+      big: dbDataMap[item.nmid]?.big || null
+    }));
+
   } catch (error) {
-    console.error('Error getting Content API key:', error);
+    console.error('Ошибка при расширении товаров:', error);
     throw error;
   }
-}
+};
+
+
 
 router.get('/getgoodsdata', authenticate, async (req, res) => {
   try {
-    const userId = req.user.id;
+/*     1. получим данные из Вайлдберриз */
+    const contentAPIKEY = await getAPIKey(req.user.id,'2');
+    const response = await fetchGoodsData(contentAPIKEY);
 
-    // Получаем API ключ из БД
-    const contentAPIKEY = await getContentAPIKey(userId);
+/*     2. Преобразуем в два массива в соответствии со структурой БД */
+    const { singleFields: goods, photos } = processCards(response.data.cards);
 
-    // Выполняем запрос к внешнему API
-    const response = await axios.post(SERVER_CONFIG.getcardsurl, {
-      settings: {
-        sort: { ascending: false },
-        filter: {
-          textSearch: "",
-          allowedCategoriesOnly: true,
-          tagIDs: [],
-          objectIDs: [],
-          brands: [],
-          imtID: 0,
-          withPhoto: -1
-        },
-        cursor: {
-          updatedAt: null,
-          nmID: 0,
-          limit: 99
-        }
-      }
-    }, {
-      headers: { 'Authorization': `Bearer ${contentAPIKEY}` }
-    });
+/*     3. Поочерёдно обновим данные в БД для каждой из таблиц */
+    const resultgoodsupdate = syncTableToDB(goods,'goods','nmid')
+    const resultphotosupdate = syncTableToDB(photos,'photos','nmid')
 
-    // Проверяем и преобразуем данные
-    let responseData = response.data;
-    
-    // Если данные не массив - преобразуем (пример для разных форматов ответа)
-    if (!Array.isArray(responseData)) {
-      if (responseData.cards && Array.isArray(responseData.cards)) {
-        responseData = responseData.cards;
-      } else if (responseData.data && Array.isArray(responseData.data)) {
-        responseData = responseData.data;
-      } else {
-        // Если структура неизвестна, возвращаем как есть с предупреждением
-        console.warn('Unexpected API response format:', responseData);
-      }
-    }
+/*     4. Добавим в массив goods нужные поля и обновим данные из БД */
+    const extendedgoods = await extendGoods(pool,goods)
 
-    // Явно возвращаем массив данных
-    res.status(200).json(Array.isArray(responseData) ? responseData : [responseData]);
-    
+/*     5. Сортируем по номенклатуре продавца */
+    const sortedGoods = extendedgoods.sort((a, b) => 
+      (a.vendorcode || '').localeCompare(b.vendorcode || '')
+    );
+
+    res.status(200).json(normalizeResponseData(sortedGoods));
   } catch (error) {
-    console.error('Error in /getgoodsdata:', error);
-    
-    const status = error.response?.status || 500;
-    const message = error.response?.data?.message || error.message;
-    
-    res.status(status).json({ 
-      error: 'Failed to fetch goods data',
-      details: message,
-      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
-    });
+    const { status, data } = createErrorResponse(error);
+    res.status(status).json(data);
   }
 });
+
+
+function normalizeResponseData(data) {
+  return Array.isArray(data) ? data : [data];
+}
 
 export default router;

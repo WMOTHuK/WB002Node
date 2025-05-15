@@ -119,31 +119,6 @@
       });
 
 
-  app.get('/api/gettablelocale', async (req, res) => {
-    // Извлечение параметров запроса
-    const fields = req.query.tablekeys ? req.query.tablekeys.split(',') : []; // Преобразуем строку обратно в массив
-    const locale = req.query.locale;
-
-    try {
-      
-      // Преобразуем список полей в строку для SQL-запроса
-      const fieldsString = fields.map(field => `'${field}'`).join(', ');
-
-      // Формируем текст запроса
-      const queryText = `
-      SELECT  * FROM localization
-      WHERE loctype = '1'
-      AND locale = '${locale}'
-      AND colname IN (${fieldsString});
-      `;
-      const { rows } = await pool.query(queryText);
-      res.json(rows);
-    } catch (error) {
-      logMessage('/api/gettablelocale', 2, error.message); // Логирование ошибки 
-      res.status(500).send(error.message);
-    }
-
-  });
 
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
