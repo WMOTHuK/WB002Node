@@ -1,10 +1,8 @@
   // server.js
 
   import 'dotenv/config';
-  import { pool, allowedTableNames } from './General/globals.js';
   import express, { json } from 'express';
-  import { logMessage, sendlogTG} from './General/logger.js';
-  import './schedule/repricer.js'
+  import './services/scheduler/repricer.js';
   import cors from 'cors';
   import authRoutes from './routes/auth.js';
   import apiKeysRoutes from './routes/apiKeys.js'; 
@@ -14,22 +12,15 @@
   import dbRoutes from './routes/dbRoutes.js';
   import scheduler from './services/scheduler/scheduler.service.js';
   import { Client } from 'pg';
+  import { initScheduler } from './services/scheduler/simplescheduler.js';
+import { sendlogTG } from './General/logger.js';
 
-  // При старте сервера
-  scheduler; // Инициализирует 
+// Отключил, пока не используем (ОСТАНОВКА КАМПАНИЙ)
+/*   scheduler; // Инициализирует сложный планировщик */
 
-  // Для периодической синхронизации
-  setInterval(async () => {
-    const activeCampaigns = await pool.query(`
-      SELECT advertid, pause_time, restart_time 
-      FROM crm_headers 
-      WHERE active = true
-    `);
-    
-    for (const campaign of activeCampaigns.rows) {
-      await scheduler.scheduleCampaign(campaign);
-    }
-  }, 5 * 60 * 1000); // Каждые 5 минут
+
+  initScheduler(); // Инициализирует простой планировщик
+
 
   const app = express();
   const PORT = process.env.PORT || 5000;
@@ -49,81 +40,14 @@
   app.use('/api/DB', authenticate, dbRoutes); // Защищенный маршрут
 
 
-  async function checkAndInsertPrice(data) {
-  const client = await pool.connect();
-
-  try {
-    const results = [];
-
-    for (const item of data) {
-      // Проверяем, существует ли запись с таким wbid
-      const res = await client.query('SELECT * FROM prices WHERE nmid = $1', [item.nmId]);
-
-      if (res.rows.length > 0) {
-        // Если запись существует
-        item.currentprice = item.price * (1 - item.discount / 100);
-        await client.query(
-          'UPDATE prices SET price = $2, discount = $3, promoCode = $4, currentprice = $5 WHERE nmId = $1',
-          [item.nmId, item.price, item.discount, item.promoCode, item.currentprice]
-        );
-        const successMessage = `Данные о ценах товара ${item.nmId} Успешно обновлены в БД`;
-  /*       logMessage(checkAndInsertPrice.name, 2, successMessage); // Логирование успешного результата Обновления записи */
-        results.push(successMessage);
-      } else {
-        // Вставляем новую запись, если wbid не найден
-        await client.query('INSERT INTO prices(nmId, price, discount, promoCode, currentprice, dayprice, nightprice, daydisc, nightdisc, active) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)',
-        [item.nmId, item.price, item.discount, item.promoCode, item.currentprice, item.dayprice, item.nightprice, item.daydisc, item.nightdisc, item.active]);
-        const successMessage = `Данные о ценах товара ${item.nmId} Успешно записаны в БД`;
-        logMessage(checkAndInsertPrice.name, 2, successMessage); // Логирование успешного создания записи
-        results.push(successMessage);
-      }
-    }
-
-    return results;
-  } catch (error) {
-    return (error.message)  ;
-  } finally {
-    client.release(); // Освобождаем клиента
-  }}
-
-  app.post('/api/save-data/prices', async (req, res) => {
-    try {
-        let data = req.body.data.listGoods; // Обновление пути до данных
-        let transformedData = data.map(item => {
-          // Проверка, есть ли размеры в товаре и взятие первого элемента
-          let firstSize = item.sizes && item.sizes[0] ? item.sizes[0] : null;
-
-          return {
-            nmId: item.nmID,
-            price: firstSize ? firstSize.price : 0, // Если размеры есть, берём цену первого размера 
-            discount: item.discount,
-            promoCode: 0,
-            currentprice: firstSize ? firstSize.discountedPrice : 0, // Если размеры есть, берём цену первого размера
-            dayprice: 0, // Примерное значение
-            nightprice: 0, // Примерное значение
-            daydisc: 0, // Примерное значение
-            nightdisc: 0, // Примерное значение
-            active: ''
-          };
-        });
-        // Сохранение данных в базе данных
-        const results = await checkAndInsertPrice(transformedData);
-        res.json(results); // Отправляем результаты
-        const successMessage = 'API успешно отработал ';
-        logMessage('/api/save-data/prices', 2, successMessage); // Логирование успешной отработки запроса API
-      } catch (error) {
-        sendlogTG(error.message);
-        logMessage('/api/save-data/prices', 2, error.message); // Логирование неуспешной отработки запроса API
-        res.status(500).send('Ошибка сервера');
-      }
-      });
-
 
 
     app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-      
-      // Запускаем периодическую проверку
+      const logMes = (`Сервер запущен. Порт: ${PORT}`)
+      sendlogTG(logMes);
+      console.log(logMes);
+// Отключил, пока не используем (ОСТАНОВКА КАМПАНИЙ)
+/*       // Запускаем периодическую проверку
       setInterval(async () => {
         const activeCampaigns = await pool.query(`
           SELECT advertid, crmname, pause_time, restart_time 
@@ -134,13 +58,30 @@
         activeCampaigns.rows.forEach(campaign => {
           scheduler.scheduleCampaign(campaign);
         });
-      }, 5 * 60 * 1000);
+      }, 5 * 60 * 1000); */
     });
     const dbListener = new Client({
       connectionString: process.env.DB_URL,
     });
 
-    await dbListener.connect();
+
+
+// Отключил, пока не используем (ОСТАНОВКА КАМПАНИЙ)
+/*   // Для периодической синхронизации
+  setInterval(async () => {
+    const activeCampaigns = await pool.query(`
+      SELECT advertid, pause_time, restart_time 
+      FROM crm_headers 
+      WHERE active = true
+    `);
+    
+    for (const campaign of activeCampaigns.rows) {
+      await scheduler.scheduleCampaign(campaign);
+    }
+  }, 5 * 60 * 1000); // Каждые 5 минут
+ */
+
+/*     await dbListener.connect();
     dbListener.query('LISTEN campaign_updated');
     
     dbListener.on('notification', async (msg) => {
@@ -167,4 +108,4 @@
         logMessage('DBLISTENER', '1', loggingMessage);
         sendlogTG(loggingMessage)
       }
-    });
+    }); */

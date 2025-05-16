@@ -1,16 +1,15 @@
 //services/scheduler/campaign.actions.js
 import axios from 'axios';
 import { getApiKey } from '../auth.service.js';
-
-export async function pauseCampaign(campaignId) {
+export async function pauseCampaign(campaignId, apiKey = null) {
     try {
-        const apiKey = await getApiKey(campaignId);
+        const finalApiKey = apiKey || await getApiKey(campaignId);
         const response = await axios.get(
             'https://advert-api.wildberries.ru/adv/v0/pause',
             {
                 params: { id: campaignId },
                 headers: { 
-                    Authorization: `Bearer ${apiKey}`
+                    Authorization: `Bearer ${finalApiKey}`
                 }
             }
         );
@@ -28,15 +27,15 @@ export async function pauseCampaign(campaignId) {
     }
 }
 
-export async function restartCampaign(campaignId) {
+export async function restartCampaign(campaignId, apiKey = null) {
     try {
-        const apiKey = await getApiKey(campaignId);
+        const finalApiKey = apiKey || await getApiKey(campaignId);
         const response = await axios.get(
             'https://advert-api.wildberries.ru/adv/v0/start',
             {
                 params: { id: campaignId },
                 headers: { 
-                    Authorization: `Bearer ${apiKey}`
+                    Authorization: `Bearer ${finalApiKey}`
                 }
             }
         );

@@ -7,6 +7,7 @@ import { authenticate } from '../middleware/auth.js';
 import { syncTableToDB, syncTableFromDB } from '../General/DBactions/tableSync.js';
 import { pool } from '../General/globals.js';
 import { getAPIKey } from '../utils/apiutils.js';
+import { checkAndInsertPrice } from '../utils/pricingutils.js';
 
 
 const router = express.Router();
@@ -156,5 +157,40 @@ router.get('/getgoodsdata', authenticate, async (req, res) => {
 function normalizeResponseData(data) {
   return Array.isArray(data) ? data : [data];
 }
+
+
+router.post('/updateprices', async (req, res) => {
+  try {
+      let data = req.body.data.listGoods; // Обновление пути до данных
+      let transformedData = data.map(item => {
+        // Проверка, есть ли размеры в товаре и взятие первого элемента
+        let firstSize = item.sizes && item.sizes[0] ? item.sizes[0] : null;
+
+        return {
+          nmId: item.nmID,
+          price: firstSize ? firstSize.price : 0, // Если размеры есть, берём цену первого размера 
+          discount: item.discount,
+          promoCode: 0,
+          currentprice: firstSize ? firstSize.discountedPrice : 0, // Если размеры есть, берём цену первого размера
+          dayprice: 0, // Примерное значение
+          nightprice: 0, // Примерное значение
+          daydisc: 0, // Примерное значение
+          nightdisc: 0, // Примерное значение
+          active: ''
+        };
+      });
+      // Сохранение данных в базе данных
+      const results = await checkAndInsertPrice(transformedData);
+      res.json(results); // Отправляем результаты
+      const successMessage = 'API успешно отработал ';
+      logMessage('/api/save-data/prices', 2, successMessage); // Логирование успешной отработки запроса API
+    } catch (error) {
+      sendlogTG(error.message);
+      logMessage('/api/save-data/prices', 2, error.message); // Логирование неуспешной отработки запроса API
+      res.status(500).send('Ошибка сервера');
+    }
+    });
+
+
 
 export default router;

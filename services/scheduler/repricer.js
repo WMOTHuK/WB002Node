@@ -1,7 +1,7 @@
 import schedule from 'node-schedule';
-import { pool } from '../General/globals.js';
+import { pool } from '../../General/globals.js';
 import axios from 'axios';
-import { logMessage, sendlogTG } from '../General/logger.js';
+import { logMessage, sendlogTG } from '../../General/logger.js';
 // Функция для выполнения последовательности действий
 
 function generateDiscountMessage(data, ttm) {
