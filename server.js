@@ -44,9 +44,9 @@ import { sendlogTG } from './General/logger.js';
 
     app.listen(PORT, () => {
       const logMes = (`Сервер запущен. Порт: ${PORT}`)
-      sendlogTG(logMes);
+      //sendlogTG(logMes);
       console.log(logMes);
-// Отключил, пока не используем (ОСТАНОВКА КАМПАНИЙ)
+// Отключил, пока не используем (Перенесено в //services/scheduler/simplesheduler.js)
 /*       // Запускаем периодическую проверку
       setInterval(async () => {
         const activeCampaigns = await pool.query(`

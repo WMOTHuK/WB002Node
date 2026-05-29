@@ -135,6 +135,7 @@ export async function enrichAdvertData(parsedData, getcrmdetailsurl, crmAPIKEY, 
 
 export async function pausecampaignslist(advertids, crmapikey) {
 const results = [];
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // Добавляем информацию о начале процесса
 let message = `🔄 Начато выполнение для ${advertids.length} кампаний:\n\n`;
@@ -171,6 +172,10 @@ for (const id of advertids) {
         status: errorStatus
     });
     message += `❌ ${errorStatus}\n\n`;
+    }
+        if (advertids.indexOf(id) !== advertids.length - 1) {
+      console.log(`Ожидание 3 секунды перед следующим ID...`);
+      await delay(3000);
     }
 }
 

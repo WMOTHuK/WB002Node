@@ -1,5 +1,4 @@
-
-//jobs/crmjobs.js
+// jobs/crmjobs.js
 import axios from 'axios';
 import { sendlogTG } from "../../../General/logger.js";
 import { getAPIKey } from "../../../utils/apiutils.js";
@@ -7,12 +6,11 @@ import { parseAdverts, pausecampaignslist } from "../../../utils/crmutils.js";
 import { getuniquekeys } from "../../../utils/arrayutils.js";
 import server_config  from '../../../config/apiurls.js';
 
-
 export const pauseactivecompaigns = {
   async run() {
       try {
-          sendlogTG('[CRON] Запуск задачи pauseactivecompaigns', new Date().toISOString());
-          
+          //sendlogTG('[CRON] Запуск задачи pauseactivecompaigns', new Date().toISOString());
+          console.log ('[CRON] Запуск задачи pauseactivecompaigns', new Date().toISOString())
           // 1. Получим список компаний с сервера
           const crmapikey = await getAPIKey('2', '1');
           const response = await axios.get(server_config.getcompaignsurl, {
@@ -25,14 +23,15 @@ export const pauseactivecompaigns = {
 
           // 3. Выполним паузу компаний и получим результат
           const TGMessage = await pausecampaignslist(advertids, crmapikey);
-          sendlogTG(TGMessage);
-
+          //sendlogTG(TGMessage);
+          console.log(TGMessage)
       } catch (error) {
-          this._handleError(error);
+          // Используем прямое обращение к объекту, а не через this
+          pauseactivecompaigns.handleError(error);
       }
   },
 
-  _handleError(error) {
+  handleError(error) {
       let errorMessage = '⚠️ Критическая ошибка:\n';
       
       if (error.response) {
@@ -47,6 +46,7 @@ export const pauseactivecompaigns = {
           errorMessage += error.message;
       }
       
-      sendlogTG(errorMessage);
+      //sendlogTG(errorMessage);
+      console.log(errorMessage)
   }
 };

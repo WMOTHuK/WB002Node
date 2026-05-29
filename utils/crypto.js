@@ -14,8 +14,8 @@ export function encrypt(text) {
 export function decrypt(text) {
   const [ivHex, encrypted] = text.split(':');
   const decipher = crypto.createDecipheriv(
-    algorithm, 
-    secretKey, 
+    algorithm,
+    secretKey,
     Buffer.from(ivHex, 'hex')
   );
   let decrypted = decipher.update(encrypted, 'hex', 'utf8');

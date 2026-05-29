@@ -1,4 +1,4 @@
-# Logs
+n # Logs
 logs
 *.log
 *log.txt
@@ -135,3 +135,4 @@ logs/log.txt
 logs/log.txt
 logs/log.txt
 start_server.bat
+temp_update_key.js
