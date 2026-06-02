@@ -1,6 +1,6 @@
 
 import { pauseCampaign } from "../services/scheduler/campaign.actions.js";
-
+import axios from 'axios';
 
 export function parseAdverts(responseData, filterStatus = null) {
   const result = [];
@@ -76,22 +76,27 @@ export async function enrichAdvertData(parsedData, getcrmdetailsurl, crmAPIKEY, 
   
       while (retryCount <= maxRetries && !success) {
         try {
-          const response = await axios.post(getcrmdetailsurl, advertIds, {
+          // Если advertIds - это массив, например [12345, 23456, 34567]
+          const idsString = Array.isArray(advertIds) ? advertIds.join(',') : advertIds;
+          
+          const response = await axios.get(getcrmdetailsurl, {
+            params: {
+             ids: idsString  // Передаём как строку через запятую
+            },
             headers: { 
-              'Authorization': `Bearer ${crmAPIKEY}`,
+              'Authorization': crmAPIKEY,
               'Content-Type': 'application/json',
               'Accept': 'application/json'
             },
             timeout: 30000
           });
-  
           const detailsMap = {};
           
-          response.data.forEach(detail => {
-            detailsMap[detail.advertId] = {
-              crmname: detail.name || null,
-              crmpt: detail.paymentType || null,
-              crmsps: detail.searchPluseState === 'on' ? true : false
+          response.data.adverts.forEach(campaign => {
+            detailsMap[campaign.id] = {  // ← id, а не advertId
+              crmname: campaign.settings?.name || null,  // ← settings.name
+              crmpt: campaign.settings?.payment_type || null,  // ← settings.payment_type
+              crmsps: campaign.settings?.placements?.search === true ? true : false  // ← placements.search
             };
           });
           

@@ -8,6 +8,8 @@ import { syncTableToDB, syncTableFromDB } from '../General/DBactions/tableSync.j
 import { pool } from '../General/globals.js';
 import { getAPIKey } from '../utils/apiutils.js';
 import { checkAndInsertPrice } from '../utils/pricingutils.js';
+import { getViewData } from '../General/DBactions/dbViews.js';
+import { removeByKeyValue } from '../General/ArrayActions/arraySort.js';
 
 
 const router = express.Router();
@@ -65,7 +67,7 @@ function processCards(wbData) {
         const firstPhotoSmall = value.length > 0 ? value[0].tm : null;
         const firstPhotoBig = value.length > 0 ? value[0].big : null;
         if (firstPhotoSmall) {
-          photos.push({ nmid: card.nmID, small: firstPhotoSmall, big: firstPhotoBig }); // Используем nmID из входных данных
+          photos.push({ vendorcode: card.vendorCode, small: firstPhotoSmall, big: firstPhotoBig }); // Используем vendorcode из входных данных
         } else {}
       } else if (includedKeys.includes(key)) {
         // Включение поля, если его ключ в списке разрешенных
@@ -81,48 +83,6 @@ function processCards(wbData) {
   return { singleFields, photos };
 }
 
-const extendGoods = async (pool, igoods) => {
-  if (!igoods || igoods.length === 0) return igoods;
-
-  try {
-    // 1. Получаем nmid всех товаров для запроса
-    const nmids = igoods.map(g => g.nmid);
-    
-    // 2. Запрос к БД для получения данных
-    const query = `
-      SELECT 
-        g.nmid, 
-        g.sprice, 
-        p.big
-      FROM goods g
-      LEFT JOIN photos p ON g.nmid = p.nmid
-      WHERE g.nmid = ANY($1::int[])
-    `;
-
-    const { rows: dbData } = await pool.query(query, [nmids]);
-
-    // 3. Создаем lookup-объект для быстрого доступа
-    const dbDataMap = dbData.reduce((acc, row) => {
-      acc[row.nmid] = {
-        sprice: row.sprice,
-        big: row.big
-      };
-      return acc;
-    }, {});
-
-    // 4. Расширяем исходный массив
-    return igoods.map(item => ({
-      ...item,
-      sprice: dbDataMap[item.nmid]?.sprice || null,
-      big: dbDataMap[item.nmid]?.big || null
-    }));
-
-  } catch (error) {
-    console.error('Ошибка при расширении товаров:', error);
-    throw error;
-  }
-};
-
 
 
 router.get('/getgoodsdata', authenticate, async (req, res) => {
@@ -135,18 +95,16 @@ router.get('/getgoodsdata', authenticate, async (req, res) => {
     const { singleFields: goods, photos } = processCards(response.data.cards);
 
 /*     3. Поочерёдно обновим данные в БД для каждой из таблиц */
-    const resultgoodsupdate = syncTableToDB(goods,'goods','nmid')
-    const resultphotosupdate = syncTableToDB(photos,'photos','nmid')
+    const resultgoodsupdate = syncTableToDB(goods,'goods','vendorcode')
+    const resultphotosupdate = syncTableToDB(photos,'photos','vendorcode')
 
-/*     4. Добавим в массив goods нужные поля и обновим данные из БД */
-    const extendedgoods = await extendGoods(pool,goods)
+/*     4. Fetch product_data from bd */
+    const productdata = await getViewData(pool, 'product_data');
 
-/*     5. Сортируем по номенклатуре продавца */
-    const sortedGoods = extendedgoods.sort((a, b) => 
-      (a.vendorcode || '').localeCompare(b.vendorcode || '')
-    );
+/*     5. Filter deleted */
+    const activeProducts = removeByKeyValue(productdata, 'deleted', true);
 
-    res.status(200).json(normalizeResponseData(sortedGoods));
+    res.status(200).json(normalizeResponseData(activeProducts));
   } catch (error) {
     const { status, data } = createErrorResponse(error);
     res.status(status).json(data);
@@ -192,5 +150,81 @@ router.post('/updateprices', async (req, res) => {
     });
 
 
+/**
+ * Обновление себестоимости товара
+ * POST /api/content/update_cost_price
+ * Body: { vendorcode, new_cost, start_date }
+ * Headers: { Authorization: Bearer <token> }
+ */
+router.post('/update_cost_price', async (req, res) => {
+  try {
+    const { vendorcode, new_cost, start_date } = req.body;
+    
+    // Валидация обязательных полей
+    if (!vendorcode) {
+      return res.status(400).json({
+        success: false,
+        error: 'vendorcode обязателен'
+      });
+    }
+    
+    if (!new_cost || new_cost <= 0) {
+      return res.status(400).json({
+        success: false,
+        error: 'new_cost должен быть положительным числом'
+      });
+    }
+    
+    if (!start_date) {
+      return res.status(400).json({
+        success: false,
+        error: 'start_date обязателен'
+      });
+    }
+    
+    // Проверка формата даты YYYY-MM-DD
+    const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    if (!dateRegex.test(start_date)) {
+      return res.status(400).json({
+        success: false,
+        error: 'start_date должен быть в формате YYYY-MM-DD'
+      });
+    }
+    
+    // Вызов хранимой функции PostgreSQL
+    const query = `
+      SELECT * FROM update_cost_price($1, $2, $3)
+    `;
+    
+    const result = await pool.query(query, [
+      vendorcode,
+      new_cost,
+      start_date
+    ]);
+    
+    const response = result.rows[0];
+    
+    // Отправка ответа клиенту
+    res.json({
+      success: response.status === 'SUCCESS',
+      status: response.status,
+      message: response.message,
+      data: {
+        old_cost: response.old_cost,
+        new_cost: response.new_cost,
+        effective_from: response.effective_from,
+        effective_to: response.effective_to
+      }
+    });
+    
+  } catch (error) {
+    console.error('Ошибка при обновлении себестоимости:', error);
+    res.status(500).json({
+      success: false,
+      error: 'Внутренняя ошибка сервера',
+      details: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+});
 
 export default router;

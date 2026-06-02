@@ -32,7 +32,7 @@ router.get('/getcompaigns', authenticate, async (req, res) => {
     const parsedData = parseAdverts(responseData);  // Прогоним через парсер 
 
     //Обагатим данными (имя, тип оплаты,Активность фиксированных фраз)
-    const enrichedData = await enrichAdvertData(parsedData, SERVER_CONFIG.getcrmdetailsurl, crmAPIKEY, userId);
+    const enrichedData = await enrichAdvertData(parsedData, server_config.getcrmdetailsurl, crmapikey, userId);
     // Теперь enrichedData содержит все исходные поля + name, paymentType, searchPluseState
 
     // Синхронизация с БД (игнорируем поля pause_time, restart_time и active при сравнении)

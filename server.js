@@ -13,7 +13,7 @@
   import scheduler from './services/scheduler/scheduler.service.js';
   import { Client } from 'pg';
   import { initScheduler } from './services/scheduler/simplescheduler.js';
-import { sendlogTG } from './General/logger.js';
+  import { sendlogTG } from './General/logger.js';
 
 // Отключил, пока не используем (ОСТАНОВКА КАМПАНИЙ)
 /*   scheduler; // Инициализирует сложный планировщик */

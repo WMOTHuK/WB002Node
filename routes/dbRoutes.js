@@ -4,8 +4,14 @@ import { syncTableToDB } from '../General/DBactions/tableSync.js';
 import { authenticate } from '../middleware/auth.js';
 import insertrow from '../General/DBactions/insertrow.js';
 import updaterow from '../General/DBactions/updaterow.js';
+import { pool } from "../General/globals.js";
 
 const router = express.Router();
+
+/**
+ * Обновление строк в таблице PostgreSQL
+ * @param {object} pool - Пул подключений к PostgreSQL
+ */
 
 /**
  * Обновление данных в таблице БД
