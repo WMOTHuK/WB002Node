@@ -9,13 +9,13 @@ import { pool } from '../General/globals.js';
 import { getAPIKey } from '../utils/apiutils.js';
 import { checkAndInsertPrice } from '../utils/pricingutils.js';
 import { getViewData } from '../General/DBactions/dbViews.js';
-import { removeByKeyValue } from '../General/ArrayActions/arraySort.js';
+import { removeByKeyValue, filterArrayByKeys, filterDeepArrayByKeys, renameKeysOnlyMapped} from '../utils/arrayutils.js';
 
 
 const router = express.Router();
 
 // конфигурацию запроса по карточкам товаров
-const DEFAULT_REQUEST_CONFIG = {
+const WB_DEFAULT_REQUEST_CONFIG = {
   settings: {
     sort: { ascending: false },
     filter: {
@@ -35,89 +35,255 @@ const DEFAULT_REQUEST_CONFIG = {
   }
 };
 
+
 // запрос к API 
-async function fetchGoodsData(apiKey) {
-  return axios.post(server_config.getcardsurl, DEFAULT_REQUEST_CONFIG, {
+async function fetchWBGoodsData(apiKey) {
+  return axios.post(server_config.getcardsurl, WB_DEFAULT_REQUEST_CONFIG, {
     headers: { 'Authorization': `Bearer ${apiKey}` }
   });
 }
 
 /**
- * Вычисляет объем в литрах с округлением вверх до целого числа
- * @param {Object} dimensions - Объект с размерами { width, height, length } в сантиметрах
- * @returns {number|null} - Объем в литрах или null, если размеры некорректны
+ * Получение списка товаров Ozon с автоматической пагинацией
+ * @param {string} apiKey - API-ключ Ozon
+ * @param {string} clientId - Client ID Ozon
+ * @param {number} limit - Количество товаров на страницу (по умолчанию 100)
+ * @returns {Promise<Array>} Массив всех товаров
  */
-function calculateVolumeInLiters(dimensions) {
+async function fetchOZONGoodsList(apiKey, clientId, limit = 100) {
+  let allProducts = [];
+  let lastId = "";
+  let hasMore = true;
+  
+  while (hasMore) {
+    const config = {
+      filter: {
+        offer_id: [],
+        product_id: [],
+        visibility: "ALL"
+      },
+      last_id: lastId,
+      limit: limit
+    };
+    
+    try {
+      const response = await axios.post(
+        server_config.ozon_product_list,
+        config,
+        {
+          headers: {
+            'Client-Id': clientId,
+            'Api-Key': apiKey,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      
+      // Получаем данные из правильной структуры
+      const { items, last_id, total } = response.data.result;
+      
+      if (items && Array.isArray(items) && items.length > 0) {
+        allProducts = [...allProducts, ...items];
+        console.log(`Загружено товаров: ${allProducts.length} из ${total}`);
+      }
+      
+      // Обновляем lastId для следующей итерации
+      lastId = last_id || "";
+      
+      // Проверяем, есть ли еще товары
+      hasMore = items && items.length === limit && allProducts.length < total;
+      
+      // Если total известен и мы загрузили все, выходим
+      if (total && allProducts.length >= total) {
+        hasMore = false;
+        allProducts = removeByKeyValue(allProducts, 'archived', true)
+        allProducts = filterArrayByKeys(allProducts, ['product_id']);
+      }
+      
+    } catch (error) {
+      console.error('Ошибка при загрузке страницы:', error.response?.data || error.message);
+      throw error;
+    }
+  }
+  
+  return allProducts;
+}
+
+
+async function fetchOzonProductsInfo(apiKey, clientId, productIds, chunkSize = 100) {
+    if (!Array.isArray(productIds) || productIds.length === 0) {
+        console.log('Нет ID товаров для запроса');
+        return [];
+    }
+    
+    // Нормализуем ID
+    const normalizedIds = productIds
+        .map(item => typeof item === 'object' && item !== null ? (item.product_id || item.id) : item)
+        .filter(id => id !== null)
+        .map(id => String(id));
+    
+    if (normalizedIds.length === 0) {
+        console.log('Не удалось извлечь ID товаров');
+        return [];
+    }
+    
+    // Разбиваем на пачки
+    const actualChunkSize = Math.min(chunkSize, 100);
+    const chunks = [];
+    for (let i = 0; i < normalizedIds.length; i += actualChunkSize) {
+        chunks.push(normalizedIds.slice(i, i + actualChunkSize));
+    }
+    
+    console.log(`Разбито ${normalizedIds.length} товаров на ${chunks.length} пачек по ${actualChunkSize} шт.`);
+    
+    // Собираем результаты
+    let allResults = [];
+    let errors = [];
+    
+    for (let i = 0; i < chunks.length; i++) {
+        console.log(`Обработка пачки ${i + 1}/${chunks.length}...`);
+        try {
+            const result = await fetchOzonProductsInfoChunk(apiKey, clientId, chunks[i]);
+            allResults = [...allResults, ...result];
+            await new Promise(resolve => setTimeout(resolve, 500));
+        } catch (error) {
+            console.error(`Ошибка в пачке ${i + 1}:`, error.message);
+            errors.push({ chunk: i + 1, error: error.message });
+        }
+    }
+    
+    // Маппинг полей
+    const fieldMapping = {
+        'id': 'ozid',
+        'offer_id': 'vendorcode',
+        'name': 'title',
+    };
+    
+    // Фильтруем, маппим и обрабатываем фото
+    const result = allResults
+        .filter(item => item.id && item.offer_id) // отфильтровываем неполные записи
+        .map(item => ({
+            ozid: item.sku,
+            vendorcode: item.offer_id,
+            title: item.name,
+            card_photo: item.primary_image?.[0] || null
+        }));
+    
+    if (errors.length > 0) {
+        console.warn(`Завершено с ошибками в ${errors.length} пачках`);
+    }
+    
+    console.log(`Успешно получено товаров: ${result.length}`);
+    
+    return result;
+}
+/**
+ * Внутренняя функция для отправки запроса одной пачкой (до 1000 товаров)
+ */
+async function fetchOzonProductsInfoChunk(apiKey, clientId, productIds) {
+    const config = {
+        product_id: productIds.map(id => String(id)) // Преобразуем в строки, как требует API
+    };
+    
+    try {
+        const response = await axios.post(
+            server_config.ozon_product_info, // предполагаемый URL, замените на правильный
+            config,
+            {
+                headers: {
+                    'Client-Id': clientId,
+                    'Api-Key': apiKey,
+                    'Content-Type': 'application/json'
+                }
+            }
+        );
+        
+        const items = response.data?.result?.items || response.data?.items || [];
+        
+        console.log(`Получена информация для ${items.length} товаров из ${productIds.length} запрошенных`);
+        
+        return items;
+        
+    } catch (error) {
+        console.error('Ошибка при получении информации о товарах Ozon:', error.response?.data || error.message);
+        throw error;
+    }
+}
+
+/**
+ * Вычисляет объем в литрах с округлением вверх
+ * @param {Object} dimensions - Объект с размерами { width, height, length }
+ * @returns {number|null} - Объем в литрах или null
+ */
+function calculateVolume(dimensions) {
   if (!dimensions || typeof dimensions !== 'object') {
     return null;
   }
   
   const { width, height, length } = dimensions;
   
-  // Проверяем, что все размеры есть и являются положительными числами
   if (typeof width !== 'number' || width <= 0 ||
       typeof height !== 'number' || height <= 0 ||
       typeof length !== 'number' || length <= 0) {
     return null;
   }
   
-  // Объем в кубических сантиметрах
   const volumeCm3 = width * height * length;
-  
-  // Переводим в литры (1 литр = 1000 кубических сантиметров)
   const volumeLiters = volumeCm3 / 1000;
   
-  // Округляем вверх до целого числа
-  const roundedVolume = Math.ceil(volumeLiters);
-  
-  return roundedVolume;
+  return Math.ceil(volumeLiters);
 }
 
+/**
+ * Извлекает первое фото из карточки товара
+ * @param {Object} card - Карточка товара
+ * @returns {string|null} - URL первого фото или null
+ */
+function getFirstPhoto(card) {
+  if (!card.photos || !Array.isArray(card.photos) || card.photos.length === 0) {
+    return null;
+  }
+  return card.photos[0].big || null;
+}
+
+/**
+ * Извлекает основные поля из карточки товара
+ * @param {Object} card - Карточка товара
+ * @returns {Object} - Объект с основными полями
+ */
+function extractBasicFields(card) {
+  const fields = ['nmID', 'imtID', 'subjectID', 'subjectName', 'vendorCode', 'brand', 'title'];
+  const result = {};
+  
+  fields.forEach(field => {
+    if (card[field] !== undefined && card[field] !== null) {
+      result[field] = card[field];
+    }
+  });
+  
+  return result;
+}
+/**
+ * Обрабатывает данные карточек товаров (с объемом)
+ * @param {Array} wbData - Массив карточек товаров от Wildberries API
+ * @returns {Array} Массив объектов с полями: nmID, imtID, subjectID, subjectName, vendorCode, brand, title, card_photo, wbvol
+ */
 function processCards(wbData) {
   if (!Array.isArray(wbData)) {
     throw new Error("wbData is not an array");
   }
-
-  const singleFields = [];
-  const photos = [];
-
-  // Определение ключей, которые нужно включить в singleFields
-  const includedKeys = ['nmID', 'imtID', 'subjectID', 'subjectName', 'vendorCode', 'brand', 'title'];
-
-  wbData.forEach(card => {
-    const cardSingleFields = {};
-
-    Object.entries(card).forEach(([key, value]) => {
-      // Преобразование ключа к нижнему регистру
-      const keyLowerCase = key.toLowerCase();
-
-      if (key === 'photos' && Array.isArray(value)) {
-        // Обработка массива фотографий
-        const firstPhotoSmall = value.length > 0 ? value[0].tm : null;
-        const firstPhotoBig = value.length > 0 ? value[0].big : null;
-        if (firstPhotoSmall) {
-          photos.push({ vendorcode: card.vendorCode, small: firstPhotoSmall, big: firstPhotoBig });
-        }
-      } else if (key === 'dimensions' && value && typeof value === 'object') {
-        // Обработка размеров и расчет объема
-        const volume = calculateVolumeInLiters(value);
-        if (volume !== null) {
-          cardSingleFields['wbvol'] = volume;
-        }
-      } else if (includedKeys.includes(key)) {
-        // Включение поля, если его ключ в списке разрешенных
-        cardSingleFields[keyLowerCase] = value;
-      }
-    });
-
-    if (Object.keys(cardSingleFields).length > 0) {
-      singleFields.push(cardSingleFields);
-    }
+  
+  return wbData.map(card => {
+    const basicFields = extractBasicFields(card);
+    const volume = calculateVolume(card.dimensions);
+    
+    return {
+      ...basicFields,
+      card_photo: getFirstPhoto(card),
+      ...(volume !== null && { wbvol: volume }) // Добавляем объем, если он есть
+    };
   });
-
-  return { singleFields, photos };
 }
-
 
 
 router.get('/getgoodsdata', authenticate, async (req, res) => {
@@ -125,19 +291,37 @@ router.get('/getgoodsdata', authenticate, async (req, res) => {
 /** BEGIN UPDATE OF WB GOODS **/
 /*     1. получим данные из Вайлдберриз */
     const contentAPIKEY = await getAPIKey(req.user.id,'2');
-    const response = await fetchGoodsData(contentAPIKEY);
+    const wb_goodsdata = await fetchWBGoodsData(contentAPIKEY);
 
 /*     2. Преобразуем в два массива в соответствии со структурой БД */
-    const { singleFields: goods, photos } = processCards(response.data.cards);
+    const wb_goods = processCards(wb_goodsdata.data.cards);
 
-/*     3. Поочерёдно обновим данные в БД для каждой из таблиц */
-    const resultgoodsupdate = syncTableToDB(goods,'goods','vendorcode')
-    const resultphotosupdate = syncTableToDB(photos,'photos','vendorcode')
+/*     3. Update goods table in DB */
+    const wb_goodsupdate_result = await syncTableToDB(wb_goods,'goods','vendorcode')
 /** END UPDATE OF WB GOODS **/
-/*     4. Fetch product_data from bd */
-    const productdata = await getViewData(pool, 'product_data');
 
-/*     5. Filter deleted */
+/** BEGIN UPDATE OF OZON GOODS **/
+/*     1. Get api key and userid from DB */
+    const ozon_content_apikey = await getAPIKey(req.user.id,'3');
+    const ozon_userid = await getAPIKey(req.user.id,'4');
+
+/*     2. Get goods id's from OZON */
+    const ozon_goodslist = await fetchOZONGoodsList(ozon_content_apikey, ozon_userid);
+    const ozon_id_list = ozon_goodslist.map(item => item.product_id);
+
+/*     3. Get goods data from OZON */
+    const ozon_goods = await fetchOzonProductsInfo(ozon_content_apikey, ozon_userid, ozon_id_list);
+
+/*     4. Update goods table in DB */
+    const ozon_goodsupdate_result = await syncTableToDB(ozon_goods,'goods','vendorcode')
+
+/** END UPDATE OF OZON GOODS **/
+
+
+/*     5. Fetch product_data from bd */
+    const productdata =   await getViewData(pool, 'product_data');
+
+/*     6. Filter deleted */
     const activeProducts = removeByKeyValue(productdata, 'deleted', true);
 
     res.status(200).json(normalizeResponseData(activeProducts));
