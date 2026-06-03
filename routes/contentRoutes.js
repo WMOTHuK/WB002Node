@@ -42,6 +42,37 @@ async function fetchGoodsData(apiKey) {
   });
 }
 
+/**
+ * Вычисляет объем в литрах с округлением вверх до целого числа
+ * @param {Object} dimensions - Объект с размерами { width, height, length } в сантиметрах
+ * @returns {number|null} - Объем в литрах или null, если размеры некорректны
+ */
+function calculateVolumeInLiters(dimensions) {
+  if (!dimensions || typeof dimensions !== 'object') {
+    return null;
+  }
+  
+  const { width, height, length } = dimensions;
+  
+  // Проверяем, что все размеры есть и являются положительными числами
+  if (typeof width !== 'number' || width <= 0 ||
+      typeof height !== 'number' || height <= 0 ||
+      typeof length !== 'number' || length <= 0) {
+    return null;
+  }
+  
+  // Объем в кубических сантиметрах
+  const volumeCm3 = width * height * length;
+  
+  // Переводим в литры (1 литр = 1000 кубических сантиметров)
+  const volumeLiters = volumeCm3 / 1000;
+  
+  // Округляем вверх до целого числа
+  const roundedVolume = Math.ceil(volumeLiters);
+  
+  return roundedVolume;
+}
+
 function processCards(wbData) {
   if (!Array.isArray(wbData)) {
     throw new Error("wbData is not an array");
@@ -52,8 +83,6 @@ function processCards(wbData) {
 
   // Определение ключей, которые нужно включить в singleFields
   const includedKeys = ['nmID', 'imtID', 'subjectID', 'subjectName', 'vendorCode', 'brand', 'title'];
-
-  
 
   wbData.forEach(card => {
     const cardSingleFields = {};
@@ -67,8 +96,14 @@ function processCards(wbData) {
         const firstPhotoSmall = value.length > 0 ? value[0].tm : null;
         const firstPhotoBig = value.length > 0 ? value[0].big : null;
         if (firstPhotoSmall) {
-          photos.push({ vendorcode: card.vendorCode, small: firstPhotoSmall, big: firstPhotoBig }); // Используем vendorcode из входных данных
-        } else {}
+          photos.push({ vendorcode: card.vendorCode, small: firstPhotoSmall, big: firstPhotoBig });
+        }
+      } else if (key === 'dimensions' && value && typeof value === 'object') {
+        // Обработка размеров и расчет объема
+        const volume = calculateVolumeInLiters(value);
+        if (volume !== null) {
+          cardSingleFields['wbvol'] = volume;
+        }
       } else if (includedKeys.includes(key)) {
         // Включение поля, если его ключ в списке разрешенных
         cardSingleFields[keyLowerCase] = value;
@@ -87,6 +122,7 @@ function processCards(wbData) {
 
 router.get('/getgoodsdata', authenticate, async (req, res) => {
   try {
+/** BEGIN UPDATE OF WB GOODS **/
 /*     1. получим данные из Вайлдберриз */
     const contentAPIKEY = await getAPIKey(req.user.id,'2');
     const response = await fetchGoodsData(contentAPIKEY);
@@ -97,7 +133,7 @@ router.get('/getgoodsdata', authenticate, async (req, res) => {
 /*     3. Поочерёдно обновим данные в БД для каждой из таблиц */
     const resultgoodsupdate = syncTableToDB(goods,'goods','vendorcode')
     const resultphotosupdate = syncTableToDB(photos,'photos','vendorcode')
-
+/** END UPDATE OF WB GOODS **/
 /*     4. Fetch product_data from bd */
     const productdata = await getViewData(pool, 'product_data');
 
