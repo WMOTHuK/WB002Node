@@ -36,6 +36,103 @@ const WB_DEFAULT_REQUEST_CONFIG = {
 };
 
 
+
+/**
+ * Вычисляет объем в литрах на основе размеров товара
+ * @param {Object} item - Товар с полями height, depth, width, dimension_unit
+ * @returns {number|null} - Объем в литрах (округленный вверх) или null
+ */
+function calculateOzonVolume(item) {
+    const { height, depth, width, dimension_unit } = item;
+    
+    // Проверяем наличие всех необходимых полей
+    if (!height || !depth || !width || !dimension_unit) {
+        return null;
+    }
+    
+    // Проверяем, что все значения - числа
+    if (typeof height !== 'number' || typeof depth !== 'number' || typeof width !== 'number') {
+        return null;
+    }
+    
+    let volumeCm3 = 0;
+    
+    // Переводим размеры в сантиметры в зависимости от единицы измерения
+    if (dimension_unit === 'mm') {
+        // Миллиметры → сантиметры (делим на 10)
+        volumeCm3 = (height / 10) * (depth / 10) * (width / 10);
+    } else if (dimension_unit === 'cm') {
+        // Сантиметры
+        volumeCm3 = height * depth * width;
+    } else if (dimension_unit === 'm') {
+        // Метры → сантиметры (умножаем на 100)
+        volumeCm3 = (height * 100) * (depth * 100) * (width * 100);
+    } else {
+        console.warn(`Неизвестная единица измерения: ${dimension_unit}`);
+        return null;
+    }
+    
+    // Переводим в литры (1 литр = 1000 кубических сантиметров)
+    const volumeLiters = volumeCm3 / 1000;
+    
+    // Округляем вверх до целого числа
+    return Math.ceil(volumeLiters);
+}
+
+/**
+ * Получает информацию о размерах товаров из Ozon API
+ * @param {string} apiKey - API-ключ Ozon
+ * @param {string} clientId - Client ID Ozon
+ * @param {Array<string>} productIds - Массив product_id
+ * @returns {Promise<Object>} - Объект с маппингом product_id -> объем
+ */
+async function fetchOzonProductsAttributes(apiKey, clientId, productIds) {
+    if (!Array.isArray(productIds) || productIds.length === 0) {
+        return {};
+    }
+    
+    const config = {
+        filter: {
+            product_id: productIds.map(id => String(id))
+        },
+        last_id: "",
+        limit: Math.min(productIds.length, 1000)
+    };
+    
+    try {
+        const response = await axios.post(
+            server_config.ozon_product_attr,
+            config,
+            {
+                headers: {
+                    'Client-Id': clientId,
+                    'Api-Key': apiKey,
+                    'Content-Type': 'application/json'
+                },
+                timeout: 30000
+            }
+        );
+        
+        const items = response.data?.result || [];
+        
+        // Создаем маппинг product_id -> объем
+        const volumeMap = {};
+        items.forEach(item => {
+            const volume = calculateOzonVolume(item);
+            if (volume !== null) {
+                volumeMap[item.id] = volume;
+            }
+        });
+        
+        console.log(`Получены объемы для ${Object.keys(volumeMap).length} товаров`);
+        
+        return volumeMap;
+        
+    } catch (error) {
+        console.error('Ошибка при получении атрибутов товаров Ozon:', error.response?.data || error.message);
+        return {};
+    }
+}
 // запрос к API 
 async function fetchWBGoodsData(apiKey) {
   return axios.post(server_config.getcardsurl, WB_DEFAULT_REQUEST_CONFIG, {
@@ -110,9 +207,11 @@ async function fetchOZONGoodsList(apiKey, clientId, limit = 100) {
 }
 
 
+/**
+ * Получение информации о товарах с параллельными запросами атрибутов
+ */
 async function fetchOzonProductsInfo(apiKey, clientId, productIds, chunkSize = 100) {
     if (!Array.isArray(productIds) || productIds.length === 0) {
-        console.log('Нет ID товаров для запроса');
         return [];
     }
     
@@ -123,59 +222,57 @@ async function fetchOzonProductsInfo(apiKey, clientId, productIds, chunkSize = 1
         .map(id => String(id));
     
     if (normalizedIds.length === 0) {
-        console.log('Не удалось извлечь ID товаров');
         return [];
     }
     
-    // Разбиваем на пачки
+    // Запускаем оба запроса параллельно
+    console.log(`Запрос данных для ${normalizedIds.length} товаров...`);
+    
+    const [volumeMap, allResults] = await Promise.all([
+        fetchOzonProductsAttributes(apiKey, clientId, normalizedIds),
+        fetchOzonProductsInfoChunks(apiKey, clientId, normalizedIds, chunkSize)
+    ]);
+    
+    // Формируем результат
+    const result = allResults
+        .filter(item => item.id && item.offer_id)
+        .map(item => ({
+            ozid: item.sku || item.id,
+            vendorcode: item.offer_id,
+            title: item.name,
+            card_photo: item.primary_image?.[0] || null,
+            ozvol: volumeMap[item.id] || null
+        }));
+    
+    console.log(`Успешно получено товаров: ${result.length} (с объемом: ${result.filter(r => r.ozvol).length})`);
+    
+    return result;
+}
+
+/**
+ * Вспомогательная функция для получения информации пачками
+ */
+async function fetchOzonProductsInfoChunks(apiKey, clientId, productIds, chunkSize = 100) {
     const actualChunkSize = Math.min(chunkSize, 100);
     const chunks = [];
-    for (let i = 0; i < normalizedIds.length; i += actualChunkSize) {
-        chunks.push(normalizedIds.slice(i, i + actualChunkSize));
+    
+    for (let i = 0; i < productIds.length; i += actualChunkSize) {
+        chunks.push(productIds.slice(i, i + actualChunkSize));
     }
     
-    console.log(`Разбито ${normalizedIds.length} товаров на ${chunks.length} пачек по ${actualChunkSize} шт.`);
-    
-    // Собираем результаты
     let allResults = [];
-    let errors = [];
     
     for (let i = 0; i < chunks.length; i++) {
-        console.log(`Обработка пачки ${i + 1}/${chunks.length}...`);
         try {
             const result = await fetchOzonProductsInfoChunk(apiKey, clientId, chunks[i]);
             allResults = [...allResults, ...result];
             await new Promise(resolve => setTimeout(resolve, 500));
         } catch (error) {
             console.error(`Ошибка в пачке ${i + 1}:`, error.message);
-            errors.push({ chunk: i + 1, error: error.message });
         }
     }
     
-    // Маппинг полей
-    const fieldMapping = {
-        'id': 'ozid',
-        'offer_id': 'vendorcode',
-        'name': 'title',
-    };
-    
-    // Фильтруем, маппим и обрабатываем фото
-    const result = allResults
-        .filter(item => item.id && item.offer_id) // отфильтровываем неполные записи
-        .map(item => ({
-            ozid: item.sku,
-            vendorcode: item.offer_id,
-            title: item.name,
-            card_photo: item.primary_image?.[0] || null
-        }));
-    
-    if (errors.length > 0) {
-        console.warn(`Завершено с ошибками в ${errors.length} пачках`);
-    }
-    
-    console.log(`Успешно получено товаров: ${result.length}`);
-    
-    return result;
+    return allResults;
 }
 /**
  * Внутренняя функция для отправки запроса одной пачкой (до 1000 товаров)

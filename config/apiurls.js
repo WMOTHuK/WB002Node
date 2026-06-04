@@ -5,7 +5,8 @@ const server_config = {
     getcompaignsurl: 'https://advert-api.wildberries.ru/adv/v1/promotion/count', // URL список компаний
     getcrmdetailsurl: 'https://advert-api.wildberries.ru/api/advert/v2/adverts', // URL подробные данные о компаниях
     ozon_product_list: 'https://api-seller.ozon.ru/v3/product/list', // URL получения cписка карточек
-    ozon_product_info: 'https://api-seller.ozon.ru/v3/product/info/list' 
+    ozon_product_info: 'https://api-seller.ozon.ru/v3/product/info/list', // URL get product details
+    ozon_product_attr: 'https://api-seller.ozon.ru/v4/product/info/attributes'// URL get product attributes
 
   };
 
