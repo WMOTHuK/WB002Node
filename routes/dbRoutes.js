@@ -1,7 +1,7 @@
 // routes/dbRoutes.js
 import express from 'express';
 import { syncTableToDB } from '../General/DBactions/tableSync.js';
-import { authenticate } from '../middleware/auth.js';
+import { authenticate } from '../src/api/middleware/auth.middleware.js';
 import insertrow from '../General/DBactions/insertrow.js';
 import updaterow from '../General/DBactions/updaterow.js';
 import { pool } from "../General/globals.js";

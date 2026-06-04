@@ -3,7 +3,7 @@ import server_config from '../config/apiurls.js'
 import express from 'express';
 import axios from 'axios';
 import { createErrorResponse } from '../utils/errorhandling.js'
-import { authenticate } from '../middleware/auth.js';
+import { authenticate } from '../src/api/middleware/auth.middleware.js';
 import { syncTableToDB, syncTableFromDB } from '../General/DBactions/tableSync.js';
 import { pool } from '../General/globals.js';
 import { getAPIKey } from '../utils/apiutils.js';

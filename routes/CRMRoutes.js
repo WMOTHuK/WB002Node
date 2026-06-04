@@ -3,7 +3,7 @@
 import express from 'express';
 import axios from 'axios';
 import { readtable } from '../General/DBactions/readtable.js';
-import { authenticate } from '../middleware/auth.js';
+import { authenticate } from '../src/api/middleware/auth.middleware.js';
 import { decrypt } from '../utils/crypto.js';
 import { syncTableToDB, syncTableFromDB } from '../General/DBactions/tableSync.js'
 import { addDescriptionColumns } from '../General/DBactions/descriptionsMapper.js';

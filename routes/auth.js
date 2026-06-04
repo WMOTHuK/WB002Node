@@ -2,7 +2,7 @@
 
 import express from 'express';
 import { login, register, getApiKeys } from '../controllers/authController.js';
-import { authenticate } from '../middleware/auth.js';
+import { authenticate } from '../src/api/middleware/auth.middleware.js';
 
 const router = express.Router();
 

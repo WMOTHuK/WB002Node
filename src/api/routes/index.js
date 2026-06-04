@@ -5,7 +5,7 @@ import apiKeysRoutes from '../../../routes/apiKeys.js';
 import contentRoutes from '../../../routes/contentRoutes.js';
 import CRMRoutes from '../../../routes/CRMRoutes.js';
 import dbRoutes from '../../../routes/dbRoutes.js';
-import { authenticate } from '../../../middleware/auth.js';
+import { authenticate } from '../middleware/auth.middleware.js';
 
 const router = Router();
 

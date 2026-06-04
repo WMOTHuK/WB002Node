@@ -1,6 +1,6 @@
 //routes/apiKeys.js
 import express from 'express';
-import { authenticate } from '../middleware/auth.js';
+import { authenticate } from '../src/api/middleware/auth.middleware.js';
 import { readtable } from '../General/DBactions/readtable.js';
 import { insertRow } from '../General/DBactions/insertrow.js';
 import { updateRow } from '../General/DBactions/updaterow.js';
