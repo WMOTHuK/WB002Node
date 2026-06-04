@@ -2,43 +2,34 @@
 import jwt from 'jsonwebtoken';
 
 const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '24h';
 
 if (!JWT_SECRET) {
   throw new Error('JWT_SECRET is not defined in environment variables');
 }
 
 export const tokenService = {
-  /**
-   * Извлечь токен из заголовка Authorization
-   * @param {string} authHeader
-   * @returns {string|null}
-   */
   extractFromHeader: (authHeader) => {
     if (!authHeader?.startsWith('Bearer ')) return null;
     return authHeader.split(' ')[1];
   },
 
-  /**
-   * Верифицировать токен и вернуть payload
-   * @param {string} token
-   * @returns {{userId: string}|null}
-   */
   verify: (token) => {
     try {
       const decoded = jwt.verify(token, JWT_SECRET);
       if (!decoded.userId) return null;
       return { userId: decoded.userId };
     } catch {
-      return null; // Токен невалидный или истёк
+      return null;
     }
   },
 
   /**
    * Создать токен
-   * @param {string} userId
+   * @param {{userId: string, login?: string}} payload
    * @returns {string}
    */
-  sign: (userId) => {
-    return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '24h' });
+  sign: (payload) => {
+    return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
   }
 };
