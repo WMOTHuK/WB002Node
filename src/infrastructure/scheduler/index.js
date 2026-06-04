@@ -1,13 +1,22 @@
 // src/infrastructure/scheduler/index.js
-import { initSimpleScheduler } from '../../../services/scheduler/simplescheduler.js';
+import { SchedulerService } from '../../services/scheduler/scheduler.service.js';
 import { logger } from '../../utils/logger.js';
 
-export const initSchedulers = () => {
-  try {
-    initSimpleScheduler();
-    logger.info('Планировщик инициализирован');
-  } catch (error) {
-    logger.error('Ошибка инициализации планировщика:', error);
-    throw error;
+let schedulerInstance = null;
+
+export function initScheduler() {
+  if (schedulerInstance) return schedulerInstance;
+  
+  schedulerInstance = new SchedulerService();
+  schedulerInstance.restoreScheduledJobs();
+  
+  logger.info('Планировщик инициализирован');
+  return schedulerInstance;
+}
+
+export function getScheduler() {
+  if (!schedulerInstance) {
+    throw new Error('Планировщик не инициализирован');
   }
-};
+  return schedulerInstance;
+}

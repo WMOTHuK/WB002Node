@@ -7,9 +7,9 @@ import { authenticate } from '../src/api/middleware/auth.middleware.js';
 import { decrypt } from '../utils/crypto.js';
 import { syncTableToDB, syncTableFromDB } from '../General/DBactions/tableSync.js'
 import { addDescriptionColumns } from '../General/DBactions/descriptionsMapper.js';
-import server_config from '../config/apiurls.js'
-import { getAPIKey } from '../utils/apiutils.js';
-import { parseAdverts, enrichAdvertData } from '../utils/crmutils.js';
+import server_config from '../src/config/api.config.js'
+import { getApiKeyByUser } from '../src/services/apiKey.service.js';
+import { parseAdverts, enrichAdvertData } from '../src/utils/crm.utils.js';
 
 const router = express.Router();
 
@@ -19,7 +19,7 @@ router.get('/getcompaigns', authenticate, async (req, res) => {
     const userId = req.user.id;
 
     // Получаем API ключ из БД
-    const crmapikey = await getAPIKey(userId, '1');
+    const crmapikey = await getApiKeyByUser(userId, '1');
 
     // Выполняем запрос к внешнему API
     const response = await axios.get(server_config.getcompaignsurl,  {

@@ -1,12 +1,12 @@
 // routes/contentRoutes.js
-import server_config from '../config/apiurls.js'
+import server_config from '../src/config/api.config.js'
 import express from 'express';
 import axios from 'axios';
 import { createErrorResponse } from '../utils/errorhandling.js'
 import { authenticate } from '../src/api/middleware/auth.middleware.js';
 import { syncTableToDB, syncTableFromDB } from '../General/DBactions/tableSync.js';
 import { pool } from '../General/globals.js';
-import { getAPIKey } from '../utils/apiutils.js';
+import { getApiKeyByUser } from '../src/services/apiKey.service.js';
 import { checkAndInsertPrice } from '../utils/pricingutils.js';
 import { getViewData } from '../General/DBactions/dbViews.js';
 import { removeByKeyValue, filterArrayByKeys, filterDeepArrayByKeys, renameKeysOnlyMapped} from '../utils/arrayutils.js';
@@ -387,7 +387,7 @@ router.get('/getgoodsdata', authenticate, async (req, res) => {
   try {
 /** BEGIN UPDATE OF WB GOODS **/
 /*     1. получим данные из Вайлдберриз */
-    const contentAPIKEY = await getAPIKey(req.user.id,'2');
+    const contentAPIKEY = await getApiKeyByUser(req.user.id,'2');
     const wb_goodsdata = await fetchWBGoodsData(contentAPIKEY);
 
 /*     2. Преобразуем в два массива в соответствии со структурой БД */
@@ -399,8 +399,8 @@ router.get('/getgoodsdata', authenticate, async (req, res) => {
 
 /** BEGIN UPDATE OF OZON GOODS **/
 /*     1. Get api key and userid from DB */
-    const ozon_content_apikey = await getAPIKey(req.user.id,'3');
-    const ozon_userid = await getAPIKey(req.user.id,'4');
+    const ozon_content_apikey = await getApiKeyByUser(req.user.id,'3');
+    const ozon_userid = await getApiKeyByUser(req.user.id,'4');
 
 /*     2. Get goods id's from OZON */
     const ozon_goodslist = await fetchOZONGoodsList(ozon_content_apikey, ozon_userid);

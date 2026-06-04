@@ -1,7 +1,7 @@
 // src/server.js
 import 'dotenv/config';
 import { app } from './app.js';
-import { initSchedulers } from './infrastructure/scheduler/index.js';
+import { initScheduler } from './infrastructure/scheduler/index.js';
 import { initDbListener } from './infrastructure/db/listener.js';
 import { logger } from './utils/logger.js';
 
@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 const startServer = async () => {
   try {
     // Инициализация планировщиков
-    initSchedulers();
+    initScheduler();
 
     // Инициализация DB Listener (раскомментируй, когда нужно)
     // await initDbListener(scheduler);
