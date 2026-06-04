@@ -18,11 +18,6 @@ export const logger = {
   error: (message, ...args) => {
     if (shouldLog('ERROR')) {
       console.error(`[ERROR]`, message, ...args);
-      try {
-        sendlogTG(`[ERROR] ${message}`);
-      } catch (e) {
-        // Игнорируем ошибки отправки в TG
-      }
     }
   },
 
@@ -35,11 +30,6 @@ export const logger = {
   info: (message, ...args) => {
     if (shouldLog('INFO')) {
       console.log(`[INFO]`, message, ...args);
-      try {
-        sendlogTG(`[INFO] ${message}`);
-      } catch (e) {
-        // Игнорируем ошибки отправки в TG
-      }
     }
   },
 

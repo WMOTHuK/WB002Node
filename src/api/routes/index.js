@@ -13,7 +13,7 @@ const router = Router();
 router.use('/auth', authRoutes);
 
 // Защищённые маршруты
-router.use('/auth/keys', authenticate, apiKeysRoutes);
+router.use('/auth', authenticate, apiKeysRoutes);
 router.use('/content', authenticate, contentRoutes);
 router.use('/CRM', authenticate, CRMRoutes);
 router.use('/DB', authenticate, dbRoutes);
