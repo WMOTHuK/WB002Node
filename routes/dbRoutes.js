@@ -1,26 +1,18 @@
 // routes/dbRoutes.js
 import express from 'express';
-import { syncTableToDB } from '../General/DBactions/tableSync.js';
+import { syncTableToDB } from '../src/utils/tableSync.utils.js';
 import { authenticate } from '../src/api/middleware/auth.middleware.js';
-import insertrow from '../General/DBactions/insertrow.js';
-import updaterow from '../General/DBactions/updaterow.js';
+import { db } from '../src/utils/sql.utils.js';
 import { pool } from "../General/globals.js";
+import { logger } from '../src/utils/logger.js';
 
 const router = express.Router();
 
-/**
- * Обновление строк в таблице PostgreSQL
- * @param {object} pool - Пул подключений к PostgreSQL
- */
+// Белый список таблиц для прямого доступа
+const allowedTableNames = []; // TODO: заполнить список разрешённых таблиц
 
 /**
- * Обновление данных в таблице БД
- * @body {Object} {
- *   rows: Array,      // Данные для обновления
- *   tableName: string,// Имя таблицы
- *   keyFields: string|Array, // Ключевые поля
- *   fieldsToUpdate: Array // Поля для обновления (опционально)
- * }
+ * Обновление данных в таблице БД через syncTableToDB
  */
 router.post('/updatetable', authenticate, async (req, res) => {
   try {
@@ -32,14 +24,9 @@ router.post('/updatetable', authenticate, async (req, res) => {
       });
     }
 
-    const syncResult = await syncTableToDB(
-      rows,
-      tableName,
-      keyFields,
-      {
-        batchSize: 500 // Можно настроить по необходимости
-      }
-    );
+    const syncResult = await syncTableToDB(rows, tableName, keyFields, {
+      batchSize: 500
+    });
 
     res.status(200).json({
       success: true,
@@ -47,7 +34,7 @@ router.post('/updatetable', authenticate, async (req, res) => {
       message: `Processed ${rows.length} rows`
     });
   } catch (error) {
-    console.error('Error in /api/DB/updatetable:', error);
+    logger.error('Error in /updatetable:', error.message);
     res.status(500).json({
       success: false,
       error: error.message,
@@ -56,71 +43,81 @@ router.post('/updatetable', authenticate, async (req, res) => {
   }
 });
 
-
+/**
+ * Получить все записи из таблицы (только из белого списка)
+ */
 router.get('/gettable', async (req, res) => {
   try {
     const table = req.query.tablename;
+
     if (!allowedTableNames.includes(table)) {
-      const errorMessage = `Error: tablename "${table}" is not allowed.`;
-      logMessage(insertrow.name, 2, errorMessage); // Предполагаем, что logMessage уже определена и импортирована
-      return errorMessage;
+      return res.status(400).json({ error: `Table "${table}" is not allowed` });
     }
 
-    // Если имя таблицы допустимо, формируем запрос, вставляя имя таблицы напрямую в строку запроса
-    const queryText = `SELECT * FROM ${table}`;
-    const { rows } = await pool.query(queryText);
+    const { rows } = await db.select(table);
     res.json(rows);
   } catch (error) {
-    logMessage('/api/gettable', 2, error.message); // Логирование ошибки 
-    res.status(500).send(error.message);
+    logger.error('Error in /gettable:', error.message);
+    res.status(500).json({ error: error.message });
   }
 });
 
+/**
+ * Обновить одну строку
+ */
 router.post('/updaterow', async (req, res) => {
   try {
     const { tablename, tablekey, fieldsToUpdate, rowData } = req.body;
-    const result = await updaterow( tablename, tablekey, fieldsToUpdate, rowData);
-    res.json({ success: true, message: result });
+
+    // tablekey: { column: value } — где условие
+    // fieldsToUpdate: { column: value } — что обновить
+    await db.update(tablename, fieldsToUpdate, tablekey);
+
+    res.json({ success: true });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    logger.error('Error in /updaterow:', error.message);
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 
+/**
+ * Вставить одну строку
+ */
 router.post('/insertrow', async (req, res) => {
   try {
     const { tablename, rowData } = req.body;
-    const result = await insertrow( tablename, rowData);
-    res.json({ success: true, message: result });
+
+    // rowData: { column: value }
+    await db.insert(tablename, rowData);
+
+    res.json({ success: true });
   } catch (error) {
-    res.status(500).json({ success: false, message: error.message });
+    logger.error('Error in /insertrow:', error.message);
+    res.status(500).json({ success: false, error: error.message });
   }
 });
 
-
+/**
+ * Получить локализованные строки
+ */
 router.get('/gettablelocale', async (req, res) => {
-  // Извлечение параметров запроса
-  const fields = req.query.tablekeys ? req.query.tablekeys.split(',') : []; // Преобразуем строку обратно в массив
-  const locale = req.query.locale;
-
   try {
-    
-    // Преобразуем список полей в строку для SQL-запроса
-    const fieldsString = fields.map(field => `'${field}'`).join(', ');
+    const fields = req.query.tablekeys ? req.query.tablekeys.split(',') : [];
+    const locale = req.query.locale;
 
-    // Формируем текст запроса
-    const queryText = `
-    SELECT  * FROM localization
-    WHERE loctype = '1'
-    AND locale = '${locale}'
-    AND colname IN (${fieldsString});
-    `;
-    const { rows } = await pool.query(queryText);
+    const { rows } = await pool.query(
+      `SELECT * FROM localization
+       WHERE loctype = '1'
+       AND locale = $1
+       AND colname = ANY($2)`,
+      [locale, fields]
+    );
+
     res.json(rows);
   } catch (error) {
-    logMessage('/api/gettablelocale', 2, error.message); // Логирование ошибки 
-    res.status(500).send(error.message);
+    logger.error('Error in /gettablelocale:', error.message);
+    res.status(500).json({ error: error.message });
   }
-
 });
 
 export default router;

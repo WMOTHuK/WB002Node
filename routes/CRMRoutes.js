@@ -2,11 +2,10 @@
 
 import express from 'express';
 import axios from 'axios';
-import { readtable } from '../General/DBactions/readtable.js';
 import { authenticate } from '../src/api/middleware/auth.middleware.js';
 import { decrypt } from '../utils/crypto.js';
-import { syncTableToDB, syncTableFromDB } from '../General/DBactions/tableSync.js'
-import { addDescriptionColumns } from '../General/DBactions/descriptionsMapper.js';
+import { syncTableToDB, syncTableFromDB } from '../src/utils/tableSync.utils.js'
+import { addDescriptionColumns } from '../src/utils/descriptionsMapper.js'
 import server_config from '../src/config/api.config.js'
 import { getApiKeyByUser } from '../src/services/apiKey.service.js';
 import { parseAdverts, enrichAdvertData } from '../src/utils/crm.utils.js';

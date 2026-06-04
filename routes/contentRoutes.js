@@ -4,11 +4,11 @@ import express from 'express';
 import axios from 'axios';
 import { createErrorResponse } from '../utils/errorhandling.js'
 import { authenticate } from '../src/api/middleware/auth.middleware.js';
-import { syncTableToDB, syncTableFromDB } from '../General/DBactions/tableSync.js';
+import { syncTableToDB, syncTableFromDB } from '../src/utils/tableSync.utils.js';
 import { pool } from '../General/globals.js';
 import { getApiKeyByUser } from '../src/services/apiKey.service.js';
 import { checkAndInsertPrice } from '../utils/pricingutils.js';
-import { getViewData } from '../General/DBactions/dbViews.js';
+import { getViewData } from '../src/utils/db/dbViews.utils.js';
 import { removeByKeyValue, filterArrayByKeys, filterDeepArrayByKeys, renameKeysOnlyMapped} from '../utils/arrayutils.js';
 
 
@@ -416,7 +416,7 @@ router.get('/getgoodsdata', authenticate, async (req, res) => {
 
 
 /*     5. Fetch product_data from bd */
-    const productdata =   await getViewData(pool, 'product_data');
+    const productdata =   await getViewData('product_data');
 
 /*     6. Filter deleted */
     const activeProducts = removeByKeyValue(productdata, 'deleted', true);
