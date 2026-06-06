@@ -1,11 +1,12 @@
 // logger.js
 
 
-import { pool } from './globals.js';
+import { pool } from '../src/config/db.config.js';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import axios from 'axios';
+
 const TELEGRAM_TOKEN = '7095039676:AAH9dSZOsoQWcw_U2Qfd-KLimh5JGW8ZzLs';
 const CHAT_ID = '-1002034663703';
 const TELEGRAM_URL = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
