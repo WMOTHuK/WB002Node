@@ -1,5 +1,5 @@
 // src/utils/db/dbViews.utils.js
-import { pool } from '../../../General/globals.js';
+import { pool } from '../../config/db.config.js';
 import { db } from '../sql.utils.js';
 import { logger } from '../logger.js';
 

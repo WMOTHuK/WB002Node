@@ -5,7 +5,7 @@ import axios from 'axios';
 import { createErrorResponse } from '../utils/errorhandling.js'
 import { authenticate } from '../src/api/middleware/auth.middleware.js';
 import { syncTableToDB, syncTableFromDB } from '../src/utils/tableSync.utils.js';
-import { pool } from '../General/globals.js';
+import { pool } from '../src/config/db.config.js';
 import { getApiKeyByUser } from '../src/services/apiKey.service.js';
 import { checkAndInsertPrice } from '../utils/pricingutils.js';
 import { getViewData } from '../src/utils/db/dbViews.utils.js';

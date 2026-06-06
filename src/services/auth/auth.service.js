@@ -1,6 +1,6 @@
 // src/services/auth/auth.service.js
 import bcrypt from 'bcryptjs';
-import { pool } from '../../../General/globals.js';
+import { pool } from '../../config/db.config.js';
 import { tokenService } from './token.service.js';
 import { AppError } from '../../utils/errors.js';
 

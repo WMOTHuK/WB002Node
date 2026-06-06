@@ -1,5 +1,5 @@
 // src/utils/sql.utils.js
-import { pool } from '../../General/globals.js';
+import { pool } from '../config/db.config.js';
 
 /**
  * Тонкая утилита для упрощения типовых SQL-запросов.

@@ -3,7 +3,7 @@ import express from 'express';
 import { syncTableToDB } from '../src/utils/tableSync.utils.js';
 import { authenticate } from '../src/api/middleware/auth.middleware.js';
 import { db } from '../src/utils/sql.utils.js';
-import { pool } from "../General/globals.js";
+import { pool } from "../src/config/db.config.js";
 import { logger } from '../src/utils/logger.js';
 
 const router = express.Router();

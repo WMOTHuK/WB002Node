@@ -1,5 +1,5 @@
 // src/utils/db/bulkOperations.utils.js
-import { pool } from '../../General/globals.js';
+import { pool } from '../../config/db.config.js';
 import { logger } from '../utils/logger.js';
 
 /**

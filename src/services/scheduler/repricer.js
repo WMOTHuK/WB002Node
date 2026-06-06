@@ -1,5 +1,5 @@
 /* // src/services/scheduler/repricer.js
-import { pool } from '../../../General/globals.js'
+import { pool } from '../../../config/db.config.js'
 import axios from 'axios';
 import { logger } from '../../utils/logger.js';
 

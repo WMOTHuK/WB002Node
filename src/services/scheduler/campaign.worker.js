@@ -2,7 +2,7 @@
 import { Worker } from 'bullmq';
 import redisConfig from '../../config/redis.config.js';    
 import { pauseCampaign, restartCampaign } from './campaign.actions.js';
-import { pool } from '../../../General/globals.js';
+import { pool } from '../../../config/db.config.js';
 import { logger } from '../../utils/logger.js';
 
 export class CampaignWorker {

@@ -1,5 +1,5 @@
 // src/services/apiKey.service.js
-import { pool } from '../../General/globals.js';
+import { pool } from '../config/db.config.js';
 import { decrypt } from '../../utils/crypto.js';
 import { AppError } from '../utils/errors.js'
 

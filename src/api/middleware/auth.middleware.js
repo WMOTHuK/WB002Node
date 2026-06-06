@@ -1,4 +1,4 @@
-import { pool } from '../../../General/globals.js';
+import { pool } from '../../config/db.config.js';
 import { tokenService } from '../../services/auth/token.service.js';
 import { AppError, AuthenticationError, ForbiddenError } from '../../utils/errors.js';
 import { logger } from '../../utils/logger.js';

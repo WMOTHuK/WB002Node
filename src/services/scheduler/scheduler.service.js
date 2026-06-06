@@ -1,5 +1,5 @@
 // src/services/scheduler/scheduler.service.js
-import { pool } from '../../../General/globals.js';
+import { pool } from '../../config/db.config.js';
 import { pauseCampaign, restartCampaign } from './campaign.actions.js';
 import { calculateDelay, formatDelay } from '../../utils/date.utils.js';
 import { logger } from '../../utils/logger.js';
