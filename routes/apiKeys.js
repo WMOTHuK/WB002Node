@@ -2,7 +2,7 @@
 import express from 'express';
 import { authenticate } from '../src/api/middleware/auth.middleware.js';
 import { pool } from '../src/config/db.config.js';
-import { encrypt } from '../utils/crypto.js';
+import { encrypt } from '../src/utils/crypto.utils.js';
 
 const router = express.Router();
 

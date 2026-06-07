@@ -135,7 +135,7 @@ async function bulkInsert(tableName, rows) {
   );
   const values = rows.flatMap(Object.values);
   const result = await pool.query(
-    `INSERT INTO ${tableName} (${columns.join(', ')}) VALUES ${placeholders.join(', ')}`,
+    `INSERT INTO ${tableName} (${columns.join(', ')}) VALUES ${placeholders.join(', ')} ON CONFLICT DO NOTHING`,
     values
   );
   return result.rowCount;

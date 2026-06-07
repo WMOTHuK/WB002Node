@@ -1,6 +1,6 @@
 // src/services/apiKey.service.js
 import { pool } from '../config/db.config.js';
-import { decrypt } from '../../utils/crypto.js';
+import { decrypt } from '../utils/crypto.utils.js';
 import { AppError } from '../utils/errors.js'
 
 // Типы ключей

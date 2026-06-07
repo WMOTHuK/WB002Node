@@ -3,7 +3,7 @@ import axios from 'axios';
 import { logger } from '../../../utils/logger.js';
 import { getApiKeyByUser, KEY_TYPE } from '../../apiKey.service.js';
 import { parseAdverts, pauseCampaignsList } from '../../../utils/crm.utils.js';
-import { getUniqueKeys } from '../../../utils/arrayutils.js';
+import { getUniqueKeys } from '../../../utils/array.utils.js';
 import server_config from '../../../config/api.config.js';
 
 const STATUS_ACTIVE = '9';

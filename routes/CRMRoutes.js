@@ -3,7 +3,7 @@
 import express from 'express';
 import axios from 'axios';
 import { authenticate } from '../src/api/middleware/auth.middleware.js';
-import { decrypt } from '../utils/crypto.js';
+import { decrypt } from '../src/utils/crypto.utils.js';
 import { syncTableToDB, syncTableFromDB } from '../src/utils/tableSync.utils.js'
 import { addDescriptionColumns } from '../src/utils/descriptionsMapper.js'
 import server_config from '../src/config/api.config.js'

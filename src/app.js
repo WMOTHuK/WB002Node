@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import authRoutes from '../routes/auth.js';
 import apiKeysRoutes from '../routes/apiKeys.js';
-import contentRoutes from '../routes/contentRoutes.js';
+import contentRoutes from './api/routes/content.routes.js';
 import CRMRoutes from '../routes/CRMRoutes.js';
 import dbRoutes from '../routes/dbRoutes.js';
 import { authenticate } from './api/middleware/auth.middleware.js';
