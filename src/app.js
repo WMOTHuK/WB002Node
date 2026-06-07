@@ -1,11 +1,11 @@
 // src/app.js
 import express from 'express';
 import cors from 'cors';
-import authRoutes from '../routes/auth.js';
-import apiKeysRoutes from '../routes/apiKeys.js';
+import authRoutes from './api/routes/auth.routes.js';
+import apiKeysRoutes from './api/routes/apiKeys.routes.js';
 import contentRoutes from './api/routes/content.routes.js';
-import CRMRoutes from '../routes/CRMRoutes.js';
-import dbRoutes from '../routes/dbRoutes.js';
+import crmRoutes from './api/routes/crm.routes.js';
+import dbRoutes from './api/routes/db.routes.js';
 import { authenticate } from './api/middleware/auth.middleware.js';
 import { errorHandler } from './api/middleware/errorHandler.js';
 
@@ -19,10 +19,10 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);  // login, register — без auth
 
 // Защищённые маршруты
-app.use('/api/apikeys', authenticate, apiKeysRoutes);    // /getapikeytypes, /getuserapikeysdata, /saveuserapikey
-app.use('/api/content', authenticate, contentRoutes);
-app.use('/api/CRM', authenticate, CRMRoutes);
-app.use('/api/DB', authenticate, dbRoutes);
+app.use('/api/apikeys', apiKeysRoutes);   
+app.use('/api/content', contentRoutes);
+app.use('/api/CRM', crmRoutes);
+app.use('/api/DB', dbRoutes);
 
 // Обработка ошибок
 app.use(errorHandler);

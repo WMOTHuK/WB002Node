@@ -2,6 +2,7 @@
 import { pool } from '../../../config/db.config.js'
 import axios from 'axios';
 import { logger } from '../../utils/logger.js';
+import { db } from '../../utils/sql.utils.js';
 
 const WB_REPRICER_URL = process.env.WB_REPRICER_URL || 'https://discounts-prices-api.wb.ru/api/v2/upload/task';
 const WB_REPRICER_API_KEY = process.env.WB_REPRICER_API_KEY;
@@ -12,10 +13,7 @@ const ACTIVE_MARK = 'X';
 // ---------------------------------------------------------------------------
 async function getActiveRepricing() {
   try {
-    const { rows } = await pool.query(
-      'SELECT * FROM prices WHERE active = $1',
-      [ACTIVE_MARK]
-    );
+    const { rows } = await db.select('prices', { active: ACTIVE_MARK });
     return rows;
   } catch (error) {
     logger.error('Ошибка получения активных репрайсов из БД:', error.message);

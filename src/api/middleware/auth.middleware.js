@@ -2,6 +2,7 @@ import { pool } from '../../config/db.config.js';
 import { tokenService } from '../../services/auth/token.service.js';
 import { AppError, AuthenticationError, ForbiddenError } from '../../utils/errors.js';
 import { logger } from '../../utils/logger.js';
+import { db } from '../../utils/sql.utils.js';
 
 export const authenticate = async (req, res, next) => {
   try {
@@ -16,14 +17,8 @@ export const authenticate = async (req, res, next) => {
     }
 
     // Проверяем, что пользователь существует (один простой запрос)
-    const { rows } = await pool.query(
-      'SELECT EXISTS(SELECT 1 FROM users WHERE id = $1)',
-      [payload.userId]
-    );
-    
-    if (!rows[0]?.exists) {
-      throw new ForbiddenError('User not found');
-    }
+    const { rows } = await db.select('users', { id: payload.userId }, 'id');
+    if (!rows[0]) throw new ForbiddenError('User not found');
 
     req.user = { id: payload.userId };
     next();

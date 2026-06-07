@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { pool } from '../../config/db.config.js';
 import { tokenService } from './token.service.js';
 import { AppError } from '../../utils/errors.js';
+import { db } from '../../utils/sql.utils.js';
 
 const SALT_ROUNDS = 12;
 
@@ -16,11 +17,7 @@ export const authService = {
    */
   login: async (login, password) => {
     // 1. Находим пользователя
-    const { rows } = await pool.query(
-      'SELECT id, login, password_hash FROM users WHERE login = $1',
-      [login]
-    );
-    
+    const { rows } = await db.select('users', { login }, 'id, login, password_hash');
     if (!rows[0]) {
       throw new AppError('Неверные учетные данные', 401);
     }
@@ -70,10 +67,7 @@ export const authService = {
     }
 
     // Проверка уникальности
-    const existing = await pool.query(
-      'SELECT id FROM users WHERE login = $1',
-      [login]
-    );
+    const { rows: existing } = await db.select('users', { login }, 'id');
     
     if (existing.rows.length > 0) {
       throw new AppError('Пользователь с таким логином уже существует', 409);
@@ -82,10 +76,8 @@ export const authService = {
     // Хеширование и сохранение
     const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS);
     
-    const { rows } = await pool.query(
-      `INSERT INTO users (login, password_hash) 
-       VALUES ($1, $2) 
-       RETURNING id, login`,
+    const { rows } = await pool.query(  
+      `INSERT INTO users (login, password_hash) VALUES ($1, $2) RETURNING id, login`,
       [login, hashedPassword]
     );
 
