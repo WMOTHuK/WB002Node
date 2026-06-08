@@ -6,6 +6,7 @@ import apiKeysRoutes from './api/routes/apiKeys.routes.js';
 import contentRoutes from './api/routes/content.routes.js';
 import crmRoutes from './api/routes/crm.routes.js';
 import dbRoutes from './api/routes/db.routes.js';
+import fiRoutes from './api/routes/fi.routes.js';
 import { authenticate } from './api/middleware/auth.middleware.js';
 import { errorHandler } from './api/middleware/errorHandler.js';
 
@@ -23,6 +24,7 @@ app.use('/api/apikeys', apiKeysRoutes);
 app.use('/api/content', contentRoutes);
 app.use('/api/CRM', crmRoutes);
 app.use('/api/DB', dbRoutes);
+app.use('/api/fi', fiRoutes);
 
 // Обработка ошибок
 app.use(errorHandler);
