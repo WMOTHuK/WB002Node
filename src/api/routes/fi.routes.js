@@ -1,7 +1,7 @@
 // src/api/routes/fi.routes.js
 import { Router } from 'express';
 import { authenticate } from '../middleware/auth.middleware.js';
-import { getOverheadTypes, addOverheadType, getOverheadGroups, addOverheadGroup } from '../../services/fi/overheads.service.js';
+import { getOverheadTypes, addOverheadType, getOverheadGroups, addOverheadGroup, changeOverheadTypeGroup } from '../../services/fi/overheads.service.js';
 
 const router = Router();
 
@@ -18,8 +18,8 @@ router.get('/getohtypes', authenticate, async (req, res, next) => {
 // POST /api/fi/addohtype
 router.post('/addohtype', authenticate, async (req, res, next) => {
   try {
-    const { name, description, locale } = req.body;
-    const result = await addOverheadType(name, description, locale);
+    const { name, description, oh_grp_id, locale } = req.body;
+    const result = await addOverheadType(name, description, oh_grp_id, locale);
     res.status(201).json(result);
   } catch (error) {
     next(error);
@@ -41,6 +41,16 @@ router.post('/addohgroup', authenticate, async (req, res, next) => {
   try {
     const { name, description, locale } = req.body;
     const result = await addOverheadGroup(name, description, locale);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/changeohtypegroup', authenticate, async (req, res, next) => {
+  try {
+    const { id, oh_grp_id } = req.body;
+    const result = await changeOverheadTypeGroup(id, oh_grp_id);
     res.status(201).json(result);
   } catch (error) {
     next(error);
