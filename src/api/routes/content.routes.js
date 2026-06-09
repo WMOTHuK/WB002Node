@@ -3,6 +3,8 @@ import { Router } from 'express';
 import { authenticate } from '../middleware/auth.middleware.js';
 import { getActiveProducts } from '../../services/goods/goods.service.js';
 import { updatePricesFromWB, updateCostPrice } from '../../services/goods/pricing.service.js';
+import { getGoodsTypes, addGoodsType, getGoodsGroups, 
+         addGoodsGroup, changeGoodsGroup, changeGoodsGroupType} from '../../services/goods/goods.service.js';
 
 const router = Router();
 
@@ -46,5 +48,58 @@ router.post('/update_cost_price', async (req, res, next) => {
     next(error);
   }
 });
+
+
+router.get('/getgoodstypes', authenticate, async (req, res, next) => {
+  try {
+    const rows = await getGoodsTypes(req.query.locale);
+    res.json(rows);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/addgoodstype', authenticate, async (req, res, next) => {
+  try {
+    const { name, description, locale } = req.body;
+    const result = await addGoodsType(name, description, locale);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+router.get('/getgoodsgroups', authenticate, async (req, res, next) => {
+  try {
+    const rows = await getGoodsGroups(req.query.locale);
+    res.json(rows);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/addgoodsgroup', authenticate, async (req, res, next) => {
+  try {
+    const { name, description, goods_type_id, locale } = req.body;
+    const result = await addGoodsGroup(name, description, goods_type_id, locale);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/changegoodsgrouptype', authenticate, async (req, res, next) => {
+  try {
+    const { id, goods_type_id } = req.body;
+    const result = await changeGoodsGroupType(id, goods_type_id);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
 
 export default router;

@@ -72,7 +72,7 @@ export async function getOverheadGroups(locale = 'ru') {
 }
 
 /**
- * Создать новую категорию накладных расходов
+ * Создать новую группу накладных расходов
  * @param {string} name - Название на текущем языке
  * @param {string} description - Описание на текущем языке
  * @param {string} locale - Язык ввода ('ru' или 'en')
