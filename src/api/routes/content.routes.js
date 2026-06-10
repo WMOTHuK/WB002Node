@@ -100,6 +100,17 @@ router.post('/changegoodsgrouptype', authenticate, async (req, res, next) => {
 });
 
 
+router.post('/changegoodsgroup', authenticate, async (req, res, next) => {
+  try {
+    const { vendorcode, goods_grp_id } = req.body;
+    const result = await changeGoodsGroup(vendorcode, goods_grp_id);
+    res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 
 export default router;
