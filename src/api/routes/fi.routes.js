@@ -1,7 +1,9 @@
 // src/api/routes/fi.routes.js
 import { Router } from 'express';
 import { authenticate } from '../middleware/auth.middleware.js';
-import { getOverheadTypes, addOverheadType, getOverheadGroups, addOverheadGroup, changeOverheadTypeGroup } from '../../services/fi/overheads.service.js';
+import { getOverheadTypes, addOverheadType, getOverheadGroups, 
+         getMonthlyOverheads, addOverheadGroup, changeOverheadTypeGroup } 
+         from '../../services/fi/overheads.service.js';
 
 const router = Router();
 
@@ -52,6 +54,15 @@ router.post('/changeohtypegroup', authenticate, async (req, res, next) => {
     const { id, oh_grp_id } = req.body;
     const result = await changeOverheadTypeGroup(id, oh_grp_id);
     res.status(201).json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/getmonthlyoh', authenticate, async (req, res, next) => {
+  try {
+    const rows = await getMonthlyOverheads(req.query.locale);
+    res.json(rows);
   } catch (error) {
     next(error);
   }

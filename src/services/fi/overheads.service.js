@@ -133,3 +133,19 @@ export async function changeOverheadTypeGroup(id, oh_grp_id) {
     oh_grp_id: result.oh_grp_id
   };
 }
+
+
+
+/** Изменить группу накладных расходов
+ * @param {integer} user_id - id пользователя
+ * @param {date} date - center date for request
+ */
+export async function getMonthlyOverheads(user_id, date) {
+
+  const { rows } = await pool.query(
+    'SELECT * FROM get_overheads_4months($1, $2);',
+    [user_id, date]
+  );
+
+  return rows;
+}
