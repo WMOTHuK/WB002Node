@@ -138,5 +138,14 @@ start_server.bat
 temp_update_key.js
 reset.js
 
-# TEST GIT BRANCH
+# Connection for VSDB
 .vsdb/connections.json
+
+# Migrations
+migrations/000_current_schema_reference.sql
+*.dump
+*.sql.backup
+
+#local settings
+.vscode/
+.vsdb/
