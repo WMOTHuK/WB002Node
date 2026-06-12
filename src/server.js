@@ -4,6 +4,9 @@ import { app } from './app.js';
 import { initScheduler } from './infrastructure/scheduler/index.js';
 import { initDbListener } from './infrastructure/db/listener.js';
 import { logger } from './utils/logger.js';
+import { runMigrations } from '../migrate.js'
+
+await runMigrations();
 
 const PORT = process.env.PORT || 5000;
 

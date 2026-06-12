@@ -2,8 +2,8 @@
 import { Router } from 'express';
 import { authenticate } from '../middleware/auth.middleware.js';
 import { getOverheadTypes, addOverheadType, getOverheadGroups, 
-         getMonthlyOverheads, addOverheadGroup, changeOverheadTypeGroup } 
-         from '../../services/fi/overheads.service.js';
+         getMonthlyOverheads, addOverheadGroup, changeOverheadTypeGroup,
+         saveMonthlyOverheads } from '../../services/fi/overheads.service.js';
 
 const router = Router();
 
@@ -61,8 +61,24 @@ router.post('/changeohtypegroup', authenticate, async (req, res, next) => {
 
 router.get('/getmonthlyoh', authenticate, async (req, res, next) => {
   try {
-    const rows = await getMonthlyOverheads(req.query.locale);
+    const rows = await getMonthlyOverheads(req.user.id, req.query.date);
     res.json(rows);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
+// POST /api/fi/savemonthlyoh
+router.post('/savemonthlyoh', authenticate, async (req, res, next) => {
+  try {
+    const { updates } = req.body;
+    if (!updates || !Array.isArray(updates)) {
+      return res.status(400).json({ error: 'updates must be a non-empty array' });
+    }
+    const result = await saveMonthlyOverheads(req.user.id, updates);
+    res.json(result);
   } catch (error) {
     next(error);
   }

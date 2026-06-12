@@ -136,16 +136,37 @@ export async function changeOverheadTypeGroup(id, oh_grp_id) {
 
 
 
-/** Изменить группу накладных расходов
- * @param {integer} user_id - id пользователя
- * @param {date} date - center date for request
+/**
+ * Получить накладные расходы за 4 месяца
+ * @param {number} userId
+ * @param {string} date - дата в формате 'YYYY-MM-DD'
  */
-export async function getMonthlyOverheads(user_id, date) {
-
+export async function getMonthlyOverheads(userId, date) {
+  // Отрезаем время и часовой пояс, оставляем только дату
   const { rows } = await pool.query(
-    'SELECT * FROM get_overheads_4months($1, $2);',
-    [user_id, date]
+    'SELECT * FROM get_overheads_4months($1, $2)',
+    [userId, date]
   );
 
   return rows;
+}
+
+
+/**
+ * Пакетное сохранение накладных расходов за месяц
+ * @param {number} userId
+ * @param {Array} overheads - [{ ohcat_id, oh_month, platform, oh_amount }]
+ * @returns {Promise<{processed: number, inserted: number, updated: number}>}
+ */
+export async function saveMonthlyOverheads(userId, overheads) {
+  if (!Array.isArray(overheads) || overheads.length === 0) {
+    throw new AppError('overheads must be a non-empty array', 400);
+  }
+
+  const { rows } = await pool.query(
+    'SELECT * FROM upsert_overheads_batch($1, $2)',
+    [userId, JSON.stringify(overheads)]
+  );
+
+  return rows[0];
 }

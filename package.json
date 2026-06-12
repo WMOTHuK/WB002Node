@@ -9,8 +9,7 @@
     "dev": "nodemon src/server.js",
     "migrate": "node migrate.js",
     "migrate:create": "node scripts/create-migration.js",
-    "migrate:status": "node -e \"require('./db.js').query('SELECT * FROM schema_migrations ORDER BY id DESC').then(r=>console.table(r.rows))\"",
-    "migrate:down": "node scripts/rollback-migration.js"
+    "migrate:status": "psql -U postgres -d wbshop002 -c \"SELECT * FROM schema_migrations ORDER BY id DESC LIMIT 10;\""
   },
   "keywords": [],
   "author": "",
