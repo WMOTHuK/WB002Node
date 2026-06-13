@@ -90,3 +90,18 @@ export async function syncCampaignSubcards(advertid, cards) {
   );
   return result.rows[0];
 };
+
+export async function addGroupToCampaign (advertid, goodsGrpId) {
+    const result = await pool.query(
+        'SELECT * FROM add_group_cards_to_campaign($1, $2)',
+        [advertid, goodsGrpId]
+    );
+    return result.rows[0];
+};
+
+export async function getGoodsGroupsWithTypes() {
+  const { rows: groups } = await pool.query(
+      'SELECT * FROM goods_grp_with_types ORDER BY goods_grp_id'
+  );
+  return groups;
+}
