@@ -70,14 +70,13 @@ export async function getAllCardsForCampaign(campaignId) {
  * @param {number} userId
  */
 export async function getAssignedCardsForCampaign(campaignId) {
-  const finished = '7'; // 7 - Finished campaigns
   const rows = await pool.query(
         `SELECT * FROM get_campaign_assignable_cards($1) 
         WHERE has_link = true`,
         [campaignId]
   );
 
-  return rows;
+  return rows.rows;
 }
 
 
