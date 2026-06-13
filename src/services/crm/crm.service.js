@@ -80,3 +80,14 @@ export async function getAssignedCardsForCampaign(campaignId) {
   return rows;
 }
 
+
+export async function syncCampaignSubcards(advertid, cards) {
+  if (!Array.isArray(cards) || cards.length === 0) {
+    throw new AppError('Cards must be a non-empty array', 400);
+  }
+  const result = await pool.query(
+      'SELECT * FROM sync_campaign_subcards($1, $2)',
+      [advertid, JSON.stringify(cards)]
+  );
+  return result.rows[0];
+};

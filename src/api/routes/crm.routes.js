@@ -1,7 +1,8 @@
 // src/api/routes/crm.routes.js
 import { Router } from 'express';
 import { authenticate } from '../middleware/auth.middleware.js';
-import { syncCampaigns, getActiveCampaigns, getAllCardsForCampaign, getAssignedCardsForCampaign } from '../../services/crm/crm.service.js';
+import { syncCampaigns, getActiveCampaigns, getAllCardsForCampaign, 
+         getAssignedCardsForCampaign, syncCampaignSubcards } from '../../services/crm/crm.service.js';
 
 const router = Router();
 
@@ -25,7 +26,7 @@ router.get('/getactivecompaigns', authenticate, async (req, res, next) => {
 
 router.get('/getallcardsforcampaign', authenticate, async (req, res, next) => {
   try {
-    const result = await getAllCardsForCampaign(req.campaignId);
+    const result = await getAllCardsForCampaign(req.query.campaign_id);
     res.json(result);
   } catch (error) {
     next(error);
@@ -35,12 +36,25 @@ router.get('/getallcardsforcampaign', authenticate, async (req, res, next) => {
 
 router.get('/getampaigncards', authenticate, async (req, res, next) => {
   try {
-    const result = await getAssignedCardsForCampaign(req.campaignId);
+    const result = await getAssignedCardsForCampaign(req.query.campaign_id);
     res.json(result);
   } catch (error) {
     next(error);
   }
 });
+
+
+router.post('/synccampaignsubcards', authenticate, async (req, res, next) => {
+  try {
+    const { advertid, cards } = req.body;
+    const result = await syncCampaignSubcards( advertid, cards);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 
 export default router;
