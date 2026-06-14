@@ -4,9 +4,21 @@ import { authenticate } from '../middleware/auth.middleware.js';
 import { getActiveProducts } from '../../services/goods/goods.service.js';
 import { updatePricesFromWB, updateCostPrice } from '../../services/goods/pricing.service.js';
 import { getGoodsTypes, addGoodsType, getGoodsGroups, 
-         addGoodsGroup, changeGoodsGroup, changeGoodsGroupType} from '../../services/goods/goods.service.js';
+         addGoodsGroup, changeGoodsGroup, changeGoodsGroupType,
+        syncUserGoods } from '../../services/goods/goods.service.js';
 
 const router = Router();
+
+router.post('/syncusergoods', authenticate, async (req, res, next) => {
+  try {
+    const products = await syncUserGoods(req.user.id);
+    res.json(products);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 
 // GET /api/content/getgoodsdata
 router.get('/getgoodsdata', authenticate, async (req, res, next) => {

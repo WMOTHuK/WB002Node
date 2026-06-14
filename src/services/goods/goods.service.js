@@ -9,6 +9,30 @@ import { pool } from '../../config/db.config.js';
 import { AppError } from '../../utils/errors.js';
 
 
+
+
+export async function syncUserGoods(userId) {
+  const [wbResult, ozonResult] = await Promise.all([
+    syncWBGoods(userId),
+    syncOzonGoods(userId)
+  ]);
+
+  return {
+    wb: {
+      inserted: wbResult.inserted,
+      updated: wbResult.updated,
+      unchanged: wbResult.unchanged,
+      total: wbResult.totalProcessed
+    },
+    ozon: {
+      inserted: ozonResult.inserted,
+      updated: ozonResult.updated,
+      unchanged: ozonResult.unchanged,
+      total: ozonResult.totalProcessed
+    }
+  };
+}
+
 /**
  * Синхронизировать товары WB
  */
@@ -33,14 +57,9 @@ async function syncOzonGoods(userId) {
  * Получить активные товары из БД
  */
 export async function getActiveProducts(userId) {
-  await syncWBGoods(userId);
-  await syncOzonGoods(userId);
-
   const productData = await getViewData('product_data');
   return removeByKeyValue(productData, 'deleted', true);
 }
-
-
 
 
 /**
