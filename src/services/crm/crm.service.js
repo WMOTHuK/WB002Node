@@ -39,14 +39,15 @@ export async function syncCampaigns(userId) {
  * Get active campaigns for current user 
  * @param {number} userId
  */
-export async function getActiveCampaigns(userId) {
-  const finished = '7'; // 7 - Finished campaigns
+export async function getActiveCampaigns(userId, active_only) {
+  const status = active_only === 'true' ? '7' : null; // 7 - Finished campaigns, - unexisting status(select all)
+  
   const { rows } = await pool.query(
       `SELECT * FROM crm_headers_simple_view 
       WHERE user_id = $1 
         AND crmstatus IS DISTINCT FROM $2
       ORDER BY advertid`,
-      [userId, finished]
+      [userId, status]
   );
 
   return rows;

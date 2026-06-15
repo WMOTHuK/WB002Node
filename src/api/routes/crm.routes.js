@@ -16,9 +16,9 @@ router.get('/updatecrmfromwb', authenticate, async (req, res, next) => {
   }
 });
 
-router.get('/getactivecompaigns', authenticate, async (req, res, next) => {
+router.get('/getcompaigns', authenticate, async (req, res, next) => {
   try {
-    const result = await getActiveCampaigns(req.user.id);
+    const result = await getActiveCampaigns(req.user.id, req.query.active_only);
     res.json(result);
   } catch (error) {
     next(error);
