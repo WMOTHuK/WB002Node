@@ -4,6 +4,7 @@ import { authenticate } from '../middleware/auth.middleware.js';
 import { getOverheadTypes, addOverheadType, getOverheadGroups, 
          getMonthlyOverheads, addOverheadGroup, changeOverheadTypeGroup,
          saveMonthlyOverheads } from '../../services/fi/overheads.service.js';
+import { syncWBFinReports, getWBFinReports } from '../../services/fi/wbReports.service.js';
 
 const router = Router();
 
@@ -79,6 +80,32 @@ router.post('/savemonthlyoh', authenticate, async (req, res, next) => {
     }
     const result = await saveMonthlyOverheads(req.user.id, updates);
     res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// POST /api/fi/updatewbreportslist
+router.post('/updatewbreportslist', authenticate, async (req, res, next) => {
+  try {
+    const { dateFrom, dateTo } = req.body;
+    if (!dateFrom || !dateTo) {
+      return res.status(400).json({ error: 'dateFrom and dateTo are required' });
+    }
+    const result = await syncWBFinReports(req.user.id, dateFrom, dateTo);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+// GET /api/fi/getwbreportslist
+router.get('/getwbreportslist', authenticate, async (req, res, next) => {
+  try {
+    const limit = req.query.limit ? parseInt(req.query.limit) : 30;
+    const rows = await getWBFinReports(req.user.id, limit);
+    res.json(rows);
   } catch (error) {
     next(error);
   }

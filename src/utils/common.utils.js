@@ -20,3 +20,19 @@ export function calculateVolume({ height, depth, width, dimension_unit }) {
   const cm3 = (height * factor) * (depth * factor) * (width * factor);
   return Math.ceil(cm3 / 1000);
 }
+
+/**
+ * Преобразовать ключи объекта из camelCase в snake_case
+ */
+export function toSnakeCase(obj) {
+  if (Array.isArray(obj)) return obj.map(toSnakeCase);
+  if (obj !== null && typeof obj === 'object') {
+    return Object.fromEntries(
+      Object.entries(obj).map(([key, value]) => [
+        key.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`),
+        toSnakeCase(value)
+      ])
+    );
+  }
+  return obj;
+}
