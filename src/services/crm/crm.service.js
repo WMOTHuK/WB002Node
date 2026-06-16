@@ -7,12 +7,17 @@ import { parseAdverts, enrichAdvertData } from '../../utils/crm.utils.js';
 import { syncTableToDB, syncTableFromDB } from '../../utils/tableSync.utils.js';
 import { addDescriptionColumns } from '../../utils/descriptionsMapper.js';
 import { AppError } from '../../utils/errors.js';
+import { toSnakeCase } from '../../utils/common.utils.js';
+
+
+const wbcrmkey = 1;
+const EXCLUDE_KEYS = ['campName', 'advertType', 'advertStatus'];
 
 /**
  * Получить и синхронизировать кампании пользователя
  */
 export async function syncCampaigns(userId) {
-  const apiKey = await getApiKeyByUser(userId, '1');
+  const apiKey = await getApiKeyByUser(userId, wbcrmkey);
 
   const { data } = await axios.get(apiConfig.wbCampaignsUrl, {
     headers: { Authorization: `Bearer ${apiKey}` }
@@ -105,4 +110,46 @@ export async function getGoodsGroupsWithTypes() {
       'SELECT * FROM goods_grp_with_types ORDER BY goods_grp_id'
   );
   return groups;
+}
+
+/**
+ * Синхронизировать затраты на кампании из WB API
+ */
+export async function syncCampaignCosts(userId, dateFrom, dateTo) {
+  const apiKey = await getApiKeyByUser(userId, wbcrmkey);
+
+  const { data } = await axios.get(apiConfig.wbCampaignCostsUrl, {
+    params: { from: dateFrom, to: dateTo },
+    headers: { Authorization: `Bearer ${apiKey}` }
+  });
+
+  const filtered = data
+    .filter(item => item.updNum !== 0)
+    .map(item => {
+      const clean = {};
+      for (const key in item) {
+        if (!EXCLUDE_KEYS.includes(key)) {
+          clean[key] = item[key];
+        }
+      }
+      return clean;
+    });
+
+  const { rows } = await pool.query(
+    'SELECT * FROM sync_crm_campaign_costs($1)',
+    [JSON.stringify(toSnakeCase(filtered))]
+  );
+
+  return rows[0];
+}
+
+/**
+ * Получить затраты по ID кампании
+ */
+export async function getCostsByAdvertId(advertId) {
+  const { rows } = await pool.query(
+    'SELECT * FROM crm_campaign_costs_view WHERE advert_id = $1 ORDER BY upd_time DESC',
+    [advertId]
+  );
+  return rows;
 }
