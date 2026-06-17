@@ -94,3 +94,73 @@ export function renameKeysOnlyMapped(inputData, keyMap) {
     return renamed;
   });
 }
+
+
+/**
+ * Удалить указанные ключи из массива объектов
+ * @param {Array} data - Массив объектов
+ * @param {Array<string>} keys - Ключи для удаления
+ * @returns {Array}
+ */
+export function excludeKeys(data, keys) {
+  return data.map(item => {
+    const clean = { ...item };
+    keys.forEach(k => delete clean[k]);
+    return clean;
+  });
+}
+
+/**
+ * Заменить пустые значения на null для указанных ключей
+ * @param {Array} data - Массив объектов
+ * @param {Array<string>} keys - Ключи для проверки
+ * @returns {Array}
+ */
+export function nullIfEmpty(data, keys) {
+  return data.map(item => {
+    const clean = { ...item };
+    for (const key of keys) {
+      if (clean[key] === '' || clean[key] === undefined || clean[key] === null) {
+        clean[key] = null;
+      }
+    }
+    return clean;
+  });
+}
+
+/**
+ * Добавить поля к каждому объекту массива
+ * @param {Array} data
+ * @param {Object} fields - { key: value }
+ * @returns {Array}
+ */
+export function addFields(data, fields) {
+  return data.map(item => ({ ...item, ...fields }));
+}
+
+/**
+ * Композитная очистка массива объектов
+ * @param {Array} data
+ * @param {Object} options
+ * @param {Object} [options.addFields] - Поля для добавления
+ * @param {Array<string>} [options.exclude] - Ключи для удаления
+ * @param {Array<string>} [options.nullIfEmpty] - Ключи для замены пустых на null
+ * @returns {Array}
+ */
+export function cleanData(data, { addFields: add, exclude = [], nullIfEmpty: nullKeys = [] } = {}) {
+  let result = [...data];
+
+  if (add && Object.keys(add).length > 0) {
+    result = result.map(item => ({ ...item, ...add }));
+  }
+
+  if (exclude.length > 0) {
+    result = excludeKeys(result, exclude);
+  }
+
+  if (nullKeys.length > 0) {
+    result = nullIfEmpty(result, nullKeys);
+  }
+
+  return result;
+}

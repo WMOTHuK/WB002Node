@@ -11,7 +11,6 @@ import { toSnakeCase } from '../../utils/common.utils.js';
 
 
 const wbcrmkey = 1;
-const EXCLUDE_KEYS = ['campName', 'advertType', 'advertStatus'];
 
 /**
  * Получить и синхронизировать кампании пользователя
@@ -123,17 +122,10 @@ export async function syncCampaignCosts(userId, dateFrom, dateTo) {
     headers: { Authorization: `Bearer ${apiKey}` }
   });
 
-  const filtered = data
-    .filter(item => item.updNum !== 0)
-    .map(item => {
-      const clean = {};
-      for (const key in item) {
-        if (!EXCLUDE_KEYS.includes(key)) {
-          clean[key] = item[key];
-        }
-      }
-      return clean;
-    });
+  const filtered = cleanData(
+    data.filter(item => item.updNum !== 0),
+    { exclude: ['campName', 'advertType', 'advertStatus'] }
+  );
 
   const { rows } = await pool.query(
     'SELECT * FROM sync_crm_campaign_costs($1)',

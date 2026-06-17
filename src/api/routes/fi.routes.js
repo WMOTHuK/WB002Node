@@ -4,10 +4,10 @@ import { authenticate } from '../middleware/auth.middleware.js';
 import { getOverheadTypes, addOverheadType, getOverheadGroups, 
          getMonthlyOverheads, addOverheadGroup, changeOverheadTypeGroup,
          saveMonthlyOverheads } from '../../services/fi/overheads.service.js';
-import { syncWBFinReports, getWBFinReports } from '../../services/fi/wbReports.service.js';
+import { syncWBFinReports, getWBFinReports, syncWBFinReportDetails } from '../../services/fi/wbReports.service.js';
 
 const router = Router();
-
+const wbfikey = 
 // GET /api/fi/getohtypes
 router.get('/getohtypes', authenticate, async (req, res, next) => {
   try {
@@ -85,6 +85,7 @@ router.post('/savemonthlyoh', authenticate, async (req, res, next) => {
   }
 });
 
+
 // POST /api/fi/updatewbreportslist
 router.post('/updatewbreportslist', authenticate, async (req, res, next) => {
   try {
@@ -106,6 +107,20 @@ router.get('/getwbreportslist', authenticate, async (req, res, next) => {
     const limit = req.query.limit ? parseInt(req.query.limit) : 30;
     const rows = await getWBFinReports(req.user.id, limit);
     res.json(rows);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// POST /api/fi/getwbfireportdetailsbyid
+router.post('/getwbfireportdetailsbyid', authenticate, async (req, res, next) => {
+  try {
+    const reportId = req.body.report_id;
+    if (!reportId) {
+      return res.status(400).json({ error: 'reportId is required' });
+    }
+    const result = await syncWBFinReportDetails(req.user.id, reportId);
+    res.json(result);
   } catch (error) {
     next(error);
   }

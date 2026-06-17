@@ -4,13 +4,13 @@ import apiConfig from '../../config/api.config.js';
 import { getApiKeyByUser } from '../apiKey.service.js';
 import { syncTableToDB } from '../../utils/tableSync.utils.js';
 import { toSnakeCase } from '../../utils/common.utils.js';
-
+import { cleanData } from '../../utils/array.utils.js';
 
 /**
  * Загрузить и синхронизировать список финансовых отчётов WB
  */
 export async function syncWBFinReports(userId, dateFrom, dateTo) {
-  const apiKey = await getApiKeyByUser(userId, '5');
+  const apiKey = await getApiKeyByUser(userId, apiConfig.wbfinancekey);
 
   const { data } = await axios.post(apiConfig.wbFinReportsList, {
     dateFrom,
@@ -30,35 +30,6 @@ export async function syncWBFinReports(userId, dateFrom, dateTo) {
 
 
 /**
- * Загрузить и синхронизировать список финансовых отчётов WB
- */
-export async function syncCampaignCosts(userId, dateFrom, dateTo) {
-  const apiKey = await getApiKeyByUser(userId, 'wbcrmkey');
-
-  const { data } = await axios.get(apiConfig.wbCampaignCostsUrl, {
-    params: { from: dateFrom, to: dateTo },
-    headers: { Authorization: `Bearer ${apiKey}` }
-  });
-
-  const filtered = data.map(item => {
-    const clean = {};
-    for (const key in item) {
-      if (!EXCLUDE_KEYS.includes(key)) {
-        clean[key] = item[key];
-      }
-    }
-    return clean;
-  });
-
-  const { rows } = await pool.query(
-    'SELECT * FROM sync_crm_campaign_costs($1)',
-    [JSON.stringify(toSnakeCase(filtered))]
-  );
-
-  return rows[0];
-}
-
-/**
  * Получить список отчётов WB из БД
  */
 export async function getWBFinReports(userId, limit = 30) {
@@ -68,3 +39,32 @@ export async function getWBFinReports(userId, limit = 30) {
   );
   return rows;
 }
+/**
+ * Загрузить и синхронизировать детализацию финотчёта WB
+ */
+export async function syncWBFinReportDetails(userId, reportId) {
+  const apiKey = await getApiKeyByUser(userId, apiConfig.wbfinancekey);
+  const url = `${apiConfig.wbFinReportDetails}/${reportId}`;
+  const { data } = await axios.post(url,
+    {
+      limit: 100000,
+      rrdId: 0
+    },
+    {
+      headers: { Authorization: `Bearer ${apiKey}` }
+    }
+  );
+
+  const filtered = cleanData(Array.isArray(data) ? data : [], {
+    exclude: ['title'],
+    nullIfEmpty: ['fixTariffDateFrom', 'fixTariffDateTo']
+  });
+
+  const { rows } = await pool.query(
+    'SELECT * FROM sync_wb_fi_report_details($1, $2)',
+    [userId, JSON.stringify(toSnakeCase(filtered))]
+  );
+
+  return rows[0];
+}
+
