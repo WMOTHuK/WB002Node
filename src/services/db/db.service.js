@@ -32,3 +32,11 @@ export async function getLocaleStrings(fields, locale) {
   );
   return rows;
 }
+
+export async function getUserLocale(userId) {
+  const { rows } = await pool.query(
+    'SELECT locale FROM users WHERE id = $1',
+    [userId]
+  );
+  return rows[0]?.locale || 'ru';
+}

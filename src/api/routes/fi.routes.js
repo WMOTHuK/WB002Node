@@ -5,6 +5,7 @@ import { getOverheadTypes, addOverheadType, getOverheadGroups,
          getMonthlyOverheads, addOverheadGroup, changeOverheadTypeGroup,
          saveMonthlyOverheads } from '../../services/fi/overheads.service.js';
 import { syncWBFinReports, getWBFinReports, syncWBFinReportDetails } from '../../services/fi/wbReports.service.js';
+import { getWBFinReportSummary } from '../../services/fi/wbReports.service.js';
 
 const router = Router();
 const wbfikey = 
@@ -120,6 +121,26 @@ router.post('/getwbfireportdetailsbyid', authenticate, async (req, res, next) =>
       return res.status(400).json({ error: 'reportId is required' });
     }
     const result = await syncWBFinReportDetails(req.user.id, reportId);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+
+
+// GET /api/fi/getwbfireportsummary
+router.get('/getwbfireportsummary', authenticate, async (req, res, next) => {
+  try {
+    const { reportId, limit } = req.query;
+    if (!reportId && !limit) {
+      return res.status(400).json({ error: 'reportId or limit is required' });
+    }
+    const result = await getWBFinReportSummary(req.user.id, {
+      reportId: reportId || null,
+      limit: limit ? parseInt(limit) : null
+    });
     res.json(result);
   } catch (error) {
     next(error);

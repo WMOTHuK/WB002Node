@@ -164,3 +164,63 @@ export function cleanData(data, { addFields: add, exclude = [], nullIfEmpty: nul
 
   return result;
 }
+
+/**
+ * Транспонировать массив объектов: ключи становятся строками, значения — столбцами по pivotKey
+ * @param {Array} data - Массив объектов
+ * @param {string} pivotKey - Ключ, по которому строятся столбцы (например, 'report_id')
+ * @param {string} labelColumn - Название первого столбца с именами полей
+ * @returns {Array} [{ field: 'fieldName', [pivotValue1]: val, [pivotValue2]: val }, ...]
+ */
+export function transposeByKey(data, pivotKey, labelColumn = 'field', orderedFields = []) {
+  if (!data.length) return [];
+
+  const pivotValues = data.map(row => row[pivotKey]);
+  const allFields = Object.keys(data[0]).filter(k => k !== pivotKey);
+
+  // Если передан orderedFields — используем его, остальные в конец
+  let fields;
+  if (orderedFields.length > 0) {
+    const remaining = allFields.filter(f => !orderedFields.includes(f));
+    fields = [...orderedFields.filter(f => allFields.includes(f)), ...remaining];
+  } else {
+    fields = allFields;
+  }
+
+  return fields.map(field => {
+    const row = { [labelColumn]: field };
+    data.forEach((item, i) => {
+      row[pivotValues[i]] = item[field];
+    });
+    return row;
+  });
+}
+
+
+/**
+ * Форматировать числа в строку валюты с пробелами и запятой
+ * @param {number} value
+ * @returns {string} "123 456,78"
+ */
+export function formatCurrency(value) {
+  if (typeof value !== 'number') return value;
+  return value
+    .toFixed(2)
+    .replace('.', ',')
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+}
+
+/**
+ * Перевести значения указанного поля через словарь из БД
+ * @param {Array} data - Массив объектов
+ * @param {string} keyField - Ключ, значения которого переводим (например, 'field')
+ * @param {Array} translations - Массив { colname, description } из БД
+ * @returns {Array}
+ */
+export function translateField(data, keyField, translations, valueField = 'value') {
+  const dict = new Map(translations.map(t => [t.colname, t[valueField]]));
+  return data.map(item => {
+    const translated = dict.get(item[keyField]);
+    return translated ? { ...item, [keyField]: translated } : item;
+  });
+}

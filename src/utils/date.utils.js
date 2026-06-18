@@ -23,3 +23,29 @@ export function calculateDelay(timeStr) {
 
   return targetTime - now;
 }
+
+/**
+ * Вычислить номер недели в году по дате
+ * @param {string|Date} date
+ * @returns {number} 1-53
+ */
+export function getWeekNumber(date) {
+  const d = new Date(date);
+  const startOfYear = new Date(d.getFullYear(), 0, 1);
+  const days = Math.floor((d - startOfYear) / (24 * 60 * 60 * 1000));
+  return Math.ceil((days + startOfYear.getDay() + 1) / 7);
+}
+
+/**
+ * Форматировать диапазон дат в читаемую строку
+ * @param {string} dateFrom
+ * @param {string} dateTo
+ * @returns {string} "с DD.MM.YYYY по DD.MM.YYYY"
+ */
+export function formatDateRange(dateFrom, dateTo) {
+  const format = (d) => {
+    const date = new Date(d);
+    return date.toLocaleDateString('ru-RU');
+  };
+  return `с ${format(dateFrom)} по ${format(dateTo)}`;
+}
