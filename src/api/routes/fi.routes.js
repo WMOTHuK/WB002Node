@@ -6,6 +6,7 @@ import { getOverheadTypes, addOverheadType, getOverheadGroups,
          saveMonthlyOverheads } from '../../services/fi/overheads.service.js';
 import { syncWBFinReports, getWBFinReports, syncWBFinReportDetails } from '../../services/fi/wbReports.service.js';
 import { getWBFinReportSummary } from '../../services/fi/wbReports.service.js';
+import { calculateWBReport } from '../../services/fi/wbReports.service.js';
 
 const router = Router();
 const wbfikey = 
@@ -148,3 +149,17 @@ router.get('/getwbfireportsummary', authenticate, async (req, res, next) => {
 });
 
 export default router;
+
+// POST /api/fi/calculatewbreport
+router.post('/calculatewbreport', authenticate, async (req, res, next) => {
+  try {
+    const { reportId } = req.body;
+    if (!reportId) {
+      return res.status(400).json({ error: 'reportId is required' });
+    }
+    const result = await calculateWBReport(req.user.id, reportId);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});

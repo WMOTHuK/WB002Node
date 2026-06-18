@@ -127,3 +127,23 @@ export async function getWBFinReportSummary(userId, { reportId, limit } = {}) {
 
   return translated;
 }
+
+/**
+ * Обработать финотчёт WB (расчёт распределения затрат)
+ */
+export async function calculateWBReport(userId, reportId) {
+  const { rows } = await pool.query(
+    'SELECT * FROM process_wb_report_details($1, $2)',
+    [userId, reportId]
+  );
+
+  const { processed_count, summary_updated, unmatched_count, unmatched_sample } = rows[0];
+
+  return {
+    success: true,
+    processedCount: processed_count,
+    summaryUpdated: summary_updated,
+    unmatchedCount: unmatched_count,
+    unmatchedSample: unmatched_sample || []
+  };
+}
