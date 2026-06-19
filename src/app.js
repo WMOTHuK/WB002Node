@@ -9,6 +9,7 @@ import dbRoutes from './api/routes/db.routes.js';
 import fiRoutes from './api/routes/fi.routes.js';
 import { authenticate } from './api/middleware/auth.middleware.js';
 import { errorHandler } from './api/middleware/errorHandler.js';
+import userRoutes from './api/routes/user.routes.js';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);  // login, register — без auth
 
 // Защищённые маршруты
+app.use('/api/user', userRoutes);
 app.use('/api/apikeys', apiKeysRoutes);   
 app.use('/api/content', contentRoutes);
 app.use('/api/CRM', crmRoutes);
