@@ -59,7 +59,7 @@ export async function syncWBFinReportDetails(userId, reportId) {
 
   const filtered = cleanData(Array.isArray(data) ? data : [], {
     exclude: ['title'],
-    nullIfEmpty: ['fixTariffDateFrom', 'fixTariffDateTo']
+    nullIfEmpty: ['fixTariffDateFrom', 'fixTariffDateTo', 'vendorCode']
   });
 
   const { rows } = await pool.query(
