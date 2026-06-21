@@ -147,3 +147,45 @@ export async function calculateWBReport(userId, reportId) {
     unmatchedSample: unmatched_sample || []
   };
 }
+
+/**
+ * Транспонировать данные продуктовой сводки в разрезе vendorcode
+ * Возвращает { [vendorcode]: [{ field, [reportId]: value }, ...] }
+ */
+function transposeProductSummary(data) {
+  const grouped = {};
+
+  // Группируем по vendorcode
+  for (const row of data) {
+    const vc = row.vendorcode;
+    if (!grouped[vc]) grouped[vc] = [];
+    grouped[vc].push(row);
+  }
+
+  // Транспонируем каждую группу
+  const result = {};
+  for (const [vc, rows] of Object.entries(grouped)) {
+    // reportId всегда один на группу, но на всякий случай — как pivot по report_id
+    result[vc] = transposeByKey(rows, 'report_id', 'field');
+  }
+
+  return result;
+}
+
+/**
+ * Получить продуктовую сводку финотчёта в разрезе vendorcode
+ */
+export async function getWBFinReportProductSummary(userId, reportId) {
+  const { rows } = await pool.query(
+    `SELECT * FROM wb_fi_report_product_summary_view 
+     WHERE user_id = $1 AND report_id = $2
+     ORDER BY nm_id`,
+    [userId, reportId]
+  );
+
+  const cleaned = cleanData(rows, {
+    exclude: ['user_id', 'created_at', 'updated_at']
+  });
+
+  return transposeProductSummary(cleaned);
+}

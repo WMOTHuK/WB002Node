@@ -163,3 +163,17 @@ router.post('/calculatewbreport', authenticate, async (req, res, next) => {
     next(error);
   }
 });
+
+// GET /api/fi/getwbfireportproductsummary
+router.get('/getwbfireportproductsummary', authenticate, async (req, res, next) => {
+  try {
+    const { reportId } = req.query;
+    if (!reportId) {
+      return res.status(400).json({ error: 'reportId is required' });
+    }
+    const result = await getWBFinReportProductSummary(req.user.id, reportId);
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});
