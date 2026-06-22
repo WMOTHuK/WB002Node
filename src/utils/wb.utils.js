@@ -1,6 +1,7 @@
 // src/utils/wb.utils.js
 import axios from 'axios';
 import apiConfig from '../config/api.config.js';
+import { renameKeysOnlyMapped } from '../utils/array.utils.js';
 
 const WB_REQUEST_CONFIG = {
   settings: {
@@ -57,9 +58,11 @@ export function calculateWBVolume(dimensions) {
  * Преобразовать карточки WB в плоский массив для БД
  */
 export function processWBCards(cards) {
-  return cards.map(card => ({
+  const processed = cards.map(card => ({
     ...extractBasicFields(card),
     card_photo: getFirstPhoto(card),
     wbvol: calculateWBVolume(card.dimensions)
   }));
+
+  return renameKeysOnlyMapped(processed, { nmID: 'nm_id' });
 }
