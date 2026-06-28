@@ -5,9 +5,13 @@ import { getApiKeyByUser } from '../apiKey.service.js';
 import { syncTableToDB } from '../../utils/tableSync.utils.js';
 import { toSnakeCase } from '../../utils/common.utils.js';
 import { getWeekNumber, formatDateRange } from '../../utils/date.utils.js';
-import { transposeByKey, addFields, cleanData, formatCurrency } from '../../utils/array.utils.js';
+import { transposeByKey, addFields, cleanData, formatCurrency, transposeProductFields } from '../../utils/array.utils.js';
 import { getUserLocale, getLocaleStrings } from '../db/db.service.js';
 import { translateField } from '../../utils/array.utils.js';
+
+
+const FIXED_PRODUCT_KEYS = ['goods_type_name', 'goods_grp_name', 'title', 'vendorcode'];
+
 /**
  * Загрузить и синхронизировать список финансовых отчётов WB
  */
@@ -173,19 +177,58 @@ function transposeProductSummary(data) {
 }
 
 /**
- * Получить продуктовую сводку финотчёта в разрезе vendorcode
+ * Получить продуктовую сводку по списку финотчётов
  */
-export async function getWBFinReportProductSummary(userId, reportId) {
-  const { rows } = await pool.query(
-    `SELECT * FROM wb_fi_report_product_summary_view 
-     WHERE user_id = $1 AND report_id = $2
-     ORDER BY nm_id`,
-    [userId, reportId]
+export async function getWBFinReportProductSummary(userId, { limit, offset = 0 } = {}) {
+  // 1. Получаем список отчётов
+  const { rows: reports } = await pool.query(
+    `SELECT * FROM wb_fi_reports_list_view
+     WHERE user_id = $1
+     ORDER BY report_id DESC
+     LIMIT $2 OFFSET $3`,
+    [userId, limit, offset]
   );
 
-  const cleaned = cleanData(rows, {
-    exclude: ['user_id', 'created_at', 'updated_at']
+  // 2. Обогащаем
+  const enriched = reports.map(row => ({
+    ...row,
+    report_week: `WEEK${getWeekNumber(row.date_from)}`,
+    report_dates: formatDateRange(row.date_from, row.date_to)
+  }));
+
+  const cleaned = cleanData(enriched, {
+    exclude: ['user_id', 'date_from', 'date_to', 'created_at', 'updated_at']
   });
 
-  return transposeProductSummary(cleaned);
+  // 3. Формируем список отчётов для ответа
+  const reportList = cleaned.map(r => ({
+    id: String(r.report_id),
+    report_week: r.report_week,
+    report_dates: r.report_dates
+  }));
+
+  if (!cleaned.length) {
+    return { success: true, data: { reports: [], rows: [] } };
+  }
+
+  // 4. Получаем продуктовые данные
+  const reportIds = cleaned.map(r => r.report_id);
+  const { rows: products } = await pool.query(
+    `SELECT * FROM wb_fi_report_product_summary_view
+     WHERE report_id = ANY($1::bigint[])
+     ORDER BY report_id DESC, goods_type_name, goods_grp_name, title`,
+    [reportIds]
+  );
+
+  const cleanedProducts = cleanData(products, {
+    exclude: ['goods_type_id',  'goods_grp_id']
+  });
+  // 5. Транспонируем
+  const rows = transposeProductFields(cleanedProducts, FIXED_PRODUCT_KEYS);
+
+  return {
+    success: true,
+    reports: reportList,
+    rows
+  };
 }

@@ -224,3 +224,48 @@ export function translateField(data, keyField, translations, valueField = 'value
     return translated ? { ...item, [keyField]: translated } : item;
   });
 }
+
+/**
+ * Сгруппировать и транспонировать продуктовую сводку:
+ * фиксированные ключи остаются в строке, числовые — уходят в values по report_id
+ * @param {Array} data - Массив объектов
+ * @param {Array<string>} fixedKeys - Ключи, которые остаются как есть (goods_type_name, goods_grp_name, title, vendorcode)
+ * @param {Array<string>} valueKeys - Ключи для транспонирования (если не переданы — всё, кроме fixedKeys)
+ * @returns {Array} [{ fixedKey: val, field: 'revenue', values: { [reportId]: val } }]
+ */
+export function transposeProductFields(data, fixedKeys, valueKeys = null) {
+  if (!data.length) return [];
+
+  const keys = valueKeys || Object.keys(data[0]).filter(k => !fixedKeys.includes(k));
+
+  // Группируем по комбинации fixedKeys + report_id (чтобы один набор fixed был на report)
+  const grouped = {};
+  for (const row of data) {
+    const fixedKey = fixedKeys.map(k => row[k]).join('|');
+    if (!grouped[fixedKey]) {
+      grouped[fixedKey] = { fixed: {}, reportValues: {} };
+      fixedKeys.forEach(k => grouped[fixedKey].fixed[k] = row[k]);
+    }
+    const reportId = String(row.report_id);
+    for (const key of keys) {
+      if (!grouped[fixedKey].reportValues[key]) {
+        grouped[fixedKey].reportValues[key] = {};
+      }
+      grouped[fixedKey].reportValues[key][reportId] = row[key];
+    }
+  }
+
+  // Преобразуем в плоский массив строк
+  const result = [];
+  for (const group of Object.values(grouped)) {
+    for (const [field, values] of Object.entries(group.reportValues)) {
+      result.push({
+        ...group.fixed,
+        field,
+        values
+      });
+    }
+  }
+
+  return result;
+}
