@@ -26,10 +26,10 @@ export async function updatePricesFromWB(rawData) {
 /**
  * Обновить себестоимость товара
  */
-export async function updateCostPrice(vendorcode, newCost, startDate) {
+export async function updateCostPrice(vendorcode, platform, newCost, startDate) {
   const { rows } = await pool.query(
-    'SELECT * FROM update_cost_price($1, $2, $3)',
-    [vendorcode, newCost, startDate]
+    'SELECT * FROM update_cost_price($1, $2, $3, $4)',
+    [vendorcode, platform, newCost, startDate]
   );
   return rows[0];
 }

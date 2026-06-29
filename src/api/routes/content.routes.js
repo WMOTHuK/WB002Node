@@ -44,13 +44,13 @@ router.post('/updateprices', async (req, res, next) => {
 // POST /api/content/update_cost_price
 router.post('/update_cost_price', async (req, res, next) => {
   try {
-    const { vendorcode, new_cost, start_date } = req.body;
+    const { vendorcode, platform, new_cost, start_date } = req.body;
 
-    if (!vendorcode || !new_cost || !start_date) {
-      return res.status(400).json({ success: false, error: 'vendorcode, new_cost, start_date обязательны' });
+    if (!vendorcode || !platform || !new_cost || !start_date) {
+      return res.status(400).json({ error: 'vendorcode, platform, new_cost, start_date обязательны' });
     }
 
-    const result = await updateCostPrice(vendorcode, new_cost, start_date);
+    const result = await updateCostPrice(vendorcode, platform, new_cost, start_date);
     res.json({
       success: result.status === 'SUCCESS',
       message: result.message,
