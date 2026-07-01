@@ -8,7 +8,7 @@ import { syncTableToDB, syncTableFromDB } from '../../utils/tableSync.utils.js';
 import { addDescriptionColumns } from '../../utils/descriptionsMapper.js';
 import { AppError } from '../../utils/errors.js';
 import { toSnakeCase } from '../../utils/common.utils.js';
-
+import { cleanData } from '../../utils/array.utils.js'
 
 const wbcrmkey = 1;
 
