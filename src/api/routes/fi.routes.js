@@ -5,7 +5,7 @@ import { getOverheadTypes, addOverheadType, getOverheadGroups,
          getMonthlyOverheads, addOverheadGroup, changeOverheadTypeGroup,
          saveMonthlyOverheads } from '../../services/fi/overheads.service.js';
 import { syncWBFinReports, getWBFinReports, syncWBFinReportDetails } from '../../services/fi/wbReports.service.js';
-import { getWBFinReportSummary, getWBFinReportProductSummary } from '../../services/fi/wbReports.service.js';
+import { getWBFinReportSummary, getWBFinReportProductSummary, checkWBFinReport} from '../../services/fi/wbReports.service.js';
 import { calculateWBReport } from '../../services/fi/wbReports.service.js';
 
 const router = Router();
@@ -170,6 +170,19 @@ router.get('/getwbfireportproductsummary', authenticate, async (req, res, next) 
     const limit = parseInt(req.query.limit) || 10;
     const offset = parseInt(req.query.offset) || 0;
     const result = await getWBFinReportProductSummary(req.user.id, { limit, offset });
+    res.json(result);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/checkwbfireport', authenticate, async (req, res, next) => {
+  try {
+    const { report_id } = req.query;
+    if (!report_id) {
+      return res.status(400).json({ error: 'reportId is required' });
+    }
+    const result = await checkWBFinReport(req.user.id, report_id);
     res.json(result);
   } catch (error) {
     next(error);

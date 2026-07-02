@@ -232,3 +232,15 @@ export async function getWBFinReportProductSummary(userId, { limit, offset = 0 }
     rows
   };
 }
+
+
+/**
+ * Проверить корректность расчёта финотчёта
+ */
+export async function checkWBFinReport(userId, reportId) {
+  const { rows } = await pool.query(
+    'SELECT * FROM verify_report_calculation($1, $2)',
+    [userId, reportId]
+  );
+  return rows;
+}
