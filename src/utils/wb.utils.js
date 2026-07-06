@@ -64,5 +64,8 @@ export function processWBCards(cards) {
     wbvol: calculateWBVolume(card.dimensions)
   }));
 
-  return renameKeysOnlyMapped(processed, { nmID: 'nm_id' });
+  return renameKeysOnlyMapped(processed, { 
+    nmID: 'nm_id',
+    vendorCode: 'vendorcode'
+  });
 }

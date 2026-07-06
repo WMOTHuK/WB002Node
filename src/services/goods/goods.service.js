@@ -12,11 +12,8 @@ import { AppError } from '../../utils/errors.js';
 
 
 export async function syncUserGoods(userId) {
-  const [wbResult, ozonResult] = await Promise.all([
-    syncWBGoods(userId),
-    syncOzonGoods(userId)
-  ]);
-
+  const wbResult = await syncWBGoods(userId);
+  const ozonResult = await syncOzonGoods(userId);
   return {
     wb: {
       inserted: wbResult.inserted,
