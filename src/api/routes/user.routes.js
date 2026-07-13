@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import { authenticate } from '../middleware/auth.middleware.js';
 import { changeUserTaxRates, changeUserLocale, getUserSettings } from '../../services/user/user.service.js';
+import { runDailyTasksForUser } from '../../services/scheduler/dailyTasks.service.js';
 
 const router = Router();
 
@@ -46,5 +47,17 @@ router.get('/getusersettings', authenticate, async (req, res, next) => {
     next(error);
   }
 });
+
+
+// POST /api/user/syncdata
+router.post('/syncdata', authenticate, async (req, res, next) => {
+  try {
+    const results = await runDailyTasksForUser(req.user.id);
+    res.json({ success: true, results });
+  } catch (error) {
+    next(error);
+  }
+});
+
 
 export default router;

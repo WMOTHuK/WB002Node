@@ -59,46 +59,110 @@ async function syncMissingReportDetails(userId, reportIds) {
 }
 
 /**
- * Основная ежедневная задача
+ * Выполнить все задачи синхронизации для одного пользователя
+ */
+export async function runDailyTasksForUser(userId) {
+  logger.info(`--- Запуск синхронизации для пользователя ${userId} ---`);
+
+  const results = {
+    goods: null,
+    campaigns: null,
+    campaignCosts: null,
+    finReports: null
+  };
+
+  // 1. Товары
+  try {
+    logger.info(`[${userId}] Синхронизация товаров`);
+    results.goods = await syncUserGoods(userId);
+    logger.info(`[${userId}] Товары: WB ${JSON.stringify(results.goods.wb)}, OZON ${JSON.stringify(results.goods.ozon)}`);
+  } catch (error) {
+    logger.error(`[${userId}] Ошибка синхронизации товаров:`, error.message);
+    results.goods = { error: error.message };
+  }
+
+  // 2. Кампании
+  try {
+    logger.info(`[${userId}] Синхронизация кампаний`);
+    results.campaigns = await syncCampaigns(userId);
+    logger.info(`[${userId}] Кампании: ${JSON.stringify(results.campaigns)}`);
+  } catch (error) {
+    logger.error(`[${userId}] Ошибка синхронизации кампаний:`, error.message);
+    results.campaigns = { error: error.message };
+  }
+
+  // 3. Затраты на кампании
+  try {
+    logger.info(`[${userId}] Синхронизация затрат на кампании`);
+    results.campaignCosts = await syncCampaignCosts(userId, twoWeeksAgo(), today());
+    logger.info(`[${userId}] Затраты на кампании: ${JSON.stringify(results.campaignCosts)}`);
+  } catch (error) {
+    logger.error(`[${userId}] Ошибка синхронизации затрат:`, error.message);
+    results.campaignCosts = { error: error.message };
+  }
+
+  // 4. Финотчёты
+  try {
+    results.finReports = await processUserFinReports(userId);
+  } catch (error) {
+    logger.error(`[${userId}] Ошибка обработки финотчётов:`, error.message);
+    results.finReports = { error: error.message };
+  }
+
+  logger.info(`--- Синхронизация для пользователя ${userId} завершена ---`);
+  return results;
+}
+/**
+ * Основная ежедневная задача (для всех пользователей)
  */
 export async function runDailyTasks() {
-  logger.info('[DAILY] Запуск ежедневных задач');
+  logger.info('=== Запуск ежедневных задач ===');
+  const startTime = Date.now();
 
-  const userIds = await getAllUserIds();
-  logger.info(`[DAILY] Найдено пользователей: ${userIds.length}`);
+  try {
+    const userIds = await getUserIds();
+    logger.info(`Найдено пользователей: ${userIds.length}`);
 
-  const dateFrom = daysAgo(14);
-  const dateTo = daysAgo(0);
+    for (const userId of userIds) {
+      await runDailyTasksForUser(userId);
+    }
 
-  for (const userId of userIds) {
-    logger.info(`[DAILY] Обработка пользователя ${userId}`);
+    const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+    logger.info(`=== Ежедневные задачи завершены за ${elapsed} сек ===`);
+  } catch (error) {
+    logger.error('Критическая ошибка ежедневных задач:', error.message);
+  }
+}
 
-    try {
-      // 1. Синхронизация товаров
-      logger.info(`[DAILY] syncUserGoods для ${userId}`);
-      await syncUserGoods(userId);
+async function processUserFinReports(userId) {
+  const dateFrom = twoWeeksAgo();
+  const dateTo = today();
 
-      // 2. Синхронизация кампаний
-      logger.info(`[DAILY] syncCampaigns для ${userId}`);
-      await syncCampaigns(userId);
+  logger.info(`Синхронизация финотчётов для пользователя ${userId} с ${dateFrom} по ${dateTo}`);
+  const syncResult = await syncWBFinReports(userId, dateFrom, dateTo);
 
-      // 3. Затраты на кампании за 2 недели
-      logger.info(`[DAILY] syncCampaignCosts для ${userId} (${dateFrom} – ${dateTo})`);
-      await syncCampaignCosts(userId, dateFrom, dateTo);
+  const { rows: reports } = await pool.query(
+    `SELECT report_id FROM wb_fi_report_headers 
+     WHERE user_id = $1 AND date_from >= $2 AND date_to <= $3`,
+    [userId, dateFrom, dateTo]
+  );
 
-      // 4. Финотчёты за 2 недели
-      logger.info(`[DAILY] syncWBFinReports для ${userId} (${dateFrom} – ${dateTo})`);
-      const result = await syncWBFinReports(userId, dateFrom, dateTo);
-
-      // 5. Проверяем детали и догружаем
-      if (result?.reportIds?.length) {
-        logger.info(`[DAILY] Проверка деталей для ${result.reportIds.length} отчётов`);
-        await syncMissingReportDetails(userId, result.reportIds);
-      }
-    } catch (error) {
-      logger.error(`[DAILY] Ошибка обработки пользователя ${userId}:`, error.message);
+  const missingDetails = [];
+  for (const report of reports) {
+    const hasDetails = await hasReportDetails(userId, report.report_id);
+    if (!hasDetails) {
+      missingDetails.push(report);
     }
   }
 
-  logger.info('[DAILY] Ежедневные задачи завершены');
+  if (missingDetails.length > 0) {
+    logger.info(`У пользователя ${userId} ${missingDetails.length} отчётов без деталей`);
+    await loadReportDetails(userId, missingDetails);
+  }
+
+  return {
+    reportsCount: reports.length,
+    missingDetails: missingDetails.length,
+    processed: missingDetails.length
+  };
 }
