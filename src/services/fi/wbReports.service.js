@@ -16,7 +16,17 @@ const FIXED_PRODUCT_KEYS = ['goods_type_name', 'goods_grp_name', 'title', 'vendo
  * Загрузить и синхронизировать список финансовых отчётов WB
  */
 export async function syncWBFinReports(userId, dateFrom, dateTo) {
-  // ... существующий код ...
+
+  const apiKey = await getApiKeyByUser(userId, apiConfig.wbfinancekey);
+
+  const { data } = await axios.post(apiConfig.wbFinReportsList, {
+    dateFrom,
+    dateTo,
+    period: 'weekly'
+  }, {
+    headers: { Authorization: `Bearer ${apiKey}` }
+  });
+
   const { rows } = await pool.query(
     'SELECT * FROM sync_wb_fi_report_headers($1, $2)',
     [userId, JSON.stringify(toSnakeCase(data))]
