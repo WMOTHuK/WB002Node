@@ -7,6 +7,7 @@ import { getViewData } from '../../utils/db/dbViews.utils.js';
 import { removeByKeyValue } from '../../utils/array.utils.js';
 import { pool } from '../../config/db.config.js';
 import { AppError } from '../../utils/errors.js';
+import apiConfig from '../../config/api.config.js';
 
 
 
@@ -33,7 +34,7 @@ export async function syncUserGoods(userId) {
 /**
  * Синхронизировать товары WB
  */
-async function syncWBGoods(userId) {
+export async function syncWBGoods(userId) {
   const apiKey = await getApiKeyByUser(userId, '2');
   const cards = await fetchWBGoods(apiKey);
   const goods = processWBCards(cards);
@@ -43,9 +44,9 @@ async function syncWBGoods(userId) {
 /**
  * Синхронизировать товары Ozon
  */
-async function syncOzonGoods(userId) {
-  const apiKey = await getApiKeyByUser(userId, '3');
-  const clientId = await getApiKeyByUser(userId, '4');
+export async function syncOzonGoods(userId) {
+  const apiKey = await getApiKeyByUser(userId, apiConfig.ozoncontentkey);
+  const clientId = await getApiKeyByUser(userId, apiConfig.ozonclientid);
   const goods = await processOzonGoods(apiKey, clientId);
   return syncTableToDB(goods, 'goods', 'vendorcode');
 }

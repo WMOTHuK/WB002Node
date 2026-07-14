@@ -1,9 +1,24 @@
 // src/services/scheduler/dailyTasks.service.js
 import { pool } from '../../config/db.config.js';
 import { logger } from '../../utils/logger.js';
-import { syncUserGoods } from '../goods/goods.service.js';
+import { syncOzonGoods, syncWBGoods} from '../goods/goods.service.js';
 import { syncCampaigns, syncCampaignCosts } from '../crm/crm.service.js';
 import { syncWBFinReports, syncWBFinReportDetails, calculateWBReport } from '../fi/wbReports.service.js';
+import { syncOzonAccrualTypes } from '../fi/ozonReports.service.js';
+
+
+async function runTask(userId, taskName, fn, ...args) {
+  logger.info(`[${userId}] Запуск: ${taskName}`);
+  try {
+    const resolvedArgs = args.map(arg => typeof arg === 'function' ? arg() : arg);
+    const result = await fn(userId, ...resolvedArgs);
+    logger.info(`[${userId}] ${taskName}: ${JSON.stringify(result)}`);
+    return result;
+  } catch (error) {
+    logger.error(`[${userId}] Ошибка: ${taskName}`, error.message);
+    return { success: false, error: error.message };
+  }
+}
 
 /**
  * Получить всех пользователей
@@ -21,6 +36,24 @@ function daysAgo(n) {
   d.setDate(d.getDate() - n);
   return d.toISOString().split('T')[0];
 }
+
+
+/**
+ * Получить дату 2 недель назад в формате YYYY-MM-DD
+ */
+function twoWeeksAgo() {
+  const d = new Date();
+  d.setDate(d.getDate() - 14);
+  return d.toISOString().split('T')[0];
+}
+
+/**
+ * Получить текущую дату в формате YYYY-MM-DD
+ */
+function today() {
+  return new Date().toISOString().split('T')[0];
+}
+
 
 /**
  * Проверить, есть ли детали отчёта в БД
@@ -64,54 +97,35 @@ async function syncMissingReportDetails(userId, reportIds) {
 export async function runDailyTasksForUser(userId) {
   logger.info(`--- Запуск синхронизации для пользователя ${userId} ---`);
 
-  const results = {
-    goods: null,
-    campaigns: null,
-    campaignCosts: null,
-    finReports: null
-  };
+  const results = {};
 
-  // 1. Товары
-  try {
-    logger.info(`[${userId}] Синхронизация товаров`);
-    results.goods = await syncUserGoods(userId);
-    logger.info(`[${userId}] Товары: WB ${JSON.stringify(results.goods.wb)}, OZON ${JSON.stringify(results.goods.ozon)}`);
-  } catch (error) {
-    logger.error(`[${userId}] Ошибка синхронизации товаров:`, error.message);
-    results.goods = { error: error.message };
-  }
+  results['Товары WB'] = await runTask(userId, 'Товары WB', syncWBGoods);
+  results['Товары Ozon'] = await runTask(userId, 'Товары Ozon', syncOzonGoods);
+  results['Кампании'] = await runTask(userId, 'Кампании', syncCampaigns);
+  results['Затраты'] = await runTask(userId, 'Затраты', syncCampaignCosts, twoWeeksAgo, today);
+  results['Финотчёты'] = await runTask(userId, 'Финотчёты', processUserFinReports);
+  results['Начисления Ozon'] = await runTask(userId, 'Начисления Ozon', syncOzonAccrualTypes);
 
-  // 2. Кампании
-  try {
-    logger.info(`[${userId}] Синхронизация кампаний`);
-    results.campaigns = await syncCampaigns(userId);
-    logger.info(`[${userId}] Кампании: ${JSON.stringify(results.campaigns)}`);
-  } catch (error) {
-    logger.error(`[${userId}] Ошибка синхронизации кампаний:`, error.message);
-    results.campaigns = { error: error.message };
-  }
+  const succeeded = [];
+  const failed = [];
 
-  // 3. Затраты на кампании
-  try {
-    logger.info(`[${userId}] Синхронизация затрат на кампании`);
-    results.campaignCosts = await syncCampaignCosts(userId, twoWeeksAgo(), today());
-    logger.info(`[${userId}] Затраты на кампании: ${JSON.stringify(results.campaignCosts)}`);
-  } catch (error) {
-    logger.error(`[${userId}] Ошибка синхронизации затрат:`, error.message);
-    results.campaignCosts = { error: error.message };
-  }
-
-  // 4. Финотчёты
-  try {
-    results.finReports = await processUserFinReports(userId);
-  } catch (error) {
-    logger.error(`[${userId}] Ошибка обработки финотчётов:`, error.message);
-    results.finReports = { error: error.message };
+  for (const [task, result] of Object.entries(results)) {
+    if (result?.success === false) {
+      failed.push({ task, error: result.error });
+    } else {
+      succeeded.push({ task, result });
+    }
   }
 
   logger.info(`--- Синхронизация для пользователя ${userId} завершена ---`);
-  return results;
+
+  return {
+    success: failed.length === 0,
+    succeeded,
+    failed: failed.length > 0 ? failed : undefined
+  };
 }
+
 /**
  * Основная ежедневная задача (для всех пользователей)
  */

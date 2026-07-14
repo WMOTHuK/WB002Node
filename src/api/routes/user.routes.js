@@ -52,12 +52,11 @@ router.get('/getusersettings', authenticate, async (req, res, next) => {
 // POST /api/user/syncdata
 router.post('/syncdata', authenticate, async (req, res, next) => {
   try {
-    const results = await runDailyTasksForUser(req.user.id);
-    res.json({ success: true, results });
+    const data = await runDailyTasksForUser(req.user.id);
+    res.json(data);
   } catch (error) {
     next(error);
   }
 });
-
 
 export default router;

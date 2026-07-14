@@ -22,6 +22,9 @@ const apiConfig = {
   ozonProductInfoUrl: 'https://api-seller.ozon.ru/v3/product/info/list',
   ozonProductAttributesUrl: 'https://api-seller.ozon.ru/v4/product/info/attributes',
 
+  // OZON FI
+  ozonAccrualTypesUrl: 'https://api-seller.ozon.ru/v1/finance/accrual/types',
+
   // KEY Types
   //WB
   wbcrmkey: 1,
@@ -29,6 +32,7 @@ const apiConfig = {
   wbfinancekey: 5,
   //OZON
   ozoncontentkey: 3,
+  ozonclientid: 4,
   ozonfinancekey: 6,
 };
 

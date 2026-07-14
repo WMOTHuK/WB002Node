@@ -57,7 +57,7 @@ async function writeLog(level, message, details = {}) {
   }
 
   // Telegram (только ошибки)
-  if (level === 'ERROR' && TELEGRAM_URL) {
+/*   if (level === 'ERROR' && TELEGRAM_URL) {
     try {
       await axios.post(TELEGRAM_URL, {
         chat_id: TELEGRAM_CHAT_ID,
@@ -66,7 +66,7 @@ async function writeLog(level, message, details = {}) {
     } catch (error) {
       console.error('Error sending to Telegram:', error.message);
     }
-  }
+  } */
 }
 
 // ---------------------------------------------------------------------------
